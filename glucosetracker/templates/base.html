@@ -1,22 +1,22 @@
 {% load staticfiles %}
-    
+
 {% load compress %}
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-        <title>{% block title %}Cryptocurreny Reporting Tool | {{ site_name }}{% endblock %}</title>
-        <meta name="description" content="Cerebro is an easy to use and interperate web application for
+    <title>{% block title %}Cryptocurreny Reporting Tool | {{ site_name }}{% endblock %}</title>
+    <meta name="description" content="Cerebro is an easy to use and interperate web application for
         determining the market's general sentiment towards a cryptocurrency.">
 
-        <!-- CSS -->
-        {% compress css %}
+    <!-- CSS -->
+    {% compress css %}
         <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
         <link href="{% static 'bootstrap/css/bootstrap-theme.css' %}" rel="stylesheet">
         <link href="{% static 'bootstrap/css/sticky-footer-navbar.css' %}" rel="stylesheet">
@@ -24,102 +24,115 @@
         <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
 
         {% block extracss %}{% endblock %}
-        {% endcompress %}
+    {% endcompress %}
 
-        <!-- Add custom CSS here -->
-        {% block customcss %}
-            <style>
-                body {padding-bottom: 40px;}
-            </style>
-        {% endblock %}
+    <!-- Add custom CSS here -->
+    {% block customcss %}
+        <style>
+            body {
+                padding-bottom: 40px;
+            }
+        </style>
+    {% endblock %}
 
-        <!-- RSS Feed -->
-        <link rel="alternate" type="application/rss+xml" title="RSS Feed for {{ site_name }}" href="{% url 'rss_feed' %}" />
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for {{ site_name }}" href="{% url 'rss_feed' %}"/>
 
-        <!-- Enables 'Add to Homescreen' for Android -->
-        <meta name="viewport" content="width=device-width">
-        <meta name="mobile-web-app-capable" content="yes">
-        <link rel="icon" sizes="192x192" href="{% static 'images/icons/icon_blood_red_192x192.png' %}">
+    <!-- Enables 'Add to Homescreen' for Android -->
+    <meta name="viewport" content="width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="{% static 'images/icons/icon_blood_red_192x192.png' %}">
 
-        {% block extrahead %}{% endblock %}
-    </head>
+    {% block extrahead %}{% endblock %}
+</head>
 
-    <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse"
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                {% if user.is_authenticated %}
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            {% if user.is_authenticated %}
                 <a class="navbar-brand" href="{% url 'dashboard' %}">
-                  <span class="fa fa-tint"></span> Cerebro Reporting</a>
-                {% else %}
+                    <span class="fa fa-tint"></span> Cerebro Reporting</a>
+            {% else %}
                 <a class="navbar-brand" href="/">
-                  <span class="fa fa-tint"></span> Cerebro Reporting</a>
-                {% endif %}
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-              <ul class="nav navbar-nav navbar-right">
-                  {% if user.is_authenticated %}
-                    <li><a href="{% url 'glucose_create' %}">
-                        <span class="fa fa-plus"></span>&nbsp;New Glucose</a>
-                    </li>
-
+                    <span class="fa fa-tint"></span> Cerebro Reporting</a>
+            {% endif %}
+        </div>
+        {# TODO fix dashboard header so that it doesnt go to a new line when you shrink the page#}
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
                     <li><a href="{% url 'dashboard' %}">
                         <span class="fa fa-th"></span>&nbsp;Dashboard</a>
                     </li>
 
-                    <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                         <span class="fa fa-bar-chart"></span>&nbsp;Reports <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="{% url 'glucose_filter' %}">Filter Data</a></li>
-                      <li><a href="{% url 'glucose_charts' %}">Charts & Graphs</a></li>
-                      <li class="divider"></li>
-                      <li><a href="{% url 'glucose_email_report' %}">Email Report</a></li>
-                    </ul>
+                    {# TODO change url to coins page #}
+                    <li><a href="{% url 'dashboard' %}">
+                        <span class="fa fa-circle-o"></span>&nbsp;Coins</a>
+                    </li>
+
+                    {# TODO change url to coins page #}
+                    <li><a href="{% url 'dashboard' %}">
+                        <span class="fa fa-newspaper-o"></span>&nbsp;Social Media</a>
                     </li>
 
                     <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="fa fa-user"></span>&nbsp;
-                        {{ user }} <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="{% url 'usersettings' %}">Account Settings</a></li>
-                      <li><a href="{% url 'password_change' %}">Change Password</a></li>
-                      <li class="divider"></li>
-                      <li><a href="{% url 'glucose_import' %}">Import Data from CSV</a></li>
-                      <li class="divider"></li>
-                      <li><a href="{% url 'help' %}">Help</a></li>
-                      <li class="divider"></li>
-                      <li><a href="{% url 'logout' %}">Log Out</a></li>
-                    </ul>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="fa fa-bar-chart"></span>&nbsp;Reports <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            {# TODO update urls when changed #}
+                            <li><a href="{% url 'glucose_filter' %}">Filter Data</a></li>
+                            <li><a href="{% url 'glucose_charts' %}">Charts & Graphs</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'glucose_email_report' %}">Email Report</a></li>
+                        </ul>
                     </li>
-                  {% else %}
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="fa fa-user"></span>&nbsp;
+                            {{ user }} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'usersettings' %}">Account Settings</a></li>
+                            <li><a href="{% url 'password_change' %}">Change Password</a></li>
+                            <li class="divider"></li>
+                            {# TODO update url when changed#}
+                            <!-- <li><a href="{% url 'glucose_import' %}">Import Data from CSV</a></li> -->
+
+                            <!-- <li class="divider"></li> -->
+                            <li><a href="{% url 'help' %}">Help</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'logout' %}">Log Out</a></li>
+                        </ul>
+                    </li>
+                {% else %}
                     <form class="navbar-form navbar-right">
-                    <button type="button" class="btn btn-primary"
-                        onclick="location.href=&quot;{% url 'login' %}&quot;;">
-                        Log In</button>
-                    <button type="button" class="btn btn-success"
-                        onclick="location.href=&quot;{% url 'signup' %}&quot;;">
-                        Sign Up (Free!)</button>
+                        <button type="button" class="btn btn-primary"
+                                onclick="location.href=&quot;{% url 'login' %}&quot;;">
+                            Log In
+                        </button>
+                        <button type="button" class="btn btn-success"
+                                onclick="location.href=&quot;{% url 'signup' %}&quot;;">
+                            Sign Up (Free!)
+                        </button>
                     </form>
-                  {% endif %}
-              </ul>
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container -->
-        </nav>
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+</nav>
 
-        {% block rootcontainer %}
-        <div class="container">
-          <div class="row">
+{% block rootcontainer %}
+    <div class="container">
+        <div class="row">
             {% block breadcrumbs %}{% endblock %}
             <div class="col-lg-12">
                 <div class="page-header">
@@ -127,69 +140,103 @@
                 </div>
                 {% block content %}{% endblock %}
             </div>
-          </div>
-        </div><!-- /.container -->
-        {% endblock %}
-
-        <!-- FOOTER -->
-        <div class="footer">
-            <div class="container">
-                <footer>
-                  <p class="pull-right"><a href="#">Back to top</a></p>
-                  <p class="text-muted">
-                      &copy; 2014 AlltraSolutions.tech by <a href="https://github.com/OriginalMidas">Clayton Brezinski </a>
-                      | <a href="{% url 'blog_list_view' %}">Blog</a>
-                        {# TODO update for facebook page#}
-                      | <a href="https://www.facebook.com/glucose.tracker/info">About</a>
-                      | <a href="mailto:contact@alttrasolutions.tech">Contact Us</a>
-                  </p>
-                </footer>
-            </div>
         </div>
+    </div><!-- /.container -->
+{% endblock %}
 
-        <!-- JavaScript -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        {% compress js %}
-        <script src="{% static 'jquery/jquery.min.js' %}"></script>
-        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'momentjs/moment.min.js' %}"></script>
-        <script src="{% static 'datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
-        <script src="{% static 'jquery-validation/jquery.validate.js' %}"></script>
-        {% block extrajs %}{% endblock %}
-        {% endcompress %}
+<!-- FOOTER -->
+<div class="footer">
+    <div class="container">
+        <footer>
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            <p class="text-muted">
+                &copy; 2014 AlltraSolutions.tech by <a href="https://github.com/OriginalMidas">Clayton Brezinski </a>
+                | <a href="{% url 'blog_list_view' %}">Blog</a>
+                {# TODO update for facebook page#}
+                | <a href="https://www.facebook.com/Alttra-Solutions-267847987034563/">About</a>
+                | <a href="mailto:contact@alttrasolutions.tech">Contact Us</a>
+            </p>
+        </footer>
+    </div>
+</div>
 
-        {% if google_analytics_tracking_id %}
-        <!-- Asynchronous Google Analytics snippet. mathiasbynens.be/notes/async-analytics-snippet -->
-        <script>
-            var _gaq=[['_setAccount','{{ google_analytics_tracking_id }}'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-        {% endif %}
+<!-- JavaScript -->
+<!-- Placed at the end of the document so the pages load faster -->
+{% compress js %}
+    <script src="{% static 'jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'momentjs/moment.min.js' %}"></script>
+    <script src="{% static 'datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
+    <script src="{% static 'jquery-validation/jquery.validate.js' %}"></script>
+    {% block extrajs %}{% endblock %}
+{% endcompress %}
 
-        {% if intercom_app_id %}
-        <!-- Intercom.io script for user tracking. -->
-        <script id="IntercomSettingsScriptTag">
-          window.intercomSettings = {
+{% if google_analytics_tracking_id %}
+    <!-- Asynchronous Google Analytics snippet. mathiasbynens.be/notes/async-analytics-snippet -->
+    <script>
+        var _gaq = [['_setAccount', '{{ google_analytics_tracking_id }}'], ['_trackPageview']];
+        (function (d, t) {
+            var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g, s)
+        }(document, 'script'));
+    </script>
+{% endif %}
+
+{% if intercom_app_id %}
+    <!-- Intercom.io script for user tracking. -->
+    <script id="IntercomSettingsScriptTag">
+        window.intercomSettings = {
             name: "{{ user }}",
             email: "{{ user.email }}",
             created_at: {{ user.date_joined|date:'U' }},
             app_id: "{{ intercom_app_id }}"
-          };
-        </script>
-        <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://static.intercomcdn.com/intercom.v1.js';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
-        {% endif %}
+        };
+    </script>
+    <script>(function () {
+        var w = window;
+        var ic = w.Intercom;
+        if (typeof ic === "function") {
+            ic('reattach_activator');
+            ic('update', intercomSettings);
+        } else {
+            var d = document;
+            var i = function () {
+                i.c(arguments)
+            };
+            i.q = [];
+            i.c = function (args) {
+                i.q.push(args)
+            };
+            w.Intercom = i;
 
-        <!-- Disable submit buttons after click to prevent multiple submissions. -->
-        <script type="text/javascript">
-            $(function () {
-                $('form').submit(function(){
-                    $(this).find('input[type=submit]').prop('disabled', true);
-                });
-            });
-        </script>
+            function l() {
+                var s = d.createElement('script');
+                s.type = 'text/javascript';
+                s.async = true;
+                s.src = 'https://static.intercomcdn.com/intercom.v1.js';
+                var x = d.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            }
 
-       {% block extrajsexternal %}{% endblock %}
-    </body>
+            if (w.attachEvent) {
+                w.attachEvent('onload', l);
+            } else {
+                w.addEventListener('load', l, false);
+            }
+        }
+    })()</script>
+{% endif %}
+
+<!-- Disable submit buttons after click to prevent multiple submissions. -->
+<script type="text/javascript">
+    $(function () {
+        $('form').submit(function () {
+            $(this).find('input[type=submit]').prop('disabled', true);
+        });
+    });
+</script>
+
+{% block extrajsexternal %}{% endblock %}
+</body>
 </html>
