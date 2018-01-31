@@ -8,74 +8,58 @@
 
 {% block content %}
     <div class="container">
-        {% if sticky_message %}
-            <div class="alert alert-info alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{ sticky_message.message|safe }}
-            </div>
-        {% endif %}
+    {% if sticky_message %}
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ sticky_message.message|safe }}
+        </div>
+    {% endif %}
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel">
-                    <div class="btn-group">
-                        <a href="{% url 'glucose_create' %}">
-                            <button type="button" class="btn btn-primary">
-                                <span class="fa fa-plus"></span> New Glucose
-                            </button>
-                        </a>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                            <span class="fa fa-stats"></span> Reports
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{% url 'glucose_filter' %}">Filter Data</a></li>
-                            <li><a href="{% url 'glucose_charts' %}">Charts & Graphs</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{% url 'glucose_email_report' %}">E-mail Report</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+        {# TODO add Bitcoin chart #}
+        <div class="col-sm-4 col-md-4">
+            <div id="bitcoinChart" class="panel-body"></div>
+        </div>
 
-            <div class="col-md-6">
-                <div class="panel text-center">{% crispy form %}</div>
-            </div>
-        </div> <!-- end row -->
+        {# TODO add Ethereum chart #}
+        <div class="col-sm-4 col-md-4">
+            <div id="ethereumChart" class="panel-body"></div>
+        </div>
 
-        <div class="row">
-            <div class="col-sm-6 col-md-6">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h5 class="panel-title text-center">
-                                    <b>Latest Reading</b>
-                                </h5>
+        {# TODO add Litecoin chart #}
+        <div class="col-sm-4 col-md-4">
+            <div id="litecoinChart" class="panel-body"></div>
+        </div>
+    </div> <!-- end row -->
+
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="panel-title text-center">
+                                <b>Cerebro's Analysis</b>
+                            </h5>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="panel panel-default">
+                                    <li><a href="{% url 'dashboard' %}">
+                                        <span class="fa fa-th"></span>&nbsp;Dashboard</a>
+                                    </li>
+                                </div>
                             </div>
-                            <div class="panel-body">
-                                <h3 id="id_latest_entry"></h3>
-                                <p id="id_twitter_button" class="text-center"></p>
+                            <div class="row">
+                                <div class="panel panel-default">
+                                    <li><a href="{% url 'dashboard' %}">
+                                        <span class="fa fa-th"></span>&nbsp;Dashboard</a>
+                                    </li>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-sm-6 col-md-6">
-                        <div class="panel panel-default">
-                            <div id="id_hba1c_panel" class="panel-heading" data-toggle="tooltip"
-                                 title="Based on the average blood glucose from the last 90 days.">
-                                <h3 class="panel-title text-center">
-                                    <b>A1C Estimate*</b>
-                                </h3>
-                            </div>
-                            <div class="panel-body" style="padding-bottom:24px">
-                                <h3 id="id_hba1c"></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- end row -->
+                </div><!-- end row -->
 
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
@@ -227,10 +211,27 @@
 
 
             // Glucose Average by Day chart
-            var avgByDayOptions = {
+            var bitcoinChartOptions = {
                 credits: {enabled: false},
                 chart: {
-                    renderTo: 'chart_panel',
+                    renderTo: 'bitcoinChart', // name of the <div id="avgByDayPanel" this'll push to
+                    type: 'line',
+                },
+                legend: {enabled: false},
+                title: {text: 'Bitcoin Chart'},
+                subtitle: {text: 'Last 14 Days'},
+                xAxis: {title: {text: null}, labels: {rotation: -45}},
+                yAxis: {title: {text: null}},
+                series: [{
+                    animation: false
+                }],
+            };
+
+            // Glucose Average by Day chart
+            var ethereumChartOptions = {
+                credits: {enabled: false},
+                chart: {
+                    renderTo: 'ethereumChart', // name of the <div id="avgByDayPanel" this'll push to
                     type: 'line',
                 },
                 legend: {enabled: false},
@@ -243,19 +244,58 @@
                 }],
             };
 
+            // Glucose Average by Day chart
+            var litecoinChartOptions = {
+                credits: {enabled: false},
+                chart: {
+                    renderTo: 'litecoinChart', // name of the <div id="avgByDayPanel" this'll push to
+                    type: 'line',
+                },
+                legend: {enabled: false},
+                title: {text: 'Litecoin Chart'},
+                subtitle: {text: 'Last 14 Days'},
+                xAxis: {title: {text: null}, labels: {rotation: -45}},
+                yAxis: {title: {text: null}},
+                series: [{
+                    animation: false
+                }],
+            };
+
             var chartDataUrl = "{% url 'chart_data_json' %}?name=avg_by_day&days=14";
 
-            function loadChart() {
+            function loadBitcoinChart() {
                 $.getJSON(chartDataUrl,
                     function (data) {
-                        avgByDayOptions.xAxis.categories = data['chart_data']['dates'];
-                        avgByDayOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
-                        avgByDayOptions.series[0].data = data['chart_data']['values'];
-                        var chart = new Highcharts.Chart(avgByDayOptions);
+                        bitcoinChartOptions.xAxis.categories = data['chart_data']['dates'];
+                        bitcoinChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
+                        bitcoinChartOptions.series[0].data = data['chart_data']['values'];
+                        var chart = new Highcharts.Chart(bitcoinChartOptions);
                     });
             }
 
-            loadChart();
+            function loadEthereumChart() {
+                $.getJSON(chartDataUrl,
+                    function (data) {
+                        ethereumChartOptions.xAxis.categories = data['chart_data']['dates'];
+                        ethereumChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
+                        ethereumChartOptions.series[0].data = data['chart_data']['values'];
+                        var chart = new Highcharts.Chart(ethereumChartOptions);
+                    });
+            }
+
+            function loadLitecoinChart() {
+                $.getJSON(chartDataUrl,
+                    function (data) {
+                        litecoinChartOptions.xAxis.categories = data['chart_data']['dates'];
+                        litecoinChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
+                        litecoinChartOptions.series[0].data = data['chart_data']['values'];
+                        var chart = new Highcharts.Chart(litecoinChartOptions);
+                    });
+            }
+
+            loadBitcoinChart();
+            loadEthereumChart();
+            loadLitecoinChart();
 
 
             var oTable = $('#glucose_table').dataTable({
@@ -316,9 +356,9 @@
                 return false;
             });
 
-
             // For Twitter button
             {# TODO remove twitter button#}
+
             function updateTwitterValues(text, via) {
                 $('#id_twitter_button').html('<a href="https://twitter.com/share?url=/" class="twitter-share-button" data-dnt="true" data-text="' + text + '" data-count="none" data-via="' + via + '">Tweet</a>');
                 twttr.widgets.load();
