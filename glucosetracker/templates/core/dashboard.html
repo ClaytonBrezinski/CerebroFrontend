@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load crispy_forms_tags %}
+{% load staticfiles %}
 
 {% block heading %}
     <h3><span class="fa fa-th"></span> Dashboard</h3>
@@ -12,123 +13,151 @@
         <div class="alert alert-info alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             {{ sticky_message.message|safe }}
+
         </div>
     {% endif %}
 
+    <!-- chart area -->
     <div class="row">
         {# TODO add Bitcoin chart #}
-        <div class="col-sm-4 col-md-4">
+        <div class="col-xs-12 col-md-4">
             <div id="bitcoinChart" class="panel-body"></div>
         </div>
 
         {# TODO add Ethereum chart #}
-        <div class="col-sm-4 col-md-4">
+        <div class="hidden-xs-block col-md-4">
             <div id="ethereumChart" class="panel-body"></div>
         </div>
 
         {# TODO add Litecoin chart #}
-        <div class="col-sm-4 col-md-4">
+        <div class="hidden-xs-block col-md-4">
             <div id="litecoinChart" class="panel-body"></div>
         </div>
     </div> <!-- end row -->
 
     <div class="row">
+        <!-- left hand side -->
+        <div class="col-sm-6 col-md-6">
+            <div class="row col-sm-12 col-md-12">
+                <!-- Cerebro Analysis Area -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="text-center">Cerebro's Analysis</h2>
+                    </div>
+                    <div class="panel-body">
+                        {# TODO put in Cerebro analysis template #}
+                        <article>
+                            <div class="row">
+                                <div class="col-sm-2 col-md-2">
+                                    <figure>
+                                        <a href="{% static 'images/icons/icon_blood_red_192x192.png' %}"
+                                           class="thumbnail">
+                                            <img src="{% static 'images/icons/icon_blood_red_192x192.png' %}">
+                                        </a>
+                                    </figure>
+                                </div>
+                                <div class="col-sm-10 col-md-10">
+                                    <span class=" pull-right fa fa-arrow-down fa-2x" style="color:red;"></span>
+                                    <h4>Bitcoin</h4>
+                                    <p>Social Media Volume Change:</p>
+                                    <p>Sentiment Change:</p>
+                                    <p>Price Change:</p>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div class="row">
+                                <div class="col-sm-2 col-md-2">
+                                    <figure>
+                                        <a href="{% static 'images/icons/icon_blood_red_192x192.png' %}"
+                                           class="thumbnail">
+                                            <img src="{% static 'images/icons/icon_blood_red_192x192.png' %}">
+                                        </a>
+                                    </figure>
+                                </div>
+                                <div class="col-sm-10 col-md-10">
+                                    <span class=" pull-right fa fa-arrow-up fa-2x" style="color:green;"></span>
+                                    <h4>Ethereum</h4>
+                                    <p>Social Media Volume Change:</p>
+                                    <p>Sentiment Change:</p>
+                                    <p>Price Change:</p>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div class="row">
+                                <div class="col-sm-2 col-md-2">
+                                    <figure>
+                                        <a href="{% static 'images/icons/icon_blood_red_192x192.png' %}"
+                                           class="thumbnail">
+                                            <img src="{% static 'images/icons/icon_blood_red_192x192.png' %}">
+                                        </a>
+                                    </figure>
+                                </div>
+                                <div class="col-sm-10 col-md-10">
+                                                <span class=" pull-right fa fa-arrow-up fa-2x"
+                                                      style="color:green;"></span>
+                                    <h4>Litecoin</h4>
+                                    <p>Social Media Volume Change:</p>
+                                    <p>Sentiment Change:</p>
+                                    <p>Price Change:</p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div><!-- end row -->
+        </div> <!-- end col -->
+        <!-- right hand side -->
         <div class="col-sm-6 col-md-6">
             <div class="row">
                 <div class="col-sm-12 col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h5 class="panel-title text-center">
-                                <b>Cerebro's Analysis</b>
-                            </h5>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="panel panel-default">
-                                    <li><a href="{% url 'dashboard' %}">
-                                        <span class="fa fa-th"></span>&nbsp;Dashboard</a>
-                                    </li>
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#one" data-toggle="tab">Twitter</a></li>
+                            <li><a href="#two" data-toggle="tab">Reddit</a></li>
+                            <li><a href="#three" data-toggle="tab">News</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="one">Lorem ipsum dolor sit amet, charetra varius quam
+                                sit
+                                amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida
+                                a
+                                libero.
+                            </div>
+                            <div class="tab-pane" id="two">
+                                <div class="panel-body">
+                                    {#                                    TODO make the whole panel an href #}
+
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <a href="#">
+                                                <img class="img-responsive"
+                                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Canis_lupus.jpg/260px-Canis_lupus.jpg"
+                                                     alt="imagename">
+                                            </a>
+                                        </div>
+
+                                        <div class="media-body">
+                                            <h3><a href="#" target="_parent">Media Source
+                                                <small class="align-bottom-left">X minutes ago</small>
+                                            </a></h3>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nulla
+                                            sapien, semper in sodales ac, rutrum at orci.
+                                            <div class="clearfix"></div>
+                                            <i class="pull-right fa fa-comment-o">5678</i>
+                                            <i class="pull-right fa fa-arrow-circle-o-up">1234</i>
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="panel panel-default">
-                                    <li><a href="{% url 'dashboard' %}">
-                                        <span class="fa fa-th"></span>&nbsp;Dashboard</a>
-                                    </li>
-                                </div>
+                            <div class="tab-pane" id="three">
+                                Lorem ipsum dolor sit amet, charetra varius quam sit
+                                amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a
+                                libero.
                             </div>
                         </div>
-                    </div>
-                </div><!-- end row -->
-
-                <div class="row">
-                    <div class="col-sm-12 col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title text-center">
-                                    <b>14-Day Breakdown</b>
-                                </h3>
-                            </div>
-                            <table class="table table-condensed">
-                                <tr>
-                                    <td><b>Lows</b></td>
-                                    <td id="id_lows"></td>
-                                    <td><b>Lowest</b></td>
-                                    <td id="id_lowest" align="right"></td>
-                                </tr>
-                                <tr>
-                                    <td><b>Highs</b></td>
-                                    <td id="id_highs"></td>
-                                    <td><b>Highest</b></td>
-                                    <td id="id_highest" align="right"></td>
-                                </tr>
-                                <tr>
-                                    <td><b>Within Target</b></td>
-                                    <td id="id_within_target"></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td><b>Other</b></td>
-                                    <td id="id_other"></td>
-                                    <td><b>Average</b></td>
-                                    <td id="id_average" align="right"></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div> <!-- end row -->
-            </div> <!-- end col -->
-
-            <div class="col-sm-6 col-md-6">
-                <div class="panel panel-default">
-                    <div id="chart_panel" class="panel-body" style="width:100%;height:343px"></div>
-                </div>
-            </div> <!--end col -->
-
-        </div> <!-- end row -->
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <table id="glucose_table" class="display responsive" width="100%">
-                            <thead>
-                            <tr>
-                                <th class="all">
-                                    <center>Value</center>
-                                </th>
-                                <th class="all">Category</th>
-                                <th class="min-tablet">Date</th>
-                                <th class="min-tablet">Time</th>
-                                <th class="min-desktop">Notes</th>
-                                <th class="min-desktop">Tags</th>
-                                <th class="all"></th>
-                            </tr>
-                            </thead>
-                        </table>
                     </div>
                 </div>
             </div>
@@ -235,7 +264,7 @@
                     type: 'line',
                 },
                 legend: {enabled: false},
-                title: {text: 'Average Glucose by Day'},
+                title: {text: 'Ethereum Chart'},
                 subtitle: {text: 'Last 14 Days'},
                 xAxis: {title: {text: null}, labels: {rotation: -45}},
                 yAxis: {title: {text: null}},
