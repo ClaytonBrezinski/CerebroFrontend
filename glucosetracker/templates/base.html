@@ -23,7 +23,10 @@
         <link href="{% static 'bootstrap/css/bootstrap-theme.css' %}" rel="stylesheet">
         <link href="{% static 'bootstrap/css/sticky-footer-navbar.css' %}" rel="stylesheet">
         <link href="{% static 'datetimepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
-        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css"
+              rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
         {% block extracss %}{% endblock %}
     {% endcompress %}
@@ -50,59 +53,67 @@
 
 <body>
 <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-md" role="navigation">
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-ex1-collapse"><span
-                class="sr-only">Toggle navigation</span>&#x2630;
-        </button>
-        {% if user.is_authenticated %}
-            <a class="navbar-brand" href="{% url 'dashboard' %}">
-                <span class="fa fa-tint"></span> Cerebro Reporting</a>
-        {% else %}
-            <a class="navbar-brand" href="/">
-                <span class="fa fa-tint"></span> Cerebro Reporting</a>
-        {% endif %}
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-ex1-collapse"><span
+            class="sr-only">Toggle navigation</span>
+    </button>
+    {% if user.is_authenticated %}
+        <a class="navbar-brand" href="{% url 'dashboard' %}">
+            <h4 class="ion-arrow-graph-up-right"> Cerebro Reporting </h4>
+
+        </a>
+    {% else %}
+        <a class="navbar-brand" href="/">
+            <h4 class="ion-arrow-graph-up-right">Cerebro Reporting </h4>
+
+        </a>
+    {% endif %}
     {# TODO fix dashboard header so that it doesnt go to a new  line when you shrink the page#}
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav ml-auto">
             {% if user.is_authenticated %}
-                <li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link">
-                    <span class="fa fa-th"></span>&#xA0;Dashboard</a>
+                <li class="nav-item">
+                    <a class="nav-link ion-ios-keypad" href="{% url 'dashboard' %}"> Dashboard</a>
                 </li>
 
                 {# TODO change url to coins page #}
-                <li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link">
-                    <span class="fa fa-circle-o"></span>&#xA0;Coins</a>
+                <li class="nav-item">
+                    <a class="nav-link ion-ios-circle-outline" href="{% url 'dashboard' %}"> Coins</a>
                 </li>
 
                 {# TODO change url to coins page #}
-                <li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link">
-                    <span class="fa fa-newspaper-o"></span>&#xA0;Social Media</a>
+                <li class="nav-item">
+                    <a class="nav-link ion-ios-pulse-strong" href="{% url 'dashboard' %}"> Social Media</a>
                 </li>
-                <li class="dropdown nav-item">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <span class="fa fa-bar-chart"></span>&#xA0;Reports <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
+                <li class="nav-item dropdown">
+                    {# TODO make the href point to a default reports page#}
+                    <a href="#" class="nav-link dropdown-toggle ion-stats-bars" data-toggle="dropdown"> Reports </a>
+                    <div class="dropdown-menu">
                         {# TODO update urls when changed #}
-                        <li class="dropdown-item"><a href="{% url 'glucose_filter' %}">Filter Data</a></li>
-                        <li class="dropdown-item"><a href="{% url 'glucose_charts' %}">Charts &amp; Graphs</a></li>
-                        <li class="divider dropdown-item"></li>
-                        <li class="dropdown-item"><a href="{% url 'glucose_email_report' %}">Email Report</a></li>
-                    </ul>
+                        <a class="dropdown-item" href="{% url 'glucose_filter' %}">Filter Data</a>
+                        <a class="dropdown-item" href="{% url 'glucose_charts' %}">Charts & Graphs</a>
+                        <a class="divider dropdown-item"></a>
+                        <a class="dropdown-item" href="{% url 'glucose_email_report' %}">Email Report</a>
+                    </div>
+{#                TODO make auto popup for when alerts occur - allow the user to click the button and receive the same popup on the popup have a button to adjust alert settings#}
+
+                <li class="nav-item">
+                     <a class="nav-link ion-ios-bell" href="{% url 'dashboard' %}"> Alerts</a>
                 </li>
-                <li class="dropdown nav-item">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <span class="fa fa-user"></span>&#xA0;{{ user }} <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a href="{% url 'usersettings' %}">Account Settings</a></li>
-                        <li class="dropdown-item"><a href="{% url 'password_change' %}">Change Password</a></li>
-                        <li class="divider dropdown-item"></li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle ion-android-person"
+                       data-toggle="dropdown"> {{ user }} </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{% url 'usersettings' %}">Account Settings</a>
+                        <a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
+                        {# TODO make alert settings page for this#}
+                        <a class="dropdown-item" href="{% url 'usersettings' %}">Alert Settings</a>
+                        <a class="divider dropdown-item"></a>
                         {# TODO update url when changed#}
-                        <!-- <li><a href="{% url 'glucose_import' %}">Import Data from CSV</a></li> -->
-                        <!-- <li class="divider"></li> -->
-                        <li class="dropdown-item"><a href="{% url 'help' %}">Help</a></li>
-                        <li class="divider dropdown-item"></li>
-                        <li class="dropdown-item"><a href="{% url 'logout' %}">Log Out</a></li>
-                    </ul>
+                        <a class="dropdown-item" href="{% url 'help' %}">Help</a>
+                        <a class="divider dropdown-item"></a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                    </div>
                 </li>
             {% else %}
                 <form class="form-inline ml-auto">
@@ -112,7 +123,8 @@
                     <button type="button" class="btn btn-success"
                             onclick="location.href=&quot;{% url 'signup' %}&quot;;">Sign Up (Free!)
                     </button>
-                </form>{% endif %}</ul>
+                </form>{% endif %}
+        </ul>
     </div>
     <!-- /.navbar-collapse -->
     <!-- /.container -->
@@ -152,11 +164,13 @@
 <!-- JavaScript -->
 <!-- Placed at the end of the document so the pages load faster -->
 {% compress js %}
+
     <script src="{% static 'jquery/jquery.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'momentjs/moment.min.js' %}"></script>
     <script src="{% static 'datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
     <script src="{% static 'jquery-validation/jquery.validate.js' %}"></script>
+
     {% block extrajs %}{% endblock %}
 {% endcompress %}
 
@@ -226,6 +240,8 @@
     });
 </script>
 
-{% block extrajsexternal %}{% endblock %}
+{% block extrajsexternal %}
+
+{% endblock %}
 </body>
 </html>

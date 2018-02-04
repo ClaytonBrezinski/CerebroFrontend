@@ -8,154 +8,187 @@
 {% endblock %}
 
 {% block content %}
+    <div class="container-fluid">
+        {% if sticky_message %}
+            <div class="alert alert-info alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ sticky_message.message|safe }}
+            </div>
+        {% endif %}
+        <!-- chart area -->
+        <div class="row">
+            {# TODO add Bitcoin chart #}
+            <div class="container">
+                <div id="bitcoinChart" class="card-body"></div>
+            </div>
+        </div>
+    </div>
     <div class="container">
-    {% if sticky_message %}
-        <div class="alert alert-info alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{ sticky_message.message|safe }}
-
-        </div>
-    {% endif %}
-
-    <!-- chart area -->
-    <div class="row">
-        {# TODO add Bitcoin chart #}
-        <div class="col-xs-12 col-md-4">
-            <div id="bitcoinChart" class="panel-body"></div>
-        </div>
-
-        {# TODO add Ethereum chart #}
-        <div class="hidden-xs-block col-md-4">
-            <div id="ethereumChart" class="panel-body"></div>
-        </div>
-
-        {# TODO add Litecoin chart #}
-        <div class="hidden-xs-block col-md-4">
-            <div id="litecoinChart" class="panel-body"></div>
-        </div>
-    </div> <!-- end row -->
-
-    <div class="row">
-        <!-- left hand side -->
-        <div class="col-sm-6 col-md-6">
-            <div class="row col-sm-12 col-md-12">
+        <div class="row">
+            <!-- left hand side -->
+            <div class="col">
                 <!-- Cerebro Analysis Area -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="text-center">Cerebro's Analysis</h2>
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-center">Cerebro's Analysis</h4>
                     </div>
-                    <div class="panel-body">
-                        {# TODO put in Cerebro analysis template #}
-                        <article>
-                            <div class="row">
-                                <div class="col-sm-2 col-md-2">
-                                    <figure>
-                                        <a href="{% static 'images/icons/icon_blood_red_192x192.png' %}"
-                                           class="thumbnail">
-                                            <img src="{% static 'images/icons/icon_blood_red_192x192.png' %}">
-                                        </a>
-                                    </figure>
-                                </div>
-                                <div class="col-sm-10 col-md-10">
-                                    <span class=" pull-right fa fa-arrow-down fa-2x" style="color:red;"></span>
-                                    <h4>Bitcoin</h4>
-                                    <p>Social Media Volume Change:</p>
-                                    <p>Sentiment Change:</p>
-                                    <p>Price Change:</p>
-                                </div>
+                    {# TODO put in Cerebro analysis template #}
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h4 class="mb-1">Bitcoin</h4>
+                                <span class="fa fa-arrow-up fa-2x" style="color:green"></span>
                             </div>
-                        </article>
-                        <article>
-                            <div class="row">
-                                <div class="col-sm-2 col-md-2">
-                                    <figure>
-                                        <a href="{% static 'images/icons/icon_blood_red_192x192.png' %}"
-                                           class="thumbnail">
-                                            <img src="{% static 'images/icons/icon_blood_red_192x192.png' %}">
-                                        </a>
-                                    </figure>
-                                </div>
-                                <div class="col-sm-10 col-md-10">
-                                    <span class=" pull-right fa fa-arrow-up fa-2x" style="color:green;"></span>
-                                    <h4>Ethereum</h4>
-                                    <p>Social Media Volume Change:</p>
-                                    <p>Sentiment Change:</p>
-                                    <p>Price Change:</p>
-                                </div>
+                            <p class="font-weight-light">
+                                <b>Social Media Volume Change:</b> +100 Volume
+                                <b>Sentiment Change:</b> +5%
+                                <b>Price Change:</b> +15%
+                            </p>
+                            <small>Updated X days ago</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h4 class="mb-1">Ethererm</h4>
+                                <span class="fa fa-arrow-down fa-2x" style="color:red"></span>
                             </div>
-                        </article>
-                        <article>
-                            <div class="row">
-                                <div class="col-sm-2 col-md-2">
-                                    <figure>
-                                        <a href="{% static 'images/icons/icon_blood_red_192x192.png' %}"
-                                           class="thumbnail">
-                                            <img src="{% static 'images/icons/icon_blood_red_192x192.png' %}">
-                                        </a>
-                                    </figure>
-                                </div>
-                                <div class="col-sm-10 col-md-10">
-                                                <span class=" pull-right fa fa-arrow-up fa-2x"
-                                                      style="color:green;"></span>
-                                    <h4>Litecoin</h4>
-                                    <p>Social Media Volume Change:</p>
-                                    <p>Sentiment Change:</p>
-                                    <p>Price Change:</p>
-                                </div>
+                            <p class="font-weight-light">
+                                <b>Social Media Volume Change:</b> -100 Volume
+                                <b>Sentiment Change:</b> -5%
+                                <b>Price Change:</b> -15%
+                            </p>
+                            <small>Updated X days ago</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h4 class="mb-1">Litecoin</h4>
+                                <span class="fa fa-arrow-up fa-2x" style="color:green"></span>
                             </div>
-                        </article>
+                            <p class="font-weight-light">
+                                <b>Social Media Volume Change:</b> +100 Volume
+                                <b>Sentiment Change:</b> +5%
+                                <b>Price Change:</b> +15%
+                            </p>
+                            <small>Updated X days ago</small>
+                        </a>
                     </div>
                 </div>
-            </div><!-- end row -->
-        </div> <!-- end col -->
-        <!-- right hand side -->
-        <div class="col-sm-6 col-md-6">
-            <div class="row">
-                <div class="col-sm-12 col-md-12">
-                    <div class="tabbable">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#one" data-toggle="tab">Twitter</a></li>
-                            <li><a href="#two" data-toggle="tab">Reddit</a></li>
-                            <li><a href="#three" data-toggle="tab">News</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="one">Lorem ipsum dolor sit amet, charetra varius quam
-                                sit
-                                amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida
-                                a
-                                libero.
-                            </div>
-                            <div class="tab-pane" id="two">
-                                <div class="panel-body">
-                                    {#                                    TODO make the whole panel an href #}
+            </div>
+            <!-- end row -->
 
-                                    <div class="media">
-                                        <div class="pull-left">
-                                            <a href="#">
-                                                <img class="img-responsive"
-                                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Canis_lupus.jpg/260px-Canis_lupus.jpg"
-                                                     alt="imagename">
-                                            </a>
-                                        </div>
-
-                                        <div class="media-body">
-                                            <h3><a href="#" target="_parent">Media Source
-                                                <small class="align-bottom-left">X minutes ago</small>
-                                            </a></h3>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nulla
-                                            sapien, semper in sodales ac, rutrum at orci.
-                                            <div class="clearfix"></div>
-                                            <i class="pull-right fa fa-comment-o">5678</i>
-                                            <i class="pull-right fa fa-arrow-circle-o-up">1234</i>
-
-                                        </div>
+            <!-- right hand side -->
+            <div class="col">
+                <div class="card text-center">
+                    <ul class="nav nav-tabs">
+                        <li class="active nav-item"><a href="#one" data-toggle="tab" class="nav-link">Twitter</a></li>
+                        <li class="nav-item"><a href="#two" data-toggle="tab" class="nav-link">Reddit</a></li>
+                        <li class="nav-item"><a href="#three" data-toggle="tab" class="nav-link">News</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- Tab 1 -->
+                        <div class="tab-pane active" id="one">
+                            <div class="list-group">
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small>3 days ago</small>
                                     </div>
-                                </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                    <small>Donec id elit non mi porta.</small>
+                                </a>
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                    <small class="text-muted">Donec id elit non mi porta.</small>
+                                </a>
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                    <small class="text-muted">Donec id elit non mi porta.</small>
+                                </a>
                             </div>
-                            <div class="tab-pane" id="three">
-                                Lorem ipsum dolor sit amet, charetra varius quam sit
-                                amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a
-                                libero.
+                        </div>
+
+                        <!-- Tab 2 -->
+                        <div class="tab-pane" id="two">
+                            <div class="list-group">
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small>3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                    <small>Donec id elit non mi porta.</small>
+                                </a>
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                    <small class="text-muted">Donec id elit non mi porta.</small>
+                                </a>
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                    <small class="text-muted">Donec id elit non mi porta.</small>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3 -->
+                        <div class="tab-pane" id="three">
+                            <div class="list-group">
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small>3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                    <small>Donec id elit non mi porta.</small>
+                                </a>
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                    <small class="text-muted">Donec id elit non mi porta.</small>
+                                </a>
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                    <small class="text-muted">Donec id elit non mi porta.</small>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -163,6 +196,9 @@
             </div>
         </div>
     </div>
+    <!-- end col -->
+
+
 {% endblock %}
 
 {% block extracss %}
@@ -171,12 +207,39 @@
     <link href="{{ STATIC_URL }}datatables/extensions/TableTools/css/dataTables.tableTools.css" rel="stylesheet">
 {% endblock %}
 
+{% block extrahead %}
+    <!-- JS, popper.js, jQuery for highcharts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+{% endblock %}
+
 {% block extrajs %}
     <script src="{{ STATIC_URL }}datatables/media/js/jquery.dataTables.js"></script>
     <script src="{{ STATIC_URL }}datatables/extensions/Responsive/js/dataTables.responsive.js"></script>
     <script src="{{ STATIC_URL }}datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
     <script src="{{ STATIC_URL }}highcharts/js/highcharts.js"></script>
     <script src="{{ STATIC_URL }}highcharts/js/modules/exporting.js"></script>
+
+    <!--
+    //<script src="https://code.highcharts.com/highcharts.src.js"></script>
+    //<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    //<script src="https://code.highcharts.com/highcharts.js"></script>
+    //<script src="https://code.highcharts.com/modules/data.js"></script>
+    //<script src="https://code.highcharts.com/modules/series-label.js"></script>
+    //<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    <!-- Additional files for the Highslide popup effect -->
+    <!--
+    //<script src="https://www.highcharts.com/media/com_demo/js/highslide-full.min.js"></script>
+    //<script src="https://www.highcharts.com/media/com_demo/js/highslide.config.js" charset="utf-8"></script>
+    -->
     <script src="{{ STATIC_URL }}scripts/scripts.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -243,7 +306,7 @@
             var bitcoinChartOptions = {
                 credits: {enabled: false},
                 chart: {
-                    renderTo: 'bitcoinChart', // name of the <div id="avgByDayPanel" this'll push to
+                    renderTo: 'bitcoinChart',
                     type: 'line',
                 },
                 legend: {enabled: false},
@@ -256,39 +319,6 @@
                 }],
             };
 
-            // Glucose Average by Day chart
-            var ethereumChartOptions = {
-                credits: {enabled: false},
-                chart: {
-                    renderTo: 'ethereumChart', // name of the <div id="avgByDayPanel" this'll push to
-                    type: 'line',
-                },
-                legend: {enabled: false},
-                title: {text: 'Ethereum Chart'},
-                subtitle: {text: 'Last 14 Days'},
-                xAxis: {title: {text: null}, labels: {rotation: -45}},
-                yAxis: {title: {text: null}},
-                series: [{
-                    animation: false
-                }],
-            };
-
-            // Glucose Average by Day chart
-            var litecoinChartOptions = {
-                credits: {enabled: false},
-                chart: {
-                    renderTo: 'litecoinChart', // name of the <div id="avgByDayPanel" this'll push to
-                    type: 'line',
-                },
-                legend: {enabled: false},
-                title: {text: 'Litecoin Chart'},
-                subtitle: {text: 'Last 14 Days'},
-                xAxis: {title: {text: null}, labels: {rotation: -45}},
-                yAxis: {title: {text: null}},
-                series: [{
-                    animation: false
-                }],
-            };
 
             var chartDataUrl = "{% url 'chart_data_json' %}?name=avg_by_day&days=14";
 
@@ -301,30 +331,8 @@
                         var chart = new Highcharts.Chart(bitcoinChartOptions);
                     });
             }
-
-            function loadEthereumChart() {
-                $.getJSON(chartDataUrl,
-                    function (data) {
-                        ethereumChartOptions.xAxis.categories = data['chart_data']['dates'];
-                        ethereumChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
-                        ethereumChartOptions.series[0].data = data['chart_data']['values'];
-                        var chart = new Highcharts.Chart(ethereumChartOptions);
-                    });
-            }
-
-            function loadLitecoinChart() {
-                $.getJSON(chartDataUrl,
-                    function (data) {
-                        litecoinChartOptions.xAxis.categories = data['chart_data']['dates'];
-                        litecoinChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
-                        litecoinChartOptions.series[0].data = data['chart_data']['values'];
-                        var chart = new Highcharts.Chart(litecoinChartOptions);
-                    });
-            }
-
+            
             loadBitcoinChart();
-            loadEthereumChart();
-            loadLitecoinChart();
 
 
             var oTable = $('#glucose_table').dataTable({
