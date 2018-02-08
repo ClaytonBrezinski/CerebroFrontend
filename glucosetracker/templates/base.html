@@ -95,10 +95,10 @@
                         <a class="divider dropdown-item"></a>
                         <a class="dropdown-item" href="{% url 'glucose_email_report' %}">Email Report</a>
                     </div>
-{#                TODO make auto popup for when alerts occur - allow the user to click the button and receive the same popup on the popup have a button to adjust alert settings#}
+                    {#                TODO make auto popup for when alerts occur - allow the user to click the button and receive the same popup on the popup have a button to adjust alert settings#}
 
                 <li class="nav-item">
-                     <a class="nav-link ion-ios-bell" href="{% url 'dashboard' %}"> Alerts</a>
+                    <a class="nav-link ion-ios-bell" href="{% url 'dashboard' %}"> Alerts</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle ion-android-person"
@@ -132,26 +132,26 @@
 
 
 {% block rootcontainer %}
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             {% block breadcrumbs %}{% endblock %}
-            <div class="col-lg-12">
-                <div class="page-header">
-                    {% block heading %}{% endblock %}
-                </div>
-                {% block content %}{% endblock %}
+
+            <div class="page-header">
+                {% block heading %}{% endblock %}
             </div>
+            {% block content %}{% endblock %}
+
         </div>
     </div><!-- /.container -->
 {% endblock %}
 
 <!-- FOOTER -->
 <div class="footer">
-    <div class="container">
+    <div class="container-fluid">
         <footer>
             <p class="pull-right"><a href="#">Back to top</a></p>
             <p class="text-muted">
-                &copy; 2014 AlltraSolutions.tech by <a href="https://github.com/OriginalMidas">Clayton Brezinski </a>
+                &copy; 2017 AlltraSolutions.tech by <a href="https://github.com/OriginalMidas">Clayton Brezinski </a>
                 | <a href="{% url 'blog_list_view' %}">Blog</a>
                 {# TODO update for facebook page#}
                 | <a href="https://www.facebook.com/Alttra-Solutions-267847987034563/">About</a>

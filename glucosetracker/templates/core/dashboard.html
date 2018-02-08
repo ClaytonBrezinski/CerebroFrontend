@@ -18,15 +18,15 @@
         <!-- chart area -->
         <div class="row">
             {# TODO add Bitcoin chart #}
-            <div class="container">
+            <div class="container-fluid">
                 <div id="bitcoinChart" class="card-body"></div>
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <!-- left hand side -->
-            <div class="col">
+            <div class="col-md">
                 <!-- Cerebro Analysis Area -->
                 <div class="card">
                     <div class="card-header">
@@ -36,39 +36,42 @@
                     <div class="list-group">
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-                                <h4 class="mb-1">Bitcoin</h4>
+                                <h5>Bitcoin
+                                    <small>(BTC) &middot; X days ago</small>
+                                </h5>
                                 <span class="fa fa-arrow-up fa-2x" style="color:green"></span>
                             </div>
                             <p class="font-weight-light">
-                                <b>Social Media Volume Change:</b> +100 Volume
-                                <b>Sentiment Change:</b> +5%
-                                <b>Price Change:</b> +15%
+                                <b>Social Media Volume Change:</b> +100 Volume <br>
+                                <b>Sentiment Change:</b> +5% <br>
+                                <b>Price Change:</b> +15% <br>
                             </p>
-                            <small>Updated X days ago</small>
                         </a>
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-                                <h4 class="mb-1">Ethererm</h4>
+                                <h5>Ethereum
+                                    <small>(ETH) &middot; X days ago</small>
+                                </h5>
                                 <span class="fa fa-arrow-down fa-2x" style="color:red"></span>
                             </div>
                             <p class="font-weight-light">
-                                <b>Social Media Volume Change:</b> -100 Volume
-                                <b>Sentiment Change:</b> -5%
+                                <b>Social Media Volume Change:</b> -100 Volume <br>
+                                <b>Sentiment Change:</b> -5% <br>
                                 <b>Price Change:</b> -15%
                             </p>
-                            <small>Updated X days ago</small>
                         </a>
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-                                <h4 class="mb-1">Litecoin</h4>
+                                <h5>Litecoin
+                                    <small>(LTC) &middot; X days ago</small>
+                                </h5>
                                 <span class="fa fa-arrow-up fa-2x" style="color:green"></span>
                             </div>
                             <p class="font-weight-light">
-                                <b>Social Media Volume Change:</b> +100 Volume
-                                <b>Sentiment Change:</b> +5%
-                                <b>Price Change:</b> +15%
+                                <b>Social Media Volume Change:</b> +100 Volume <br>
+                                <b>Sentiment Change:</b> +5% <br>
+                                <b>Price Change:</b> +15% <br>
                             </p>
-                            <small>Updated X days ago</small>
                         </a>
                     </div>
                 </div>
@@ -76,94 +79,131 @@
             <!-- end row -->
 
             <!-- right hand side -->
-            <div class="col">
+            <div class="col-md">
                 <div class="card text-center">
                     <ul class="nav nav-tabs">
-                        <li class="active nav-item"><a href="#one" data-toggle="tab" class="nav-link">Twitter</a></li>
-                        <li class="nav-item"><a href="#two" data-toggle="tab" class="nav-link">Reddit</a></li>
-                        <li class="nav-item"><a href="#three" data-toggle="tab" class="nav-link">News</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#twitterTab" data-toggle="tab">
+                               <h5> Twitter </h5>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#redditTab" data-toggle="tab">
+                                <h5>Reddit</h5>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#newsTab" data-toggle="tab">
+                                <h5>News</h5>
+                            </a>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <!-- Tab 1 -->
-                        <div class="tab-pane active" id="one">
+                        <div class="tab-pane active" id="twitterTab">
                             <div class="list-group">
                                 <a href="#"
                                    class="list-group-item list-group-item-action flex-column align-items-start">
+                                    {# TODO add picture in this column and set the width fixed, and left justified#}
+                                    <div class="col"></div>
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">List group item heading</h5>
-                                        <small>3 days ago</small>
+                                        <h6 class="font-weight-light"> Twitter name
+                                            <small>&middot; 3 days ago</small>
+                                        </h6>
+                                        <small>
+                                            100<i class="fa fa-retweet"></i> &middot;
+                                            100<i class="fa fa fa-thumbs-o-up"></i>
+                                        </small>
                                     </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                    <p class="font-weight-normal">Donec id elit non mi porta gravida at eget metus.
+                                        Maecenas sed
                                         diam eget risus varius blandit.</p>
-                                    <small>Donec id elit non mi porta.</small>
                                 </a>
-                                <a href="#"
-                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="col"></div>
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">List group item heading</h5>
-                                        <small class="text-muted">3 days ago</small>
+                                        <h6 class="font-weight-light"> Twitter name
+                                            <small>&middot; 3 days ago</small>
+                                        </h6>
+                                        <small>
+                                            100<i class="fa fa-retweet"></i> &middot;
+                                            100<i class="fa fa fa-thumbs-o-up"></i>
+                                        </small>
                                     </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                    <p class="font-weight-normal">Donec id elit non mi porta gravida at eget metus.
+                                        Maecenas sed
                                         diam eget risus varius blandit.</p>
-                                    <small class="text-muted">Donec id elit non mi porta.</small>
                                 </a>
-                                <a href="#"
-                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="col"></div>
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">List group item heading</h5>
-                                        <small class="text-muted">3 days ago</small>
+                                        <h6 class="font-weight-light"> Twitter name
+                                            <small>&middot; 3 days ago</small>
+                                        </h6>
+                                        <small>
+                                            100<i class="fa fa-retweet"></i> &middot;
+                                            100<i class="fa fa fa-thumbs-o-up"></i>
+                                        </small>
                                     </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                    <p class="font-weight-normal">Donec id elit non mi porta gravida at eget metus.
+                                        Maecenas sed
                                         diam eget risus varius blandit.</p>
-                                    <small class="text-muted">Donec id elit non mi porta.</small>
                                 </a>
                             </div>
                         </div>
 
                         <!-- Tab 2 -->
-                        <div class="tab-pane" id="two">
+                        <div class="tab-pane" id="redditTab">
                             <div class="list-group">
                                 <a href="#"
                                    class="list-group-item list-group-item-action flex-column align-items-start">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">List group item heading</h5>
-                                        <small>3 days ago</small>
+                                        <h6 class="font-weight-light">/r/CryptoCurrency<small>&middot; 3 days ago</small>
+                                        </h6>
+                                        <small>
+                                            100 <i class="fa fa-commenting-o"></i> &middot;
+                                            100 <i class="fa fa-arrow-circle-o-up"></i>
+                                        </small>
                                     </div>
                                     <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
                                         diam eget risus varius blandit.</p>
-                                    <small>Donec id elit non mi porta.</small>
                                 </a>
                                 <a href="#"
                                    class="list-group-item list-group-item-action flex-column align-items-start">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">List group item heading</h5>
-                                        <small class="text-muted">3 days ago</small>
+                                        <h6 class="font-weight-light">/r/CryptoCurrency<small>&middot; 3 days ago</small>
+                                        </h6>
+                                        <small>
+                                            100 <i class="fa fa-commenting-o"></i> &middot;
+                                            100 <i class="fa fa-arrow-circle-o-up"></i>
+                                        </small>
                                     </div>
                                     <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
                                         diam eget risus varius blandit.</p>
-                                    <small class="text-muted">Donec id elit non mi porta.</small>
                                 </a>
                                 <a href="#"
                                    class="list-group-item list-group-item-action flex-column align-items-start">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">List group item heading</h5>
-                                        <small class="text-muted">3 days ago</small>
+                                        <h6 class="font-weight-light">/r/CryptoCurrency<small>&middot; 3 days ago</small>
+                                        </h6>
+                                        <small>
+                                            100 <i class="fa fa-commenting-o"></i> &middot;
+                                            100 <i class="fa fa-arrow-circle-o-up"></i>
+                                        </small>
                                     </div>
                                     <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
                                         diam eget risus varius blandit.</p>
-                                    <small class="text-muted">Donec id elit non mi porta.</small>
                                 </a>
                             </div>
                         </div>
 
                         <!-- Tab 3 -->
-                        <div class="tab-pane" id="three">
+                        <div class="tab-pane" id="newsTab">
                             <div class="list-group">
-                                <a href="#"
-                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">List group item heading</h5>
-                                        <small>3 days ago</small>
+                                        <h6 class="font-weight-light">News Agency<small>&middot; 3 days ago</small>
+                                        </h6>
                                     </div>
                                     <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
                                         diam eget risus varius blandit.</p>
@@ -172,8 +212,8 @@
                                 <a href="#"
                                    class="list-group-item list-group-item-action flex-column align-items-start">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">List group item heading</h5>
-                                        <small class="text-muted">3 days ago</small>
+                                        <h6 class="font-weight-light">News Agency<small>&middot; 3 days ago</small>
+                                        </h6>
                                     </div>
                                     <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
                                         diam eget risus varius blandit.</p>
@@ -182,8 +222,8 @@
                                 <a href="#"
                                    class="list-group-item list-group-item-action flex-column align-items-start">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">List group item heading</h5>
-                                        <small class="text-muted">3 days ago</small>
+                                        <h6 class="font-weight-light">News Agency<small>&middot; 3 days ago</small>
+                                        </h6>
                                     </div>
                                     <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
                                         diam eget risus varius blandit.</p>
@@ -331,7 +371,7 @@
                         var chart = new Highcharts.Chart(bitcoinChartOptions);
                     });
             }
-            
+
             loadBitcoinChart();
 
 
