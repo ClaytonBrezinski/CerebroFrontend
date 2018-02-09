@@ -31,7 +31,7 @@ $(document).ready(function() {
     });
 
     // Convert the given value to mg/dL or mmol/L based on the glucose unit id.
-    // Note that id 1 is mg/dL, 2 is mmol/L.
+    // Note that id 1 is mg/dL, 2 is mmol/L.E
     function convert_glucose_unit(id, value) {
         if (id == 2) {
             var result = Math.round((value / 18.018) * 10) / 10;

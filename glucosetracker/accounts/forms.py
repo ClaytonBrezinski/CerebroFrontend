@@ -62,18 +62,18 @@ class UserSettingsForm(forms.Form):
     email = forms.EmailField(label='Email')
     time_zone = TimeZoneFormField(label='Time Zone')
 
-    glucose_unit = NameModelChoiceField(Unit.objects.all(), label='Glucose Unit', empty_label=None)
+    glucose_unit = NameModelChoiceField(Unit.objects.all(), label='Primary Currency', empty_label=None)
     default_category = NameModelChoiceField(Category.objects.all(), label='Default Category', empty_label='Auto',
                                             required=False)
 
-    glucose_low = forms.DecimalField(label='Low', max_digits=6, max_value=3000, min_value=0,
-                                     help_text="Below this value is a low blood glucose.")
-    glucose_high = forms.DecimalField(label='High', max_digits=6, max_value=3000, min_value=0,
-                                      help_text="Above this value is a high blood glucose.")
-    glucose_target_min = forms.DecimalField(label='Target Min', max_digits=6, max_value=3000, min_value=0,
-                                            help_text="Your target range's minimum value.")
-    glucose_target_max = forms.DecimalField(label='Target Max', max_digits=6, max_value=3000, min_value=0,
-                                            help_text="Your target range's maximum value.")
+    glucose_low = forms.DecimalField(label='MarketCap % Drop', max_digits=6, max_value=3000, min_value=0,
+                                     help_text="-% change in market cap before alert email")
+    glucose_high = forms.DecimalField(label='MarketCap % Rise', max_digits=6, max_value=3000, min_value=0,
+                                      help_text="+% change in market cap before alert email")
+    glucose_target_min = forms.DecimalField(label='Sentiment change %', max_digits=6, max_value=3000, min_value=0,
+                                            help_text="change in currency's sentiment before alert email")
+    glucose_target_max = forms.DecimalField(label='Volume change %', max_digits=6, max_value=3000, min_value=0,
+                                            help_text="change in currency's volume change before alert email")
 
     def __init__(self, *args, **kwargs):
         super(UserSettingsForm, self).__init__(*args, **kwargs)
@@ -104,7 +104,7 @@ class UserSettingsForm(forms.Form):
                          Field('glucose_unit'),
                          Field('default_category'),
                          ),
-                Fieldset('Glucose Levels',
+                Fieldset('Email Alert Parameters ',
                          Field('glucose_low'),
                          Field('glucose_high'),
                          Field('glucose_target_min'),

@@ -1,335 +1,458 @@
 {% extends 'base.html' %}
 
 {% load crispy_forms_tags %}
+{% load staticfiles %}
 
 {% block heading %}
     <h3><span class="fa fa-th"></span> Dashboard</h3>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-{% if sticky_message %}
-    <div class="alert alert-info alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{ sticky_message.message|safe }}
+    <div class="container-fluid">
+        {% if sticky_message %}
+            <div class="alert alert-info alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ sticky_message.message|safe }}
+            </div>
+        {% endif %}
+        <!-- chart area -->
+        <div class="row">
+            {# TODO add Bitcoin chart #}
+            <div class="container-fluid">
+                <div id="bitcoinChart" class="card-body"></div>
+            </div>
+        </div>
     </div>
-{% endif %}
-    
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel">
-                <div class="btn-group">
-                    <a href="{% url 'glucose_create'%}">
-                    <button type="button" class="btn btn-primary">
-                        <span class="fa fa-plus"></span> New Glucose</button>
-                    </a>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left hand side -->
+            <div class="col-md">
+                <!-- Cerebro Analysis Area -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-center">Cerebro's Analysis</h4>
+                    </div>
+                    {# TODO put in Cerebro analysis template #}
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5>Bitcoin
+                                    <small>(BTC) &middot; X days ago</small>
+                                </h5>
+                                <span class="fa fa-arrow-up fa-2x" style="color:green"></span>
+                            </div>
+                            <p class="font-weight-light">
+                                <b>Social Media Volume Change:</b> +100 Volume <br>
+                                <b>Sentiment Change:</b> +5% <br>
+                                <b>Price Change:</b> +15% <br>
+                            </p>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5>Ethereum
+                                    <small>(ETH) &middot; X days ago</small>
+                                </h5>
+                                <span class="fa fa-arrow-down fa-2x" style="color:red"></span>
+                            </div>
+                            <p class="font-weight-light">
+                                <b>Social Media Volume Change:</b> -100 Volume <br>
+                                <b>Sentiment Change:</b> -5% <br>
+                                <b>Price Change:</b> -15%
+                            </p>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5>Litecoin
+                                    <small>(LTC) &middot; X days ago</small>
+                                </h5>
+                                <span class="fa fa-arrow-up fa-2x" style="color:green"></span>
+                            </div>
+                            <p class="font-weight-light">
+                                <b>Social Media Volume Change:</b> +100 Volume <br>
+                                <b>Sentiment Change:</b> +5% <br>
+                                <b>Price Change:</b> +15% <br>
+                            </p>
+                        </a>
+                    </div>
                 </div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                    <span class="fa fa-stats"></span> Reports
-                    <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                    <li><a href="{% url 'glucose_filter' %}">Filter Data</a></li>
-                    <li><a href="{% url 'glucose_charts' %}">Charts & Graphs</a></li>
-                    <li class="divider"></li>
-                    <li><a href="{% url 'glucose_email_report' %}">E-mail Report</a></li>
+            </div>
+            <!-- end row -->
+
+            <!-- right hand side -->
+            <div class="col-md">
+                <div class="card text-center">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#twitterTab" data-toggle="tab">
+                               <h5> Twitter </h5>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#redditTab" data-toggle="tab">
+                                <h5>Reddit</h5>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#newsTab" data-toggle="tab">
+                                <h5>News</h5>
+                            </a>
+                        </li>
                     </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="panel text-center">{% crispy form %}</div>
-        </div>
-    </div> <!-- end row -->
-
-    <div class="row">
-        <div class="col-sm-6 col-md-6">
-            <div class="row">
-                <div class="col-sm-6 col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h5 class="panel-title text-center">
-                                <b>Latest Reading</b>
-                            </h5>
+                    <div class="tab-content">
+                        <!-- Tab 1 -->
+                        <div class="tab-pane active" id="twitterTab">
+                            <div class="list-group">
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    {# TODO add picture in this column and set the width fixed, and left justified#}
+                                    <div class="col"></div>
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="font-weight-light"> Twitter name
+                                            <small>&middot; 3 days ago</small>
+                                        </h6>
+                                        <small>
+                                            100<i class="fa fa-retweet"></i> &middot;
+                                            100<i class="fa fa fa-thumbs-o-up"></i>
+                                        </small>
+                                    </div>
+                                    <p class="font-weight-normal">Donec id elit non mi porta gravida at eget metus.
+                                        Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="col"></div>
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="font-weight-light"> Twitter name
+                                            <small>&middot; 3 days ago</small>
+                                        </h6>
+                                        <small>
+                                            100<i class="fa fa-retweet"></i> &middot;
+                                            100<i class="fa fa fa-thumbs-o-up"></i>
+                                        </small>
+                                    </div>
+                                    <p class="font-weight-normal">Donec id elit non mi porta gravida at eget metus.
+                                        Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="col"></div>
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="font-weight-light"> Twitter name
+                                            <small>&middot; 3 days ago</small>
+                                        </h6>
+                                        <small>
+                                            100<i class="fa fa-retweet"></i> &middot;
+                                            100<i class="fa fa fa-thumbs-o-up"></i>
+                                        </small>
+                                    </div>
+                                    <p class="font-weight-normal">Donec id elit non mi porta gravida at eget metus.
+                                        Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                </a>
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            <h3 id="id_latest_entry"></h3>
-                            <p id="id_twitter_button" class="text-center"></p>
+
+                        <!-- Tab 2 -->
+                        <div class="tab-pane" id="redditTab">
+                            <div class="list-group">
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="font-weight-light">/r/CryptoCurrency<small>&middot; 3 days ago</small>
+                                        </h6>
+                                        <small>
+                                            100 <i class="fa fa-commenting-o"></i> &middot;
+                                            100 <i class="fa fa-arrow-circle-o-up"></i>
+                                        </small>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                </a>
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="font-weight-light">/r/CryptoCurrency<small>&middot; 3 days ago</small>
+                                        </h6>
+                                        <small>
+                                            100 <i class="fa fa-commenting-o"></i> &middot;
+                                            100 <i class="fa fa-arrow-circle-o-up"></i>
+                                        </small>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                </a>
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="font-weight-light">/r/CryptoCurrency<small>&middot; 3 days ago</small>
+                                        </h6>
+                                        <small>
+                                            100 <i class="fa fa-commenting-o"></i> &middot;
+                                            100 <i class="fa fa-arrow-circle-o-up"></i>
+                                        </small>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3 -->
+                        <div class="tab-pane" id="newsTab">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="font-weight-light">News Agency<small>&middot; 3 days ago</small>
+                                        </h6>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                    <small>Donec id elit non mi porta.</small>
+                                </a>
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="font-weight-light">News Agency<small>&middot; 3 days ago</small>
+                                        </h6>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                    <small class="text-muted">Donec id elit non mi porta.</small>
+                                </a>
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="font-weight-light">News Agency<small>&middot; 3 days ago</small>
+                                        </h6>
+                                    </div>
+                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
+                                        diam eget risus varius blandit.</p>
+                                    <small class="text-muted">Donec id elit non mi porta.</small>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-sm-6 col-md-6">
-                    <div class="panel panel-default">
-                        <div id="id_hba1c_panel" class="panel-heading" data-toggle="tooltip"
-                             title="Based on the average blood glucose from the last 90 days.">
-                            <h3 class="panel-title text-center">
-                                <b>A1C Estimate*</b>
-                            </h3>
-                        </div>
-                        <div class="panel-body" style="padding-bottom:24px">
-                            <h3 id="id_hba1c"></h3>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- end row -->
-
-            <div class="row">
-                <div class="col-sm-12 col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title text-center">
-                                <b>14-Day Breakdown</b>
-                            </h3>
-                        </div>
-                        <table class="table table-condensed">
-                            <tr>
-                                <td><b>Lows</b></td>
-                                <td id="id_lows"></td>
-                                <td><b>Lowest</b></td>
-                                <td id="id_lowest" align="right"></td>
-                            </tr>
-                            <tr>
-                                <td><b>Highs</b></td>
-                                <td id="id_highs"></td>
-                                <td><b>Highest</b></td>
-                                <td id="id_highest" align="right"></td>
-                            </tr>
-                            <tr>
-                                <td><b>Within Target</b></td>
-                                <td id="id_within_target"></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td><b>Other</b></td>
-                                <td id="id_other"></td>
-                                <td><b>Average</b></td>
-                                <td id="id_average" align="right"></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div> <!-- end row -->
-        </div> <!-- end col -->
-
-        <div class="col-sm-6 col-md-6">
-            <div class="panel panel-default">
-                <div id="chart_panel" class="panel-body" style="width:100%;height:343px"></div>
-            </div>
-        </div> <!--end col -->
-
-    </div> <!-- end row -->
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <table id="glucose_table" class="display responsive" width="100%">
-                        <thead>
-                            <tr>
-                                <th class="all"><center>Value</center></th>
-                                <th class="all">Category</th>
-                                <th class="min-tablet">Date</th>
-                                <th class="min-tablet">Time</th>
-                                <th class="min-desktop">Notes</th>
-                                <th class="min-desktop">Tags</th>
-                                <th class="all"></th>
-                            </tr>
-                        </thead>
-                    </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- end col -->
+
+
 {% endblock %}
 
 {% block extracss %}
-<link href="{{ STATIC_URL }}datatables/media/css/jquery.dataTables.css" rel="stylesheet">
-<link href="{{ STATIC_URL }}datatables/extensions/Responsive/css/dataTables.responsive.css" rel="stylesheet">
-<link href="{{ STATIC_URL }}datatables/extensions/TableTools/css/dataTables.tableTools.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}datatables/media/css/jquery.dataTables.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}datatables/extensions/Responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}datatables/extensions/TableTools/css/dataTables.tableTools.css" rel="stylesheet">
+{% endblock %}
+
+{% block extrahead %}
+    <!-- JS, popper.js, jQuery for highcharts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block extrajs %}
-<script src="{{ STATIC_URL }}datatables/media/js/jquery.dataTables.js"></script>
-<script src="{{ STATIC_URL }}datatables/extensions/Responsive/js/dataTables.responsive.js"></script>
-<script src="{{ STATIC_URL }}datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
-<script src="{{ STATIC_URL }}highcharts/js/highcharts.js"></script>
-<script src="{{ STATIC_URL }}highcharts/js/modules/exporting.js"></script>
-<script src="{{ STATIC_URL }}scripts/scripts.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#id_hba1c_panel').tooltip();
+    <script src="{{ STATIC_URL }}datatables/media/js/jquery.dataTables.js"></script>
+    <script src="{{ STATIC_URL }}datatables/extensions/Responsive/js/dataTables.responsive.js"></script>
+    <script src="{{ STATIC_URL }}datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
+    <script src="{{ STATIC_URL }}highcharts/js/highcharts.js"></script>
+    <script src="{{ STATIC_URL }}highcharts/js/modules/exporting.js"></script>
 
-    // Update stats in panels
-    var statsUrl = "{% url 'stats_json' %}";
-    function loadStats() {
-        $.getJSON(statsUrl,
-            function(data) {
-                document.getElementById('id_latest_entry').innerHTML =
-                    data['stats']['latest_entry']['value'];
-                document.getElementById('id_latest_entry').className =
-                    "text-center " + data['stats']['latest_entry']['css_class'];
+    <!--
+    //<script src="https://code.highcharts.com/highcharts.src.js"></script>
+    //<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    //<script src="https://code.highcharts.com/highcharts.js"></script>
+    //<script src="https://code.highcharts.com/modules/data.js"></script>
+    //<script src="https://code.highcharts.com/modules/series-label.js"></script>
+    //<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
-                document.getElementById('id_hba1c').innerHTML =
-                    data['stats']['hba1c']['value'];
-                document.getElementById('id_hba1c').className =
-                    "text-center " + data['stats']['hba1c']['css_class'];
+    <!-- Additional files for the Highslide popup effect -->
+    <!--
+    //<script src="https://www.highcharts.com/media/com_demo/js/highslide-full.min.js"></script>
+    //<script src="https://www.highcharts.com/media/com_demo/js/highslide.config.js" charset="utf-8"></script>
+    -->
+    <script src="{{ STATIC_URL }}scripts/scripts.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#id_hba1c_panel').tooltip();
 
-                /*document.getElementById('id_num_records').innerHTML =
-                    data['stats']['num_records'];*/
+            // Update stats in panels
+            var statsUrl = "{% url 'stats_json' %}";
 
-                document.getElementById('id_lowest').innerHTML =
-                    data['stats']['breakdown']['lowest']['value'];
-                document.getElementById('id_lowest').className =
-                    data['stats']['breakdown']['lowest']['css_class'];
+            function loadStats() {
+                $.getJSON(statsUrl,
+                    function (data) {
+                        document.getElementById('id_latest_entry').innerHTML =
+                            data['stats']['latest_entry']['value'];
+                        document.getElementById('id_latest_entry').className =
+                            "text-center " + data['stats']['latest_entry']['css_class'];
 
-                document.getElementById('id_highest').innerHTML =
-                    data['stats']['breakdown']['highest']['value'];
-                document.getElementById('id_highest').className =
-                    data['stats']['breakdown']['highest']['css_class'];
+                        document.getElementById('id_hba1c').innerHTML =
+                            data['stats']['hba1c']['value'];
+                        document.getElementById('id_hba1c').className =
+                            "text-center " + data['stats']['hba1c']['css_class'];
 
-                document.getElementById('id_average').innerHTML =
-                    data['stats']['breakdown']['average']['value'];
-                document.getElementById('id_average').className =
-                    data['stats']['breakdown']['average']['css_class'];
+                        /*document.getElementById('id_num_records').innerHTML =
+                            data['stats']['num_records'];*/
 
-                document.getElementById('id_highs').innerHTML =
-                    data['stats']['breakdown']['highs'];
-                document.getElementById('id_lows').innerHTML =
-                    data['stats']['breakdown']['lows'];
-                document.getElementById('id_within_target').innerHTML =
-                    data['stats']['breakdown']['within_target'];
-                document.getElementById('id_other').innerHTML =
-                    data['stats']['breakdown']['other'];
+                        document.getElementById('id_lowest').innerHTML =
+                            data['stats']['breakdown']['lowest']['value'];
+                        document.getElementById('id_lowest').className =
+                            data['stats']['breakdown']['lowest']['css_class'];
 
-                var twitter_text = "#bgnow "
-                    + data['stats']['latest_entry']['value']
-                    + " (" + data['stats']['latest_entry']['record_time']
-                    + ") " + data['stats']['latest_entry']['notes'];
-                // Remove leading and trailing spaces
-                twitter_text = twitter_text.trim();
-                updateTwitterValues(twitter_text, 'glucosetracker');
+                        document.getElementById('id_highest').innerHTML =
+                            data['stats']['breakdown']['highest']['value'];
+                        document.getElementById('id_highest').className =
+                            data['stats']['breakdown']['highest']['css_class'];
+
+                        document.getElementById('id_average').innerHTML =
+                            data['stats']['breakdown']['average']['value'];
+                        document.getElementById('id_average').className =
+                            data['stats']['breakdown']['average']['css_class'];
+
+                        document.getElementById('id_highs').innerHTML =
+                            data['stats']['breakdown']['highs'];
+                        document.getElementById('id_lows').innerHTML =
+                            data['stats']['breakdown']['lows'];
+                        document.getElementById('id_within_target').innerHTML =
+                            data['stats']['breakdown']['within_target'];
+                        document.getElementById('id_other').innerHTML =
+                            data['stats']['breakdown']['other'];
+
+                        var twitter_text = "#bgnow "
+                            + data['stats']['latest_entry']['value']
+                            + " (" + data['stats']['latest_entry']['record_time']
+                            + ") " + data['stats']['latest_entry']['notes'];
+                        // Remove leading and trailing spaces
+                        twitter_text = twitter_text.trim();
+                        updateTwitterValues(twitter_text, 'glucosetracker');
+                    }
+                )
+            };
+
+            loadStats();
+
+
+            // Glucose Average by Day chart
+            var bitcoinChartOptions = {
+                credits: {enabled: false},
+                chart: {
+                    renderTo: 'bitcoinChart',
+                    type: 'line',
+                },
+                legend: {enabled: false},
+                title: {text: 'Bitcoin Chart'},
+                subtitle: {text: 'Last 14 Days'},
+                xAxis: {title: {text: null}, labels: {rotation: -45}},
+                yAxis: {title: {text: null}},
+                series: [{
+                    animation: false
+                }],
+            };
+
+
+            var chartDataUrl = "{% url 'chart_data_json' %}?name=avg_by_day&days=14";
+
+            function loadBitcoinChart() {
+                $.getJSON(chartDataUrl,
+                    function (data) {
+                        bitcoinChartOptions.xAxis.categories = data['chart_data']['dates'];
+                        bitcoinChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
+                        bitcoinChartOptions.series[0].data = data['chart_data']['values'];
+                        var chart = new Highcharts.Chart(bitcoinChartOptions);
+                    });
             }
-        )};
 
-    loadStats();
-
-
-    // Glucose Average by Day chart
-     var avgByDayOptions = {
-        credits: {
-            enabled: false
-        },
-        chart: {
-            renderTo: 'chart_panel',
-            type: 'line',
-        },
-        legend: {enabled: false},
-        title: {text: 'Average Glucose by Day'},
-        subtitle: {text: 'Last 14 Days'},
-        xAxis: {title: {text: null}, labels: {rotation: -45}},
-        yAxis: {title: {text: null}},
-        series: [{
-            animation: false
-        }],
-    };
-
-    var chartDataUrl = "{% url 'chart_data_json' %}?name=avg_by_day&days=14";
-    function loadChart() {
-        $.getJSON(chartDataUrl,
-            function(data) {
-                avgByDayOptions.xAxis.categories = data['chart_data']['dates'];
-                avgByDayOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
-                avgByDayOptions.series[0].data = data['chart_data']['values'];
-                var chart = new Highcharts.Chart(avgByDayOptions);
-         });
-     }
-
-    loadChart();
+            loadBitcoinChart();
 
 
-    var oTable = $('#glucose_table').dataTable( {
-        "sDom": 'T<"container">lfrtip',
-        "tableTools": {
-            "sSwfPath": "{{ STATIC_URL }}datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
-		        "aButtons": [ "csv", "pdf" ]
-        },
-        "aLengthMenu": [
-            [10, 15, 25, 50, 75, 100],
-            [10, 15, 25, 50, 75, 100],
-        ],
-        "bProcessing": true,
-        "bServerSide": true,
-        "sAjaxSource": "{% url 'glucose_list_json' %}",
-        "aaSorting": [ [2,'desc'], [3,'desc'] ],
+            var oTable = $('#glucose_table').dataTable({
+                "sDom": 'T<"container">lfrtip',
+                "tableTools": {
+                    "sSwfPath": "{{ STATIC_URL }}datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+                    "aButtons": ["csv", "pdf"]
+                },
+                "aLengthMenu": [
+                    [10, 15, 25, 50, 75, 100],
+                    [10, 15, 25, 50, 75, 100],
+                ],
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": "{% url 'glucose_list_json' %}",
+                "aaSorting": [[2, 'desc'], [3, 'desc']],
 
-        // Disable sorting for the Tags and Delete columns.
-        "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 5, 6 ] } ]
-    } );
+                // Disable sorting for the Tags and Delete columns.
+                "aoColumnDefs": [{"bSortable": false, "aTargets": [5, 6]}]
+            });
 
-    // Add the glucose value and refresh the table data
-    var frm = $('#quick_add_form');
-    frm.submit(function () {
-        $.ajax({
-            type: frm.attr('method'),
-            url: "{% url 'glucose_quick_add' %}",
-            data: frm.serialize(),
-            success: function (data) {
-                var message = jQuery.parseJSON(data);
-                if (message['success']) {
-                    // Reload the table data. This function is located in
-                    // scripts/scripts.js.
-                    oTable.fnReloadAjax();
+            // Add the glucose value and refresh the table data
+            var frm = $('#quick_add_form');
+            frm.submit(function () {
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: "{% url 'glucose_quick_add' %}",
+                    data: frm.serialize(),
+                    success: function (data) {
+                        var message = jQuery.parseJSON(data);
+                        if (message['success']) {
+                            // Reload the table data. This function is located in
+                            // scripts/scripts.js.
+                            oTable.fnReloadAjax();
 
-                    // Reload the chart and stats panels
-                    loadStats();
-                    loadChart();
+                            // Reload the chart and stats panels
+                            loadStats();
+                            loadChart();
 
-                    document.getElementById('quick_add_form').reset();
-                    $('#id_value').focus();
+                            document.getElementById('quick_add_form').reset();
+                            $('#id_value').focus();
 
-                    // Re-enable the submit button.
-                    $('#submit-id-submit').prop('disabled', false);
-                }
-                else {
-                    alert(message['error']);
-                    $('#id_value').focus().select();
+                            // Re-enable the submit button.
+                            $('#submit-id-submit').prop('disabled', false);
+                        }
+                        else {
+                            alert(message['error']);
+                            $('#id_value').focus().select();
 
-                    // Re-enable the submit button.
-                    $('#submit-id-submit').prop('disabled', false);
-                }
-            },
-            error: function(data) {
-                alert('Sorry, something went wrong. Please try again.');
+                            // Re-enable the submit button.
+                            $('#submit-id-submit').prop('disabled', false);
+                        }
+                    },
+                    error: function (data) {
+                        alert('Sorry, something went wrong. Please try again.');
+                    }
+                });
+                return false;
+            });
+
+            // For Twitter button
+            {# TODO remove twitter button#}
+
+            function updateTwitterValues(text, via) {
+                $('#id_twitter_button').html('<a href="https://twitter.com/share?url=/" class="twitter-share-button" data-dnt="true" data-text="' + text + '" data-count="none" data-via="' + via + '">Tweet</a>');
+                twttr.widgets.load();
             }
+
+            !function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+
+                if (!d.getElementById(id)) {
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = "https://platform.twitter.com/widgets.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }
+            }
+
+            (document, "script", "twitter-wjs");
         });
-        return false;
-    });
-
-
-    // For Twitter button
-    function updateTwitterValues(text, via) {
-      $('#id_twitter_button').html('<a href="https://twitter.com/share?url=/" class="twitter-share-button" data-dnt="true" data-text="' + text +'" data-count="none" data-via="' + via +'">Tweet</a>');
-      twttr.widgets.load();
-    }
-
-    !function(d,s,id){
-    var js,fjs=d.getElementsByTagName(s)[0];
-
-    if(!d.getElementById(id)){
-        js=d.createElement(s);
-        js.id=id;
-        js.src="https://platform.twitter.com/widgets.js";
-        fjs.parentNode.insertBefore(js,fjs);
-    }}
-
-    (document,"script","twitter-wjs");
-} );
-</script>
+    </script>
 {% endblock %}
