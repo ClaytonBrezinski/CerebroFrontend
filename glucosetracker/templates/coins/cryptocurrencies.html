@@ -2,6 +2,10 @@
 {% load staticfiles %}
 {% load render_table from django_tables2 %}
 
+{% block heading %}
+    <h3><span class="fa fa-circle-o"></span> Coins</h3>
+{% endblock %}
+
 {% block content %}
         {% render_table cryptocurrency %}
 {% endblock %}

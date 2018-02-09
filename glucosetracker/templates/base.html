@@ -54,9 +54,6 @@
 <body>
 {# TODO make menu button appear on right when shrunk - make menu button appear#}
 <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-md" role="navigation">
-    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-ex1-collapse"><span
-            class="sr-only">Toggle navigation</span>
-    </button>
     {% if user.is_authenticated %}
         <a class="navbar-brand" href="{% url 'dashboard' %}">
             <h4 class="ion-arrow-graph-up-right"> Cerebro Reporting </h4>
@@ -66,9 +63,12 @@
             <h4 class="ion-arrow-graph-up-right">Cerebro Reporting </h4>
         </a>
     {% endif %}
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     {# TODO fix dashboard header so that it doesnt go to a new  line when you shrink the page#}
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
             {% if user.is_authenticated %}
                 <li class="nav-item">
@@ -130,31 +130,31 @@
 
 
 {% block rootcontainer %}
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container container-fluid">
+        <div class="mt-3 row">
             {% block breadcrumbs %}{% endblock %}
             <div class="col-lg-12">
-                <div class="page-header">
+                <div class="border-bottom">
                     {% block heading %}{% endblock %}
                 </div>
                 {% block content %}{% endblock %}
             </div>
         </div>
-    </div><!-- /.container -->
+    </div>
 {% endblock %}
 
 <footer class="footer">
     <!-- FOOTER -->
-        <div class="container">
-            <p class="pull-right "><a href="#" class="font-weight-light">Back to top</a></p>
-            <p class="text-muted font-weight-light">
-                &copy; 2017 AlltraSolutions.tech by <a href="https://github.com/OriginalMidas">Clayton Brezinski </a>
-                | <a href="{% url 'blog_list_view' %}">Blog</a>
-                {# TODO update for facebook page#}
-                | <a href="https://www.facebook.com/Alttra-Solutions-267847987034563/">About</a>
-                | <a href="mailto:contact@alttrasolutions.tech">Contact Us</a>
-            </p>
-        </div>
+    <div class="container">
+        <p class="pull-right "><a href="#" class="font-weight-light">Back to top</a></p>
+        <p class="text-muted font-weight-light">
+            &copy; 2017 AlltraSolutions.tech by <a href="https://github.com/OriginalMidas">Clayton Brezinski </a>
+            | <a href="{% url 'blog_list_view' %}">Blog</a>
+            {# TODO update for facebook page#}
+            | <a href="https://www.facebook.com/Alttra-Solutions-267847987034563/">About</a>
+            | <a href="mailto:contact@alttrasolutions.tech">Contact Us</a>
+        </p>
+    </div>
 </footer>
 <!-- JavaScript -->
 <!-- Placed at the end of the document so the pages load faster -->
