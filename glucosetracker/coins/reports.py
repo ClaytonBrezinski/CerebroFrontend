@@ -10,7 +10,7 @@ from .models import Cryptocurrency, Coin
 # from sentiment.models import sentimentResults
 logger = logging.getLogger(__name__)
 
-DATE_FORMAT = '%m/%d/%Y'
+DATE_FORMAT = '%Y/%m/%d'
 FILENAME_DATE_FORMAT = '%b%d%Y'
 TIME_FORMAT = '%I:%M %p'
 
