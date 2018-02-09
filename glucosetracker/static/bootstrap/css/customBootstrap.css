@@ -1,5 +1,7 @@
 body {
+    padding-top: 100px;
     background-color: #eef0f3;
+    margin-bottom: 60px;
 }
 
 .footer {
@@ -16,11 +18,6 @@ body {
 html {
     position: relative;
     min-height: 100%;
-}
-
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
 }
 
 /* Custom page CSS
@@ -48,4 +45,8 @@ code {
     .img-responsive();
     width: 50px;
     max-height: 50px
+}
+
+.card-header{
+    background-color: White;
 }
