@@ -17,10 +17,15 @@
 
     <!-- CSS -->
     {% compress css %}
-        # bootstrap cdn
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- custom css -->
+        <link href="{% static 'bootstrap/css/sticky-footer-navbar.css' %}" rel="stylesheet">
+        <!-- bootstrap cdn -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css"
+              rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
         {% block extracss %}{% endblock %}
@@ -137,22 +142,19 @@
     </div><!-- /.container -->
 {% endblock %}
 
-<!-- FOOTER -->
-<div class="footer">
-    <div class="container-fluid">
-        <footer>
-            <p class="pull-right"><a href="#">Back to top</a></p>
-            <p class="text-muted">
+<footer class="footer">
+    <!-- FOOTER -->
+        <div class="container">
+            <p class="pull-right "><a href="#" class="font-weight-light">Back to top</a></p>
+            <p class="text-muted font-weight-light">
                 &copy; 2017 AlltraSolutions.tech by <a href="https://github.com/OriginalMidas">Clayton Brezinski </a>
                 | <a href="{% url 'blog_list_view' %}">Blog</a>
                 {# TODO update for facebook page#}
                 | <a href="https://www.facebook.com/Alttra-Solutions-267847987034563/">About</a>
                 | <a href="mailto:contact@alttrasolutions.tech">Contact Us</a>
             </p>
-        </footer>
-    </div>
-</div>
-
+        </div>
+</footer>
 <!-- JavaScript -->
 <!-- Placed at the end of the document so the pages load faster -->
 {% compress js %}
@@ -160,8 +162,12 @@
     <script src="{% static 'jquery/jquery.min.js' %}"></script>
     <script src="{% static 'jquery-validation/jquery.validate.js' %}"></script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"
+            integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D"
+            crossorigin="anonymous"></script>
 
     {% block extrajs %}{% endblock %}
 {% endcompress %}
