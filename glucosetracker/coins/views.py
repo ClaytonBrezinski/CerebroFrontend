@@ -20,7 +20,7 @@ def cryptocurrenciesView(request):
     table = Cryptocurrencytable(Cryptocurrency.objects.all())
     RequestConfig(request).configure(table)
 
-    return render(request=request, template_name=template_name, context={'cryptocurrency': table},)
+    return render(request=request, template_name=template_name, context={'cryptocurrency': table}, )
 
 
 # def coinsChart(request):
