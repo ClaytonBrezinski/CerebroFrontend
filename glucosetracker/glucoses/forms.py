@@ -11,7 +11,7 @@ from crispy_forms.bootstrap import FormActions
 from .models import Glucose, Category
 from .fields import RestrictedFileField
 
-DATE_FORMAT = '%m/%d/%Y'
+DATE_FORMAT = '%Y/%m/%d'
 TIME_FORMAT = '%I:%M %p'
 
 

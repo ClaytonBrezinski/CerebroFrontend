@@ -7,7 +7,7 @@ from core.utils import to_mg
 from .models import Category, Glucose
 
 
-DATE_FORMAT = '%m/%d/%Y'
+DATE_FORMAT = '%Y/%m/%d'
 TIME_FORMAT = '%I:%M %p'
 
 

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+        {% render_table cryptocurrency %}
+{% endblock %}
+{% block extrajs %}
+{% endblock %}

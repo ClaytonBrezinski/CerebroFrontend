@@ -25,7 +25,7 @@ from .forms import (GlucoseCreateForm, GlucoseImportForm, GlucoseEmailReportForm
 from functools import reduce
 from django.contrib.auth.models import User
 
-DATE_FORMAT = '%m/%d/%Y'
+DATE_FORMAT = '%Y/%m/%d'
 TIME_FORMAT = '%I:%M %p'
 
 logger = logging.getLogger(__name__)
@@ -127,7 +127,9 @@ def chart_data_json(request):
     if name == 'avg_by_category':
         data['chart_data'] = ChartData.get_avg_by_category(user=request.user, days=int(days))
     elif name == 'avg_by_day':
-        data['chart_data'] = ChartData.get_avg_by_day(user=request.user, days=int(days))
+        # data['chart_data'] = ChartData.get_avg_by_day(user=request.user, days=int(days))
+        data['chart_data'] = {'dates': ['2017/05/05', '2017/05/06', '2017/05/07'],
+                              'values': [90.0, 95.0, 100.0]}
     elif name == 'level_breakdown':
         data['chart_data'] = ChartData.get_level_breakdown(user=request.user, days=int(days))
     elif name == 'count_by_category':

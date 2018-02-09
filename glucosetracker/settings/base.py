@@ -96,6 +96,7 @@ TEMPLATES = [
                 # Template loaders
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader',
+                # TODO remove depricated file here
                 # depricated 'django.template.loaders.eggs.Loader',
                 ],
             },
@@ -140,6 +141,7 @@ INSTALLED_APPS = [
     'stickymessages',
     'taggit',
     'storages',
+    'django_tables2',
 
     # Local apps
     'accounts',
@@ -147,6 +149,7 @@ INSTALLED_APPS = [
     'core',
     'glucoses',
     'subscribers',
+    'coins',
     ]
 
 # Django-crispy-forms settings
