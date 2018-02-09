@@ -1,4 +1,6 @@
 Django==1.11.0
+Fabric==1.8.1 #note this needs to be fabric 2
+reportlab==3.4.0
 
 coverage==3.7
 django-axes
@@ -29,3 +31,4 @@ requests==2.3.0
 
 # additional
 django-model-utils
+django-tables2

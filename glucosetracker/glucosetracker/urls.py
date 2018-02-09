@@ -48,6 +48,7 @@ urlpatterns = [
     url(r'^core/', include('core.urls')),
     url(r'^glucoses/', include('glucoses.urls')),
     url(r'^blog/', include('blogs.urls')),
+    url(r'^coins/', include('coins.urls')),
 
     url(r'^dashboard/$', view=dashboard, name='dashboard'),
     url(r'^subscribe/$', view=subscribe_view, name='subscribe'),
