@@ -71,10 +71,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
             {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link ion-ios-keypad" href="{% url 'dashboard' %}"> Dashboard</a>
-                </li>
-
                 {# TODO change url to coins page #}
                 <li class="nav-item">
                     <a class="nav-link ion-ios-circle-outline" href="{% url 'cryptocurrencies' %}"> Coins</a>
