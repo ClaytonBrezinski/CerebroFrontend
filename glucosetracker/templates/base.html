@@ -73,14 +73,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
             {% if user.is_authenticated %}
-                {# TODO change url to coins page #}
                 <li class="nav-item">
                     <a class="nav-link ion-ios-circle-outline" href="{% url 'cryptocurrencies' %}"> Coins</a>
                 </li>
-
-                {# TODO change url to social media page #}
                 <li class="nav-item">
-                    <a class="nav-link ion-ios-pulse-strong" href="{% url 'dashboard' %}"> Social Media</a>
+                    <a class="nav-link ion-ios-pulse-strong" href="{% url 'socialMedia' %}"> Social Media</a>
                 </li>
                 <li class="nav-item dropdown">
                     {# TODO make the href point to a default reports page#}
