@@ -9,7 +9,14 @@ class Tweet(models.Model):
     createdAt = models.DateTimeField()
     username = models.CharField(max_length=100)
     url = models.URLField(validators=([validators.URLValidator]))
+
     # TODO add default name
+
+    def get_name(self):
+        return self.username + " - " + self.text
+
+    def __str__(self):
+        return self.username + " - " + self.text
 
 
 class NewsItem(models.Model):
@@ -21,6 +28,11 @@ class NewsItem(models.Model):
     newsAgency = models.CharField(max_length=256)
 
     # TODO add default name
+    def get_name(self):
+        return self.newsAgency + " - " + self.headlineText
+
+    def __str__(self):
+        return self.newsAgency + " - " + self.headlineText
 
 
 class RedditPost(models.Model):
@@ -35,4 +47,11 @@ class RedditPost(models.Model):
     # ^\/r\/
     comments = models.IntegerField(default=0)
     upvotes = models.IntegerField(default=0)
+
     # TODO add default name
+
+    def get_name(self):
+        return self.subreddit + " - " + self.text
+
+    def __str__(self):
+        return self.subreddit + " - " + self.text
