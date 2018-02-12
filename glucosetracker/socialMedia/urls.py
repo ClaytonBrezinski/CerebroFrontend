@@ -1,10 +1,10 @@
 from django.conf.urls import url
 
-from .views import
+from .views import socialMediaView
 
 urlpatterns = [
     url(regex=r'^$',
-        view=Tweet.as_view(),
-        name='blog_list_view',
+        view=socialMediaView,
+        name='socialMedia',
         ),
     ]
