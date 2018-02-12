@@ -150,6 +150,7 @@ INSTALLED_APPS = [
     'glucoses',
     'subscribers',
     'coins',
+    'socialMedia',
     ]
 
 # Django-crispy-forms settings
