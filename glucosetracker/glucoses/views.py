@@ -26,6 +26,7 @@ from functools import reduce
 from django.contrib.auth.models import User
 
 from socialMedia.models import Tweet, RedditPost, NewsItem
+from socialMedia.utils import datetimeToTimeAgo, timeAgoToString
 
 DATE_FORMAT = '%Y/%m/%d'
 TIME_FORMAT = '%I:%M %p'
@@ -113,9 +114,19 @@ def dashboard(request):
     form.fields['category'].initial = get_initial_category(request.user)
     user = User.objects.get(username=request.user.username)
     user_settings = user.settings
-    newsItems = NewsItem.objects.all()[:4]
-    redditPosts = RedditPost.objects.all()[:4]
-    tweets = Tweet.objects.all()[:4]
+
+    # TODO update from .latest to a more complex algorithm
+    newsItems = NewsItem.objects.order_by('-createdAt')[:4]
+    redditPosts = RedditPost.objects.order_by('-createdAt')[:4]
+    tweets = Tweet.objects.order_by('-createdAt')[:4]
+
+    for item in newsItems:
+        item.daysAgo = timeAgoToString(datetimeToTimeAgo(item.createdAt))
+    for item in redditPosts:
+        item.daysAgo = timeAgoToString(datetimeToTimeAgo(item.createdAt))
+    for item in tweets:
+        item.daysAgo = timeAgoToString(datetimeToTimeAgo(item.createdAt))
+
     return render(template_name='core/dashboard.html',
                   context={'form': form,
                            'glucose_unit_name': user_settings.glucose_unit.name,
