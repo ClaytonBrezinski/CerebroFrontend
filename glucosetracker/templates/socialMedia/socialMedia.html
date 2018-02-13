@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load render_table from django_tables2 %}
+
+{% block heading %}
+    <h3><span class="ion-ios-pulse-strong"></span> Social Media</h3>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        {% if sticky_message %}
+            <div class="alert alert-info alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ sticky_message.message|safe }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left panel: News-->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-center">News</h4>
+                    </div>
+                    <div class="list-group">
+                        {% for newsItem in newsItems %}
+                            <a href="{{ newsItem.url }}"
+                               class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="font-weight-light"> {{ newsItem.newsAgency }}
+                                        <small>&middot; {{ newsItem.daysAgo }}</small>
+                                    </h6>
+                                </div>
+                                <p class="mb-1">{{ newsItem.headlineText }}</p>
+                                <small>{{ newsItem.text }}</small>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- Middle: Twitter -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-center">Twitter</h4>
+                    </div>
+                    <div class="list-group">
+                        {% for tweet in tweets %}
+                            <a href="{{ tweet.url }}"
+                               class="list-group-item list-group-item-action flex-column align-items-start">
+                                {# TODO add picture in this column and set the width fixed, and left justified#}
+                                <div class="col"></div>
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="font-weight-light"> {{ tweet.username }}
+                                        <small>&middot; {{ tweet.daysAgo }}</small>
+                                    </h6>
+                                    <small>
+                                        {{ tweet.retweetCount }}<i class="fa fa-retweet"></i> &middot;
+                                        {{ tweet.likesCount }}<i class="fa fa fa-thumbs-o-up"></i>
+                                    </small>
+                                </div>
+                                <p class="font-weight-normal">{{ tweet.text }}</p>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- Right panel: Reddit -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-center">Reddit</h4>
+                    </div>
+                    <div class="list-group">
+                        {% for post in redditPosts %}
+                            <a href="{{ post.url }}"
+                               class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="font-weight-light">/r/{{ post.subreddit|title }}
+                                        <small>&middot; {{ post.daysAgo }}</small>
+                                    </h6>
+                                    <small>
+                                        {{ post.comments }} <i class="fa fa-commenting-o"></i> &middot;
+                                        {{ post.upvotes }} <i class="fa fa-arrow-circle-o-up"></i>
+                                    </small>
+                                </div>
+                                <p class="mb-1">{{ post.text }}</p>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extrajs %}
+{% endblock %}

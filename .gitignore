@@ -107,3 +107,5 @@ ENV/
 \.idea/workspace\.xml
 
 requirements2\.txt
+
+\.idea/

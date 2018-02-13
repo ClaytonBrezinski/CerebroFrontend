@@ -25,6 +25,9 @@ from .forms import (GlucoseCreateForm, GlucoseImportForm, GlucoseEmailReportForm
 from functools import reduce
 from django.contrib.auth.models import User
 
+from socialMedia.models import Tweet, RedditPost, NewsItem
+from socialMedia.utils import datetimeToTimeAgo, timeAgoToString
+
 DATE_FORMAT = '%Y/%m/%d'
 TIME_FORMAT = '%I:%M %p'
 
@@ -112,8 +115,25 @@ def dashboard(request):
     user = User.objects.get(username=request.user.username)
     user_settings = user.settings
 
+    # TODO update from .latest to a more complex algorithm
+    newsItems = NewsItem.objects.order_by('-createdAt')[:4]
+    redditPosts = RedditPost.objects.order_by('-createdAt')[:4]
+    tweets = Tweet.objects.order_by('-createdAt')[:4]
+
+    for item in newsItems:
+        item.daysAgo = timeAgoToString(datetimeToTimeAgo(item.createdAt))
+    for item in redditPosts:
+        item.daysAgo = timeAgoToString(datetimeToTimeAgo(item.createdAt))
+    for item in tweets:
+        item.daysAgo = timeAgoToString(datetimeToTimeAgo(item.createdAt))
+
     return render(template_name='core/dashboard.html',
-                  context={'form': form, 'glucose_unit_name': user_settings.glucose_unit.name},
+                  context={'form': form,
+                           'glucose_unit_name': user_settings.glucose_unit.name,
+                           'newsItems': newsItems,
+                           'redditPosts': redditPosts,
+                           'tweets': tweets,
+                           },
                   request=request, )
 
 

@@ -18,7 +18,6 @@
         <!-- chart area -->
         {# TODO create carousel for multiple currencies #}
         <div class="row">
-
             <div class="container-fluid">
                 <div id="bitcoinChart" class="card-body"></div>
             </div>
@@ -84,7 +83,7 @@
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <a class="nav-link active" href="#twitterTab" data-toggle="tab">
-                               <h5> Twitter </h5>
+                                <h5> Twitter </h5>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -102,133 +101,62 @@
                         <!-- Tab 1 -->
                         <div class="tab-pane active" id="twitterTab">
                             <div class="list-group">
-                                <a href="#"
-                                   class="list-group-item list-group-item-action flex-column align-items-start">
-                                    {# TODO add picture in this column and set the width fixed, and left justified#}
-                                    <div class="col"></div>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="font-weight-light"> Twitter name
-                                            <small>&middot; 3 days ago</small>
-                                        </h6>
-                                        <small>
-                                            100<i class="fa fa-retweet"></i> &middot;
-                                            100<i class="fa fa fa-thumbs-o-up"></i>
-                                        </small>
-                                    </div>
-                                    <p class="font-weight-normal">Donec id elit non mi porta gravida at eget metus.
-                                        Maecenas sed
-                                        diam eget risus varius blandit.</p>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="col"></div>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="font-weight-light"> Twitter name
-                                            <small>&middot; 3 days ago</small>
-                                        </h6>
-                                        <small>
-                                            100<i class="fa fa-retweet"></i> &middot;
-                                            100<i class="fa fa fa-thumbs-o-up"></i>
-                                        </small>
-                                    </div>
-                                    <p class="font-weight-normal">Donec id elit non mi porta gravida at eget metus.
-                                        Maecenas sed
-                                        diam eget risus varius blandit.</p>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="col"></div>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="font-weight-light"> Twitter name
-                                            <small>&middot; 3 days ago</small>
-                                        </h6>
-                                        <small>
-                                            100<i class="fa fa-retweet"></i> &middot;
-                                            100<i class="fa fa fa-thumbs-o-up"></i>
-                                        </small>
-                                    </div>
-                                    <p class="font-weight-normal">Donec id elit non mi porta gravida at eget metus.
-                                        Maecenas sed
-                                        diam eget risus varius blandit.</p>
-                                </a>
+                                {% for tweet in tweets %}
+                                    <a href="{{ tweet.url }}"
+                                       class="list-group-item list-group-item-action flex-column align-items-start">
+                                        {# TODO add picture in this column and set the width fixed, and left justified#}
+                                        <div class="col"></div>
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="font-weight-light"> {{ tweet.username }}
+                                                <small>&middot; {{ tweet.daysAgo }}</small>
+                                            </h6>
+                                            <small>
+                                                {{ tweet.retweetCount }}<i class="fa fa-retweet"></i> &middot;
+                                                {{ tweet.likesCount }}<i class="fa fa fa-thumbs-o-up"></i>
+                                            </small>
+                                        </div>
+                                        <p class="font-weight-normal">{{ tweet.text }}</p>
+                                    </a>
+                                {% endfor %}
                             </div>
                         </div>
 
                         <!-- Tab 2 -->
                         <div class="tab-pane" id="redditTab">
                             <div class="list-group">
-                                <a href="#"
-                                   class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="font-weight-light">/r/CryptoCurrency<small>&middot; 3 days ago</small>
-                                        </h6>
-                                        <small>
-                                            100 <i class="fa fa-commenting-o"></i> &middot;
-                                            100 <i class="fa fa-arrow-circle-o-up"></i>
-                                        </small>
-                                    </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
-                                        diam eget risus varius blandit.</p>
-                                </a>
-                                <a href="#"
-                                   class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="font-weight-light">/r/CryptoCurrency<small>&middot; 3 days ago</small>
-                                        </h6>
-                                        <small>
-                                            100 <i class="fa fa-commenting-o"></i> &middot;
-                                            100 <i class="fa fa-arrow-circle-o-up"></i>
-                                        </small>
-                                    </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
-                                        diam eget risus varius blandit.</p>
-                                </a>
-                                <a href="#"
-                                   class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="font-weight-light">/r/CryptoCurrency<small>&middot; 3 days ago</small>
-                                        </h6>
-                                        <small>
-                                            100 <i class="fa fa-commenting-o"></i> &middot;
-                                            100 <i class="fa fa-arrow-circle-o-up"></i>
-                                        </small>
-                                    </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
-                                        diam eget risus varius blandit.</p>
-                                </a>
+                                {% for post in redditPosts %}
+                            <a href="{{ post.url }}"
+                               class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="font-weight-light">/r/{{ post.subreddit|title }}
+                                        <small>&middot; {{ post.daysAgo }}</small>
+                                    </h6>
+                                    <small>
+                                        {{ post.comments }} <i class="fa fa-commenting-o"></i> &middot;
+                                        {{ post.upvotes }} <i class="fa fa-arrow-circle-o-up"></i>
+                                    </small>
+                                </div>
+                                <p class="mb-1">{{ post.text }}</p>
+                            </a>
+                        {% endfor %}
                             </div>
                         </div>
 
                         <!-- Tab 3 -->
                         <div class="tab-pane" id="newsTab">
                             <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="font-weight-light">News Agency<small>&middot; 3 days ago</small>
-                                        </h6>
-                                    </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
-                                        diam eget risus varius blandit.</p>
-                                    <small>Donec id elit non mi porta.</small>
-                                </a>
-                                <a href="#"
-                                   class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="font-weight-light">News Agency<small>&middot; 3 days ago</small>
-                                        </h6>
-                                    </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
-                                        diam eget risus varius blandit.</p>
-                                    <small class="text-muted">Donec id elit non mi porta.</small>
-                                </a>
-                                <a href="#"
-                                   class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="font-weight-light">News Agency<small>&middot; 3 days ago</small>
-                                        </h6>
-                                    </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed
-                                        diam eget risus varius blandit.</p>
-                                    <small class="text-muted">Donec id elit non mi porta.</small>
-                                </a>
+                                {% for newsItem in newsItems %}
+                            <a href="{{ newsItem.url }}"
+                               class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="font-weight-light"> {{ newsItem.newsAgency }}
+                                        <small>&middot; {{ newsItem.daysAgo }}</small>
+                                    </h6>
+                                </div>
+                                <p class="mb-1">{{ newsItem.headlineText }}</p>
+                                <small>{{ newsItem.text }}</small>
+                            </a>
+                        {% endfor %}
                             </div>
                         </div>
                     </div>
