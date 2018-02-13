@@ -25,6 +25,8 @@ from .forms import (GlucoseCreateForm, GlucoseImportForm, GlucoseEmailReportForm
 from functools import reduce
 from django.contrib.auth.models import User
 
+from socialMedia.models import Tweet, RedditPost, NewsItem
+
 DATE_FORMAT = '%Y/%m/%d'
 TIME_FORMAT = '%I:%M %p'
 
@@ -111,9 +113,16 @@ def dashboard(request):
     form.fields['category'].initial = get_initial_category(request.user)
     user = User.objects.get(username=request.user.username)
     user_settings = user.settings
-
+    newsItems = NewsItem.objects.all()[:4]
+    redditPosts = RedditPost.objects.all()[:4]
+    tweets = Tweet.objects.all()[:4]
     return render(template_name='core/dashboard.html',
-                  context={'form': form, 'glucose_unit_name': user_settings.glucose_unit.name},
+                  context={'form': form,
+                           'glucose_unit_name': user_settings.glucose_unit.name,
+                           'newsItems': newsItems,
+                           'redditPosts': redditPosts,
+                           'tweets': tweets,
+                           },
                   request=request, )
 
 
