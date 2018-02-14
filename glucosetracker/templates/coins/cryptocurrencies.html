@@ -7,7 +7,70 @@
 {% endblock %}
 
 {% block content %}
-        {% render_table cryptocurrency %}
+
+    <div class="container-fluid">
+        {% if sticky_message %}
+            <div class="alert alert-info alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ sticky_message.message|safe }}
+            </div>
+        {% endif %}
+        <!-- chart area -->
+        {# TODO create carousel for multiple currencies #}
+        <div class="row">
+            <div class="container-fluid">
+                <div id="bitcoinChart" class="card-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% render_table cryptocurrency %}
+        </div>
+    </div>
 {% endblock %}
 {% block extrajs %}
+    <script src="{{ STATIC_URL }}datatables/media/js/jquery.dataTables.js"></script>
+    <script src="{{ STATIC_URL }}datatables/extensions/Responsive/js/dataTables.responsive.js"></script>
+    <script src="{{ STATIC_URL }}datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
+    <script src="{{ STATIC_URL }}highcharts/js/highcharts.js"></script>
+    <script src="{{ STATIC_URL }}highcharts/js/modules/exporting.js"></script>
+
+    <script src="{{ STATIC_URL }}scripts/scripts.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Glucose Average by Day chart
+            var bitcoinChartOptions = {
+                credits: {enabled: false},
+                chart: {
+                    renderTo: 'bitcoinChart',
+                    type: 'line',
+                },
+                legend: {enabled: false},
+                title: {text: 'Bitcoin Chart'},
+                subtitle: {text: 'Last 14 Days'},
+                xAxis: {title: {text: null}, labels: {rotation: -45}},
+                yAxis: {title: {text: null}},
+                series: [{
+                    animation: false
+                }],
+            };
+
+
+            var chartDataUrl = "{% url 'chart_data_json' %}?name=avg_by_day&days=14";
+
+            function loadBitcoinChart() {
+                $.getJSON(chartDataUrl,
+                    function (data) {
+                        bitcoinChartOptions.xAxis.categories = data['chart_data']['dates'];
+                        bitcoinChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
+                        bitcoinChartOptions.series[0].data = data['chart_data']['values'];
+                        var chart = new Highcharts.Chart(bitcoinChartOptions);
+                    });
+            }
+
+            loadBitcoinChart();
+        });
+    </script>
 {% endblock %}
