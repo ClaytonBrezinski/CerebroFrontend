@@ -39,7 +39,8 @@ def login_view(request):
             login_failed = True
 
     return render(template_name='accounts/login.html',
-                  context={'login_failed': login_failed}, request=request)
+                  context={'login_failed': login_failed},
+                  request=request)
 
 
 class SignUpView(FormView):

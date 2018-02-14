@@ -6,7 +6,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'US/Eastern'
+TIME_ZONE = 'America/Regina'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -96,6 +96,7 @@ TEMPLATES = [
                 # Template loaders
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader',
+                # TODO remove depricated file here
                 # depricated 'django.template.loaders.eggs.Loader',
                 ],
             },
@@ -140,6 +141,7 @@ INSTALLED_APPS = [
     'stickymessages',
     'taggit',
     'storages',
+    'django_tables2',
 
     # Local apps
     'accounts',
@@ -147,6 +149,8 @@ INSTALLED_APPS = [
     'core',
     'glucoses',
     'subscribers',
+    'coins',
+    'socialMedia',
     ]
 
 # Django-crispy-forms settings

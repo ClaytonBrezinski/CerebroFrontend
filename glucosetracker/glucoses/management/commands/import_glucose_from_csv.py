@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from ...models import Glucose, Category
 
 
-DATE_FORMAT = '%m/%d/%Y'
+DATE_FORMAT = '%Y/%m/%d'
 TIME_FORMAT = '%I:%M %p'
 
 

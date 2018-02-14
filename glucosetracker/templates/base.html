@@ -17,8 +17,6 @@
 
     <!-- CSS -->
     {% compress css %}
-        <!-- custom css -->
-        <link href="{% static 'bootstrap/css/sticky-footer-navbar.css' %}" rel="stylesheet">
         <!-- bootstrap cdn -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -27,6 +25,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css"
               rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <!-- custom css -->
+        <link href="{% static 'bootstrap/css/customBootstrap.css' %}" rel="stylesheet">
 
         {% block extracss %}{% endblock %}
     {% endcompress %}
@@ -52,36 +53,31 @@
 </head>
 
 <body>
+{# TODO make menu button appear on right when shrunk - make menu button appear#}
 <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-md" role="navigation">
-    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-ex1-collapse"><span
-            class="sr-only">Toggle navigation</span>
-    </button>
     {% if user.is_authenticated %}
         <a class="navbar-brand" href="{% url 'dashboard' %}">
-            <h4 class="ion-arrow-graph-up-right"> Cerebro Reporting </h4>
+
+            <h4> <img class="logo-img" src="{% static 'images/icons/icon_blood_red_192x192.png' %}"> Cerebro Reporting </h4>
         </a>
     {% else %}
         <a class="navbar-brand" href="/">
             <h4 class="ion-arrow-graph-up-right">Cerebro Reporting </h4>
         </a>
     {% endif %}
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     {# TODO fix dashboard header so that it doesnt go to a new  line when you shrink the page#}
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
             {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link ion-ios-keypad" href="{% url 'dashboard' %}"> Dashboard</a>
+                    <a class="nav-link ion-ios-circle-outline" href="{% url 'cryptocurrencies' %}"> Coins</a>
                 </li>
-
-                {# TODO change url to coins page #}
                 <li class="nav-item">
-                    <a class="nav-link ion-ios-circle-outline" href="{% url 'dashboard' %}"> Coins</a>
-                </li>
-
-                {# TODO change url to coins page #}
-                <li class="nav-item">
-                    <a class="nav-link ion-ios-pulse-strong" href="{% url 'dashboard' %}"> Social Media</a>
+                    <a class="nav-link ion-ios-pulse-strong" href="{% url 'socialMedia' %}"> Social Media</a>
                 </li>
                 <li class="nav-item dropdown">
                     {# TODO make the href point to a default reports page#}
@@ -130,30 +126,30 @@
 
 {% block rootcontainer %}
     <div class="container-fluid">
-        <div class="row">
+        <div class="mt-3 row">
             {% block breadcrumbs %}{% endblock %}
             <div class="col-lg-12">
-                <div class="page-header">
+                <div class="border-bottom">
                     {% block heading %}{% endblock %}
                 </div>
                 {% block content %}{% endblock %}
             </div>
         </div>
-    </div><!-- /.container -->
+    </div>
 {% endblock %}
 
 <footer class="footer">
     <!-- FOOTER -->
-        <div class="container">
-            <p class="pull-right "><a href="#" class="font-weight-light">Back to top</a></p>
-            <p class="text-muted font-weight-light">
-                &copy; 2017 AlltraSolutions.tech by <a href="https://github.com/OriginalMidas">Clayton Brezinski </a>
-                | <a href="{% url 'blog_list_view' %}">Blog</a>
-                {# TODO update for facebook page#}
-                | <a href="https://www.facebook.com/Alttra-Solutions-267847987034563/">About</a>
-                | <a href="mailto:contact@alttrasolutions.tech">Contact Us</a>
-            </p>
-        </div>
+    <div class="container">
+        <p class="pull-right "><a href="#" class="font-weight-light">Back to top</a></p>
+        <p class="text-muted font-weight-light">
+            &copy; 2017 AlltraSolutions.tech by <a href="https://github.com/OriginalMidas">Clayton Brezinski </a>
+            | <a href="{% url 'blog_list_view' %}">Blog</a>
+            {# TODO update for facebook page#}
+            | <a href="https://www.facebook.com/Alttra-Solutions-267847987034563/">About</a>
+            | <a href="mailto:contact@alttrasolutions.tech">Contact Us</a>
+        </p>
+    </div>
 </footer>
 <!-- JavaScript -->
 <!-- Placed at the end of the document so the pages load faster -->

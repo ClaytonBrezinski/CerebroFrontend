@@ -20,7 +20,7 @@ from .models import Glucose
 
 logger = logging.getLogger(__name__)
 
-DATE_FORMAT = '%m/%d/%Y'
+DATE_FORMAT = '%Y/%m/%d'
 FILENAME_DATE_FORMAT = '%b%d%Y'
 TIME_FORMAT = '%I:%M %p'
 
@@ -231,6 +231,12 @@ class ChartData(object):
 
     @classmethod
     def get_avg_by_day(cls, user, days):
+        """
+        pull data from the database for displaying on the website
+        :param user:
+        :param days:
+        :return:
+        """
         now = datetime.now(tz=user.settings.time_zone).date()
 
         glucose_averages = Glucose.objects.avg_by_day(
@@ -239,8 +245,7 @@ class ChartData(object):
         data = {'dates': [], 'values': []}
         for avg in glucose_averages:
             rounded_value = core_utils.round_value(avg['avg_value'])
-            data['values'].append(
-                    core_utils.glucose_by_unit_setting(user, rounded_value))
+            data['values'].append(core_utils.glucose_by_unit_setting(user, rounded_value))
             data['dates'].append(avg['record_date'].strftime('%m/%d'))
 
         return data
