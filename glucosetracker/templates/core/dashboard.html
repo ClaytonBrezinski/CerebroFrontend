@@ -195,29 +195,43 @@
                 credits: {enabled: false},
                 chart: {
                     renderTo: 'bitcoinChart',
-                    type: 'line',
                 },
-                legend: {enabled: false},
+
                 title: {text: 'Bitcoin Chart'},
-                subtitle: {text: 'Last 14 Days'},
                 xAxis: {
                     title: {text: null},
                     labels: {rotation: -45}
                 },
                 yAxis: {title: {text: null}},
                 series: [{
-                    animation: false
+                    animation: true,
+                    type: 'area',
+                    tooltip: {
+                        valueDecimals: 2
+                    },
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    }
                 }]
             };
 
             // set the url to the chart_data_json view
-            var chartDataUrl = "{% url 'chart_data_json' %}?name=avg_by_day&days=14";
+            var chartDataUrl = "{% url 'coinsChartDataJson' %}";
 
             // pull data from the chart_data_json view and add it to the chart
             $.getJSON(chartDataUrl, function (data) {
-                bitcoinChartOptions.xAxis.categories = data['chart_data']['dates'];
+
                 bitcoinChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
-                bitcoinChartOptions.series[0].data = data['chart_data']['values'];
+                bitcoinChartOptions.series[0].data = data['chart_data'];
                 new Highcharts.stockChart(bitcoinChartOptions);
             });
         });
