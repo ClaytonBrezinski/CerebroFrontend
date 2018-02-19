@@ -125,20 +125,20 @@
                         <div class="tab-pane" id="redditTab">
                             <div class="list-group">
                                 {% for post in redditPosts %}
-                            <a href="{{ post.url }}"
-                               class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h6 class="font-weight-light">/r/{{ post.subreddit|title }}
-                                        <small>&middot; {{ post.daysAgo }}</small>
-                                    </h6>
-                                    <small>
-                                        {{ post.comments }} <i class="fa fa-commenting-o"></i> &middot;
-                                        {{ post.upvotes }} <i class="fa fa-arrow-circle-o-up"></i>
-                                    </small>
-                                </div>
-                                <p class="mb-1">{{ post.text }}</p>
-                            </a>
-                        {% endfor %}
+                                    <a href="{{ post.url }}"
+                                       class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="font-weight-light">/r/{{ post.subreddit|title }}
+                                                <small>&middot; {{ post.daysAgo }}</small>
+                                            </h6>
+                                            <small>
+                                                {{ post.comments }} <i class="fa fa-commenting-o"></i> &middot;
+                                                {{ post.upvotes }} <i class="fa fa-arrow-circle-o-up"></i>
+                                            </small>
+                                        </div>
+                                        <p class="mb-1">{{ post.text }}</p>
+                                    </a>
+                                {% endfor %}
                             </div>
                         </div>
 
@@ -146,17 +146,17 @@
                         <div class="tab-pane" id="newsTab">
                             <div class="list-group">
                                 {% for newsItem in newsItems %}
-                            <a href="{{ newsItem.url }}"
-                               class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h6 class="font-weight-light"> {{ newsItem.newsAgency }}
-                                        <small>&middot; {{ newsItem.daysAgo }}</small>
-                                    </h6>
-                                </div>
-                                <p class="mb-1">{{ newsItem.headlineText }}</p>
-                                <small>{{ newsItem.text }}</small>
-                            </a>
-                        {% endfor %}
+                                    <a href="{{ newsItem.url }}"
+                                       class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="font-weight-light"> {{ newsItem.newsAgency }}
+                                                <small>&middot; {{ newsItem.daysAgo }}</small>
+                                            </h6>
+                                        </div>
+                                        <p class="mb-1">{{ newsItem.headlineText }}</p>
+                                        <small>{{ newsItem.text }}</small>
+                                    </a>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -170,105 +170,25 @@
 {% endblock %}
 
 {% block extracss %}
-    <link href="{{ STATIC_URL }}datatables/media/css/jquery.dataTables.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}datatables/extensions/Responsive/css/dataTables.responsive.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}datatables/extensions/TableTools/css/dataTables.tableTools.css" rel="stylesheet">
 {% endblock %}
 
 {% block extrahead %}
-    <!-- JS, popper.js, jQuery for highcharts -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
+    <!-- popper.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+
+    <!-- HighCharts/Highstocks js-->
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
 {% endblock %}
 
 {% block extrajs %}
-    <script src="{{ STATIC_URL }}datatables/media/js/jquery.dataTables.js"></script>
-    <script src="{{ STATIC_URL }}datatables/extensions/Responsive/js/dataTables.responsive.js"></script>
-    <script src="{{ STATIC_URL }}datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
-    <script src="{{ STATIC_URL }}highcharts/js/highcharts.js"></script>
-    <script src="{{ STATIC_URL }}highcharts/js/modules/exporting.js"></script>
 
-    <!--
-    //<script src="https://code.highcharts.com/highcharts.src.js"></script>
-    //<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    //<script src="https://code.highcharts.com/highcharts.js"></script>
-    //<script src="https://code.highcharts.com/modules/data.js"></script>
-    //<script src="https://code.highcharts.com/modules/series-label.js"></script>
-    //<script src="https://code.highcharts.com/modules/exporting.js"></script>
-
-    <!-- Additional files for the Highslide popup effect -->
-    <!--
-    //<script src="https://www.highcharts.com/media/com_demo/js/highslide-full.min.js"></script>
-    //<script src="https://www.highcharts.com/media/com_demo/js/highslide.config.js" charset="utf-8"></script>
-    -->
-    <script src="{{ STATIC_URL }}scripts/scripts.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#id_hba1c_panel').tooltip();
-
-            // Update stats in panels
-            var statsUrl = "{% url 'stats_json' %}";
-
-            function loadStats() {
-                $.getJSON(statsUrl,
-                    function (data) {
-                        document.getElementById('id_latest_entry').innerHTML =
-                            data['stats']['latest_entry']['value'];
-                        document.getElementById('id_latest_entry').className =
-                            "text-center " + data['stats']['latest_entry']['css_class'];
-
-                        document.getElementById('id_hba1c').innerHTML =
-                            data['stats']['hba1c']['value'];
-                        document.getElementById('id_hba1c').className =
-                            "text-center " + data['stats']['hba1c']['css_class'];
-
-                        /*document.getElementById('id_num_records').innerHTML =
-                            data['stats']['num_records'];*/
-
-                        document.getElementById('id_lowest').innerHTML =
-                            data['stats']['breakdown']['lowest']['value'];
-                        document.getElementById('id_lowest').className =
-                            data['stats']['breakdown']['lowest']['css_class'];
-
-                        document.getElementById('id_highest').innerHTML =
-                            data['stats']['breakdown']['highest']['value'];
-                        document.getElementById('id_highest').className =
-                            data['stats']['breakdown']['highest']['css_class'];
-
-                        document.getElementById('id_average').innerHTML =
-                            data['stats']['breakdown']['average']['value'];
-                        document.getElementById('id_average').className =
-                            data['stats']['breakdown']['average']['css_class'];
-
-                        document.getElementById('id_highs').innerHTML =
-                            data['stats']['breakdown']['highs'];
-                        document.getElementById('id_lows').innerHTML =
-                            data['stats']['breakdown']['lows'];
-                        document.getElementById('id_within_target').innerHTML =
-                            data['stats']['breakdown']['within_target'];
-                        document.getElementById('id_other').innerHTML =
-                            data['stats']['breakdown']['other'];
-
-                        var twitter_text = "#bgnow "
-                            + data['stats']['latest_entry']['value']
-                            + " (" + data['stats']['latest_entry']['record_time']
-                            + ") " + data['stats']['latest_entry']['notes'];
-                        // Remove leading and trailing spaces
-                        twitter_text = twitter_text.trim();
-                        updateTwitterValues(twitter_text, 'glucosetracker');
-                    }
-                )
-            };
-
-            loadStats();
-
 
             // Glucose Average by Day chart
             var bitcoinChartOptions = {
@@ -280,107 +200,26 @@
                 legend: {enabled: false},
                 title: {text: 'Bitcoin Chart'},
                 subtitle: {text: 'Last 14 Days'},
-                xAxis: {title: {text: null}, labels: {rotation: -45}},
+                xAxis: {
+                    title: {text: null},
+                    labels: {rotation: -45}
+                },
                 yAxis: {title: {text: null}},
                 series: [{
                     animation: false
-                }],
+                }]
             };
 
-
+            // set the url to the chart_data_json view
             var chartDataUrl = "{% url 'chart_data_json' %}?name=avg_by_day&days=14";
 
-            function loadBitcoinChart() {
-                $.getJSON(chartDataUrl,
-                    function (data) {
-                        bitcoinChartOptions.xAxis.categories = data['chart_data']['dates'];
-                        bitcoinChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
-                        bitcoinChartOptions.series[0].data = data['chart_data']['values'];
-                        var chart = new Highcharts.Chart(bitcoinChartOptions);
-                    });
-            }
-
-            loadBitcoinChart();
-
-
-            var oTable = $('#glucose_table').dataTable({
-                "sDom": 'T<"container">lfrtip',
-                "tableTools": {
-                    "sSwfPath": "{{ STATIC_URL }}datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
-                    "aButtons": ["csv", "pdf"]
-                },
-                "aLengthMenu": [
-                    [10, 15, 25, 50, 75, 100],
-                    [10, 15, 25, 50, 75, 100],
-                ],
-                "bProcessing": true,
-                "bServerSide": true,
-                "sAjaxSource": "{% url 'glucose_list_json' %}",
-                "aaSorting": [[2, 'desc'], [3, 'desc']],
-
-                // Disable sorting for the Tags and Delete columns.
-                "aoColumnDefs": [{"bSortable": false, "aTargets": [5, 6]}]
+            // pull data from the chart_data_json view and add it to the chart
+            $.getJSON(chartDataUrl, function (data) {
+                bitcoinChartOptions.xAxis.categories = data['chart_data']['dates'];
+                bitcoinChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
+                bitcoinChartOptions.series[0].data = data['chart_data']['values'];
+                new Highcharts.stockChart(bitcoinChartOptions);
             });
-
-            // Add the glucose value and refresh the table data
-            var frm = $('#quick_add_form');
-            frm.submit(function () {
-                $.ajax({
-                    type: frm.attr('method'),
-                    url: "{% url 'glucose_quick_add' %}",
-                    data: frm.serialize(),
-                    success: function (data) {
-                        var message = jQuery.parseJSON(data);
-                        if (message['success']) {
-                            // Reload the table data. This function is located in
-                            // scripts/scripts.js.
-                            oTable.fnReloadAjax();
-
-                            // Reload the chart and stats panels
-                            loadStats();
-                            loadChart();
-
-                            document.getElementById('quick_add_form').reset();
-                            $('#id_value').focus();
-
-                            // Re-enable the submit button.
-                            $('#submit-id-submit').prop('disabled', false);
-                        }
-                        else {
-                            alert(message['error']);
-                            $('#id_value').focus().select();
-
-                            // Re-enable the submit button.
-                            $('#submit-id-submit').prop('disabled', false);
-                        }
-                    },
-                    error: function (data) {
-                        alert('Sorry, something went wrong. Please try again.');
-                    }
-                });
-                return false;
-            });
-
-            // For Twitter button
-            {# TODO remove twitter button#}
-
-            function updateTwitterValues(text, via) {
-                $('#id_twitter_button').html('<a href="https://twitter.com/share?url=/" class="twitter-share-button" data-dnt="true" data-text="' + text + '" data-count="none" data-via="' + via + '">Tweet</a>');
-                twttr.widgets.load();
-            }
-
-            !function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-
-                if (!d.getElementById(id)) {
-                    js = d.createElement(s);
-                    js.id = id;
-                    js.src = "https://platform.twitter.com/widgets.js";
-                    fjs.parentNode.insertBefore(js, fjs);
-                }
-            }
-
-            (document, "script", "twitter-wjs");
         });
     </script>
 {% endblock %}

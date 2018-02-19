@@ -30,16 +30,20 @@
         </div>
     </div>
 {% endblock %}
-{% block extrajs %}
-    <script src="{{ STATIC_URL }}datatables/media/js/jquery.dataTables.js"></script>
-    <script src="{{ STATIC_URL }}datatables/extensions/Responsive/js/dataTables.responsive.js"></script>
-    <script src="{{ STATIC_URL }}datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
-    <script src="{{ STATIC_URL }}highcharts/js/highcharts.js"></script>
-    <script src="{{ STATIC_URL }}highcharts/js/modules/exporting.js"></script>
 
-    <script src="{{ STATIC_URL }}scripts/scripts.js"></script>
+{% block extrahead %}
+
+    <!-- HighCharts/Highstocks js-->
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+{% endblock %}
+
+{% block extrajs %}
+
     <script type="text/javascript">
         $(document).ready(function () {
+
             // Glucose Average by Day chart
             var bitcoinChartOptions = {
                 credits: {enabled: false},
@@ -50,27 +54,26 @@
                 legend: {enabled: false},
                 title: {text: 'Bitcoin Chart'},
                 subtitle: {text: 'Last 14 Days'},
-                xAxis: {title: {text: null}, labels: {rotation: -45}},
+                xAxis: {
+                    title: {text: null},
+                    labels: {rotation: -45}
+                },
                 yAxis: {title: {text: null}},
                 series: [{
                     animation: false
-                }],
+                }]
             };
 
-
+            // set the url to the chart_data_json view
             var chartDataUrl = "{% url 'chart_data_json' %}?name=avg_by_day&days=14";
 
-            function loadBitcoinChart() {
-                $.getJSON(chartDataUrl,
-                    function (data) {
-                        bitcoinChartOptions.xAxis.categories = data['chart_data']['dates'];
-                        bitcoinChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
-                        bitcoinChartOptions.series[0].data = data['chart_data']['values'];
-                        var chart = new Highcharts.Chart(bitcoinChartOptions);
-                    });
-            }
-
-            loadBitcoinChart();
+            // pull data from the chart_data_json view and add it to the chart
+            $.getJSON(chartDataUrl, function (data) {
+                bitcoinChartOptions.xAxis.categories = data['chart_data']['dates'];
+                bitcoinChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
+                bitcoinChartOptions.series[0].data = data['chart_data']['values'];
+                new Highcharts.stockChart(bitcoinChartOptions);
+            });
         });
     </script>
 {% endblock %}
