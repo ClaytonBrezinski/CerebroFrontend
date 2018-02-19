@@ -1,12 +1,13 @@
 import csv
 from datetime import datetime
 import logging
-
+import datetime
 from django.conf import settings
 # TODO add email capabilities
 # from django.core.mail import EmailMessage
 
 from .models import Cryptocurrency, Coin
+
 # from sentiment.models import sentimentResults
 logger = logging.getLogger(__name__)
 
@@ -18,7 +19,7 @@ TIME_FORMAT = '%I:%M %p'
 class ChartData(object):
 
     @classmethod
-    def getCurrencyData(cls, user, timespan, currency):
+    def getCurrencyData(cls, currency, user='', timespan=''):
         """
         pull currency data from the database about the specified currency
         :param user:
@@ -28,12 +29,16 @@ class ChartData(object):
         """
         # Alter currency value based on User's currency default
         # pull all data from the database
-        curencyData = Coin.objects.all().filter(cryptocurrency=currency)
-
-        # TODO add volume in the future
-        data = {'dates': [],
-                'values': []}
-        data['values'].append(curencyData)
+        # TODO add volume
+        data = Coin.objects.all().filter(cryptocurrency__name=currency).values('price', 'time')
+        # update time field to unix time, multiply by 10,000 to get time 'accuracy' to mS
+        for object in data:
+            unixTime = int(object['time'].timestamp()) * 10000
+            object['time'] = unixTime
+        # convert the queryset to a list of dictionaries
+        data = [item for item in data]
+        # time, price inverted
+        return [[row[key] for key in ['time', 'price']] for row in data]
 
     # TODO create a getCurrencySentimentData class
     @classmethod
