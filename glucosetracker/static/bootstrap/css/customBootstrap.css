@@ -42,11 +42,20 @@ code {
 }
 
 .logo-img {
-    .img-responsive();
+. img-responsive();
     width: 50px;
-    max-height: 50px
+    max-height: 50px;
 }
 
-.card-header{
+.card-header {
     background-color: White;
+}
+
+.full-width {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.topPadding {
+    padding-top: 5px;
 }

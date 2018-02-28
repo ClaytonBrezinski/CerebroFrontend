@@ -128,16 +128,18 @@
 
 
 {% block rootcontainer %}
-    <div class="container-fluid">
-        <div class="mt-3 row">
+    <div class="container-fluid full-width">
+        <div class="container row">
             {% block breadcrumbs %}{% endblock %}
-            <div class="col-lg-12">
+            <div class="col">
                 <div class="border-bottom">
                     {% block heading %}{% endblock %}
                 </div>
-                {% block content %}{% endblock %}
             </div>
         </div>
+    </div>
+    <div class="container-fluid full-width">
+        {% block content %}{% endblock %}
     </div>
 {% endblock %}
 
@@ -158,16 +160,13 @@
 <!-- Placed at the end of the document so the pages load faster -->
 {% compress js %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
 
     {# TODO remove extra bootstrap import #}
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"
-            integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D"
             crossorigin="anonymous"></script>
 
     {% block extrajs %}{% endblock %}

@@ -109,3 +109,7 @@ ENV/
 requirements2\.txt
 
 \.idea/
+
+glucosetracker/CerebroReport\.csv
+
+*.sqlite-journal

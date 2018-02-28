@@ -40,10 +40,10 @@ class Coin(models.Model):
 
 class Cryptocurrencytable(tables.Table):
     rank = tables.Column(verbose_name='#')
-    name = tables.Column(verbose_name='Name')
+    name = tables.Column(verbose_name='Name', accessor='cryptocurrency.name')
     # TODO remove ticker symbol
-    tickerSymbol = tables.Column(verbose_name='Ticker Symbol')
-    price = tables.Column(verbose_name='Price')
+    tickerSymbol = tables.Column(verbose_name='Ticker Symbol', accessor='cryptocurrency.tickerSymbol')
+    price = tables.Column(verbose_name='Price', )
     marketCap = tables.Column(verbose_name='Market Cap')
     volume = tables.Column(verbose_name='Volume')
     # TODO add ticker symbol to the circulating supply
@@ -52,7 +52,8 @@ class Cryptocurrencytable(tables.Table):
     weekChange = tables.Column(verbose_name='Change(7d)')
 
     class Meta:
-        model = Cryptocurrency
-        template_name = 'django_tables2/bootstrap.html'
+        model = Coin
+        template_name = 'django_tables2/bootstrap-responsive.html'
         sequence = ('rank', 'name', 'tickerSymbol')
         fields = ('name', 'tickerSymbol')  # 'price', 'Market Cap'
+        attrs = {'class': 'table table-striped table-hover'}

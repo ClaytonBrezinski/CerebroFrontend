@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block content %}
-
     <div class="container-fluid">
         {% if sticky_message %}
             <div class="alert alert-info alert-dismissable">
@@ -18,13 +17,13 @@
         <!-- chart area -->
         {# TODO create carousel for multiple currencies #}
         <div class="row">
-            <div class="container-fluid">
-                <div id="bitcoinChart" class="card-body"></div>
+            <div class="container-fluid full-width">
+                <div id="bitcoinChart" class = "card-body"></div>
             </div>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid topPadding">
         <div class="row">
             {% render_table cryptocurrency %}
         </div>
@@ -32,7 +31,6 @@
 {% endblock %}
 
 {% block extrahead %}
-
     <!-- HighCharts/Highstocks js-->
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
@@ -60,7 +58,22 @@
                 },
                 yAxis: {title: {text: null}},
                 series: [{
-                    animation: false
+                    animation: true,
+                    tooltip: {
+                        valueDecimals: 2
+                    },
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    }
                 }]
             };
 
@@ -70,10 +83,10 @@
             //var ?name=avg_by_day&days=14";
 
             // pull data from the chart_data_json view and add it to the chart
+            {# TODO add currency price and update the chart#}
             $.getJSON(chartDataUrl, function (data) {
-                bitcoinChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
+                bitcoinChartOptions.series[0].name = 'Price'; // ({{ user.settings.currencyUnit }})
                 bitcoinChartOptions.series[0].data = data['chart_data'];
-
                 new Highcharts.stockChart(bitcoinChartOptions);
             });
         });

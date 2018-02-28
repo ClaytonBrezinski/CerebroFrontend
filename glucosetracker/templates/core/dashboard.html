@@ -19,11 +19,11 @@
         {# TODO create carousel for multiple currencies #}
         <div class="row">
             <div class="container-fluid">
-                <div id="bitcoinChart" class="card-body"></div>
+                <div id="bitcoinChart"></div>
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid topPadding">
         <div class="row">
             <!-- left hand side -->
             <div class="col-md">
@@ -195,6 +195,7 @@
                 credits: {enabled: false},
                 chart: {
                     renderTo: 'bitcoinChart',
+                    type: 'line',
                 },
 
                 title: {text: 'Bitcoin Chart'},
@@ -202,10 +203,15 @@
                     title: {text: null},
                     labels: {rotation: -45}
                 },
-                yAxis: {title: {text: null}},
+                yAxis: {
+                    tickAmount: 4,
+                    title: {text: null},
+                    startOnTick: true,
+                    endOnTick: true
+                },
                 series: [{
                     animation: true,
-                    type: 'area',
+
                     tooltip: {
                         valueDecimals: 2
                     },
@@ -229,8 +235,7 @@
 
             // pull data from the chart_data_json view and add it to the chart
             $.getJSON(chartDataUrl, function (data) {
-
-                bitcoinChartOptions.series[0].name = 'Avg Glucose ({{ user.settings.glucose_unit }})';
+                bitcoinChartOptions.series[0].name = 'Price // ({{ user.settings.glucose_unit }})';
                 bitcoinChartOptions.series[0].data = data['chart_data'];
                 new Highcharts.stockChart(bitcoinChartOptions);
             });
