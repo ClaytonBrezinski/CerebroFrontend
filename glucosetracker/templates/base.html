@@ -59,7 +59,6 @@
 <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-md" role="navigation">
     {% if user.is_authenticated %}
         <a class="navbar-brand" href="{% url 'dashboard' %}">
-
             <h4><img class="logo-img" src="{% static 'images/icons/icon_blood_red_192x192.png' %}"> Cerebro Reporting
             </h4>
         </a>
@@ -72,20 +71,21 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     {# TODO fix dashboard header so that it doesnt go to a new  line when you shrink the page#}
+    {% block navbarWrapper %}
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
             {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link ion-ios-circle-outline" href="{% url 'cryptocurrencies' %}"> Coins</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link ion-ios-pulse-strong" href="{% url 'socialMedia' %}"> Social Media</a>
-                </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item {{isActiveDashboard}}"><a class="nav-link ion-ios-grid" href="{% url 'dashboard' %}">
+                    Dashboard</a></li>
+                <li class="nav-item {{isActiveCoins}}"><a class="nav-link ion-ios-circle-outline" href="{% url 'cryptocurrencies' %}">
+                    Coins</a></li>
+                <li class="nav-item {{isActiveSocialMedia}}"><a class="nav-link ion-ios-pulse-strong" href="{% url 'socialMedia' %}"> Social
+                    Media</a></li>
+                <li class="nav-item dropdown {{isActive}} ">
                     {# TODO make the href point to a default reports page#}
                     <a href="#" class="nav-link dropdown-toggle ion-stats-bars" data-toggle="dropdown"> Reports </a>
-                    <div class="dropdown-menu" , aria-labelledby="">
+                    <div class="dropdown-menu" aria-labelledby="">
                         {# TODO update urls when changed #}
                         <a class="dropdown-item" href="{% url 'glucose_filter' %}">Filter Data</a>
                         <a class="dropdown-item" href="{% url 'glucose_charts' %}">Charts & Graphs</a>
@@ -94,10 +94,8 @@
                     </div>
                     {#                TODO make auto popup for when alerts occur - allow the user to click the button and receive the same popup on the popup have a button to adjust alert settings#}
 
-                <li class="nav-item">
-                    <a class="nav-link ion-ios-bell" href="{% url 'dashboard' %}"> Alerts</a>
-                </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item"><a class="nav-link ion-ios-bell" href="{% url 'dashboard' %}"> Alerts</a></li>
+                <li class="nav-item dropdown {{isActiveSettings}}">
                     <a href="#" class="nav-link dropdown-toggle ion-android-person"
                        data-toggle="dropdown"> {{ user }} </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -122,8 +120,7 @@
             {% endif %}
         </ul>
     </div>
-    <!-- /.navbar-collapse -->
-    <!-- /.container -->
+    {% endblock navbarWrapper %}
 </nav>
 
 

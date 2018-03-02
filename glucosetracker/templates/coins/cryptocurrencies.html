@@ -6,6 +6,12 @@
     <h3><span class="fa fa-circle-o"></span> Coins</h3>
 {% endblock %}
 
+{% block navbarWrapper %}
+    {% with isActiveCoins='active' %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock navbarWrapper %}
+
 {% block content %}
     <div class="container-fluid">
         {% if sticky_message %}
