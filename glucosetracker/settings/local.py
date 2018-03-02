@@ -16,15 +16,15 @@ GOOGLE_ANALYTICS_TRACKING_ID = None
 ADDTHIS_PUBLISHER_ID = None
 
 ADMINS = (
-    ('Local Admin', 'admin@glucosetracker.net'),
+    ('Local Admin', 'admin@cerebro.net'),
     )
 
 MANAGERS = ADMINS
 
 CONTACTS = {
-    'support_email': 'support@glucosetracker.net',
-    'admin_email': 'admin@glucosetracker.net',
-    'info_email': 'info@glucosetracker.net',
+    'support_email': 'support@cerebro.net',
+    'admin_email': 'admin@cerebro.net',
+    'info_email': 'info@cerebro.net',
     }
 
 # For 'subscribers' app
@@ -33,8 +33,8 @@ SEND_SUBSCRIBERS_EMAIL_CONFIRMATION = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'glucosetracker',
-        'USER': 'glucosetracker',
+        'NAME': 'cerebro',
+        'USER': 'cerebro',
         'PASSWORD': 'password',
         'HOST': os.getenv('POSTGRESQL_HOST', 'localhost'),
         'PORT': '',

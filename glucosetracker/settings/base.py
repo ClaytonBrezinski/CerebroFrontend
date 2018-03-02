@@ -15,8 +15,8 @@ LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 
 # Run management command 'set_site_values to set these values
-SITE_NAME = 'GlucoseTracker.net'
-SITE_DOMAIN = 'www.glucosetracker.net'
+SITE_NAME = 'Cerebro.net'
+SITE_DOMAIN = 'www.Cerebro.net'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -42,7 +42,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = '/webapps/glucosetracker/static/'
+STATIC_ROOT = '/webapps/cerebro/static/'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -87,7 +87,7 @@ TEMPLATES = [
                 # 3rd-party context processors
                 'stickymessages.context_processors.latest_sticky_message',
 
-                # GlucoseTracker context processors
+                # cerebro context processors
                 'core.context_processors.third_party_tracking_ids',
                 'core.context_processors.site_info',
                 ]
@@ -113,10 +113,10 @@ MIDDLEWARE = [
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
     ]
 
-ROOT_URLCONF = 'glucosetracker.urls'
+ROOT_URLCONF = 'cerebro.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'glucosetracker.wsgi.application'
+WSGI_APPLICATION = 'cerebro.wsgi.application'
 
 INSTALLED_APPS = [
     # Grappelli custom admin, needs to be defined before the admin app.

@@ -25,7 +25,7 @@ class Command(BaseCommand):
             user = User.objects.create(username=args[0])
             user.first_name = 'John'
             user.last_name = 'Smith'
-            user.email = 'test@glucosetracker.net'
+            user.email = 'test@cerebro.net'
             user.set_password('demo')
             user.save()
 
