@@ -1,4 +1,4 @@
-setuptools
+setuptools >= 38.5.2
 Django==1.11.0
 Fabric==1.8.1 #note this needs to be fabric 2
 reportlab==3.4.0
