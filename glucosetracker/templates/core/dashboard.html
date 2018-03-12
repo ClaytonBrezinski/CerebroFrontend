@@ -7,6 +7,12 @@
     <h3><span class="fa fa-th"></span> Dashboard</h3>
 {% endblock %}
 
+{% block navbarWrapper %}
+    {% with isActiveDashboard='active' %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock navbarWrapper %}
+
 {% block content %}
     <div class="container-fluid">
         {% if sticky_message %}

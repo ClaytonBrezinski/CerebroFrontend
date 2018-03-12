@@ -6,6 +6,12 @@
 
 {% load crispy_forms_tags %}
 
+{% block navbarWrapper %}
+    {% with isActiveSettings='active' %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock navbarWrapper %}
+
 {% block content %}
    {% crispy form %}
 {% endblock %}

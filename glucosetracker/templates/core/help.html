@@ -1,8 +1,14 @@
-{% extends 'base.html' %}
+{% include 'base.html' with active='dashboard' %}
 
 {% block heading %}
     <h3><span class="fa fa-question-circle"></span> Help</h3>
 {% endblock %}
+
+{% block navbarWrapper %}
+    {% with isActiveSettings='active' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock navbarWrapper %}
 
 {% load crispy_forms_tags %}
 
