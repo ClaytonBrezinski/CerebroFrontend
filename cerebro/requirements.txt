@@ -33,3 +33,6 @@ requests==2.3.0
 # additional
 django-model-utils
 django-tables2
+
+# for production
+dj-database-url

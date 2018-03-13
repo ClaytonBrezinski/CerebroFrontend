@@ -1,3 +1,5 @@
+import dj_database_url
+
 from .base import *
 
 
@@ -26,7 +28,7 @@ DATABASES = {
         'NAME': 'cerebro',
         'USER': os.environ['DATABASE_USER'],
         'PASSWORD': os.environ['DATABASE_PASSWORD'],
-        'HOST': 'ec2-50-16-217-122.compute-1.amazonaws.com',
+        'HOST': 'cerebro',
         'PORT': '',
     }
 }
@@ -73,3 +75,10 @@ CACHES = {
     }
 }
 AXES_CACHE = 'axes_cache'
+
+# Parse database configuration from $DATABASE_URL
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+
+# set max connection time to the database to 10 mins
+db_from_env = dj_database_url.config(conn_max_age=600)
