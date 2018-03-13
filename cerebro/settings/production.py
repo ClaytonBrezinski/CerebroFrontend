@@ -57,9 +57,9 @@ SEND_SUBSCRIBERS_EMAIL_CONFIRMATION = True
 # Django-storages settings
 DEFAULT_FILE_STORAGE = 'core.s3utils.MediaRootS3BotoStorage'
 
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-AWS_STORAGE_BUCKET_NAME = 'cerebro-assets'
-AWS_QUERYSTRING_AUTH = False
-
-MEDIA_URL = '//%s.s3.amazonaws.com/%s/' % (AWS_STORAGE_BUCKET_NAME, MEDIA_ROOT)
+# AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+# AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+# AWS_STORAGE_BUCKET_NAME = 'cerebro-assets'
+# AWS_QUERYSTRING_AUTH = False
+#
+# MEDIA_URL = '//%s.s3.amazonaws.com/%s/' % (AWS_STORAGE_BUCKET_NAME, MEDIA_ROOT)
