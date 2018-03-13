@@ -26,7 +26,7 @@ DATABASES = {
         'NAME': 'cerebro',
         'USER': os.environ['DATABASE_USER'],
         'PASSWORD': os.environ['DATABASE_PASSWORD'],
-        'HOST': 'localhost',
+        'HOST': 'ec2-50-16-217-122.compute-1.amazonaws.com',
         'PORT': '',
     }
 }
