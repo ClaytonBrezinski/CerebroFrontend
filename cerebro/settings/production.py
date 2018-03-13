@@ -66,16 +66,6 @@ DEFAULT_FILE_STORAGE = 'core.s3utils.MediaRootS3BotoStorage'
 #
 # MEDIA_URL = '//%s.s3.amazonaws.com/%s/' % (AWS_STORAGE_BUCKET_NAME, MEDIA_ROOT)
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    },
-    'axes_cache': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-    }
-}
-AXES_CACHE = 'axes_cache'
-
 # Parse database configuration from $DATABASE_URL
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)

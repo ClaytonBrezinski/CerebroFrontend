@@ -17,20 +17,20 @@
 
     <!-- CSS -->
     {% compress css %}
-        <!-- bootstrap cdn -->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-              crossorigin="anonymous">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css"
-              rel="stylesheet">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
         <!-- custom css -->
         <link href="{% static 'bootstrap/css/customBootstrap.css' %}" rel="stylesheet">
-
         {% block extracss %}{% endblock %}
     {% endcompress %}
+
+    <!-- bootstrap cdn -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css"
+          rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
 
     <!-- Add custom CSS here -->
     {% block customcss %}
@@ -72,54 +72,57 @@
     </button>
     {# TODO fix dashboard header so that it doesnt go to a new  line when you shrink the page#}
     {% block navbarWrapper %}
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="nav navbar-nav ml-auto">
-            {% if user.is_authenticated %}
-                <li class="nav-item {{isActiveDashboard}}"><a class="nav-link ion-ios-grid" href="{% url 'dashboard' %}">
-                    Dashboard</a></li>
-                <li class="nav-item {{isActiveCoins}}"><a class="nav-link ion-ios-circle-outline" href="{% url 'cryptocurrencies' %}">
-                    Coins</a></li>
-                <li class="nav-item {{isActiveSocialMedia}}"><a class="nav-link ion-ios-pulse-strong" href="{% url 'socialMedia' %}"> Social
-                    Media</a></li>
-                <li class="nav-item dropdown {{isActive}} ">
-                    {# TODO make the href point to a default reports page#}
-                    <a href="#" class="nav-link dropdown-toggle ion-stats-bars" data-toggle="dropdown"> Reports </a>
-                    <div class="dropdown-menu" aria-labelledby="">
-                        {# TODO update urls when changed #}
-                        <a class="dropdown-item" href="{% url 'glucose_filter' %}">Filter Data</a>
-                        <a class="dropdown-item" href="{% url 'glucose_charts' %}">Charts & Graphs</a>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item {{ isActiveDashboard }}"><a class="nav-link ion-ios-grid"
+                                                                    href="{% url 'dashboard' %}">
+                        Dashboard</a></li>
+                    <li class="nav-item {{ isActiveCoins }}"><a class="nav-link ion-ios-circle-outline"
+                                                                href="{% url 'cryptocurrencies' %}">
+                        Coins</a></li>
+                    <li class="nav-item {{ isActiveSocialMedia }}"><a class="nav-link ion-ios-pulse-strong"
+                                                                      href="{% url 'socialMedia' %}"> Social
+                        Media</a></li>
+                    <li class="nav-item dropdown {{ isActive }} ">
+                        {# TODO make the href point to a default reports page#}
+                        <a href="#" class="nav-link dropdown-toggle ion-stats-bars" data-toggle="dropdown"> Reports </a>
+                        <div class="dropdown-menu" aria-labelledby="">
+                            {# TODO update urls when changed #}
+                            <a class="dropdown-item" href="{% url 'glucose_filter' %}">Filter Data</a>
+                            <a class="dropdown-item" href="{% url 'glucose_charts' %}">Charts & Graphs</a>
 
-                        <a class="dropdown-item" href="{% url 'glucose_email_report' %}">Email Report</a>
-                    </div>
-                    {#                TODO make auto popup for when alerts occur - allow the user to click the button and receive the same popup on the popup have a button to adjust alert settings#}
+                            <a class="dropdown-item" href="{% url 'glucose_email_report' %}">Email Report</a>
+                        </div>
+                        {#                TODO make auto popup for when alerts occur - allow the user to click the button and receive the same popup on the popup have a button to adjust alert settings#}
 
-                <li class="nav-item"><a class="nav-link ion-ios-bell" href="{% url 'dashboard' %}"> Alerts</a></li>
-                <li class="nav-item dropdown {{isActiveSettings}}">
-                    <a href="#" class="nav-link dropdown-toggle ion-android-person"
-                       data-toggle="dropdown"> {{ user }} </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="{% url 'usersettings' %}">Account Settings</a>
-                        <a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
-                        {# TODO make alert settings page for this#}
-                        <a class="dropdown-item" href="{% url 'usersettings' %}">Alert Settings</a>
-                        {# TODO update url when changed#}
-                        <a class="dropdown-item" href="{% url 'help' %}">Help</a>
-                        <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
-                    </div>
-                </li>
-            {% else %}
-                <form class="form-inline ml-auto">
-                    <button type="button" class="btn btn-primary"
-                            onclick="location.href=&quot;{% url 'login' %}&quot;;">Log In
-                    </button>
-                    <button type="button" class="btn btn-success"
-                            onclick="location.href=&quot;{% url 'signup' %}&quot;;">Sign Up (Free!)
-                    </button>
-                </form>
-            {% endif %}
-        </ul>
-    </div>
+                    <li class="nav-item"><a class="nav-link ion-ios-bell" href="{% url 'dashboard' %}"> Alerts</a></li>
+                    <li class="nav-item dropdown {{ isActiveSettings }}">
+                        <a href="#" class="nav-link dropdown-toggle ion-android-person"
+                           data-toggle="dropdown"> {{ user }} </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="{% url 'usersettings' %}">Account Settings</a>
+                            <a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
+                            {# TODO make alert settings page for this#}
+                            <a class="dropdown-item" href="{% url 'usersettings' %}">Alert Settings</a>
+                            {# TODO update url when changed#}
+                            <a class="dropdown-item" href="{% url 'help' %}">Help</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <form class="form-inline ml-auto">
+                        <button type="button" class="btn btn-primary"
+                                onclick="location.href=&quot;{% url 'login' %}&quot;;">Log In
+                        </button>
+                        <button type="button" class="btn btn-success"
+                                onclick="location.href=&quot;{% url 'signup' %}&quot;;">Sign Up (Free!)
+                        </button>
+                    </form>
+                {% endif %}
+            </ul>
+        </div>
     {% endblock navbarWrapper %}
 </nav>
 
@@ -172,67 +175,67 @@
 {% if google_analytics_tracking_id %}
     <!-- Asynchronous Google Analytics snippet. mathiasbynens.be/notes/async-analytics-snippet -->
     <script>
-        var _gaq = [['_setAccount', '{{ google_analytics_tracking_id }}'], ['_trackPageview']];
-        (function (d, t) {
-            var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-            g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g, s)
-        }(document, 'script'));
+      var _gaq = [['_setAccount', '{{ google_analytics_tracking_id }}'], ['_trackPageview']];
+      (function (d, t) {
+        var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g, s)
+      }(document, 'script'));
     </script>
 {% endif %}
 
 {% if intercom_app_id %}
     <!-- Intercom.io script for user tracking. -->
     <script id="IntercomSettingsScriptTag">
-        window.intercomSettings = {
-            name: "{{ user }}",
-            email: "{{ user.email }}",
-            created_at: {{ user.date_joined|date:'U' }},
-            app_id: "{{ intercom_app_id }}"
-        };
+      window.intercomSettings = {
+        name: "{{ user }}",
+        email: "{{ user.email }}",
+        created_at: {{ user.date_joined|date:'U' }},
+        app_id: "{{ intercom_app_id }}"
+      };
     </script>
     <script>(function () {
-        var w = window;
-        var ic = w.Intercom;
-        if (typeof ic === "function") {
-            ic('reattach_activator');
-            ic('update', intercomSettings);
-        } else {
-            var d = document;
-            var i = function () {
-                i.c(arguments)
-            };
-            i.q = [];
-            i.c = function (args) {
-                i.q.push(args)
-            };
-            w.Intercom = i;
+      var w = window;
+      var ic = w.Intercom;
+      if (typeof ic === "function") {
+        ic('reattach_activator');
+        ic('update', intercomSettings);
+      } else {
+        var d = document;
+        var i = function () {
+          i.c(arguments)
+        };
+        i.q = [];
+        i.c = function (args) {
+          i.q.push(args)
+        };
+        w.Intercom = i;
 
-            function l() {
-                var s = d.createElement('script');
-                s.type = 'text/javascript';
-                s.async = true;
-                s.src = 'https://static.intercomcdn.com/intercom.v1.js';
-                var x = d.getElementsByTagName('script')[0];
-                x.parentNode.insertBefore(s, x);
-            }
-
-            if (w.attachEvent) {
-                w.attachEvent('onload', l);
-            } else {
-                w.addEventListener('load', l, false);
-            }
+        function l() {
+          var s = d.createElement('script');
+          s.type = 'text/javascript';
+          s.async = true;
+          s.src = 'https://static.intercomcdn.com/intercom.v1.js';
+          var x = d.getElementsByTagName('script')[0];
+          x.parentNode.insertBefore(s, x);
         }
+
+        if (w.attachEvent) {
+          w.attachEvent('onload', l);
+        } else {
+          w.addEventListener('load', l, false);
+        }
+      }
     })()</script>
 {% endif %}
 
 <!-- Disable submit buttons after click to prevent multiple submissions. -->
 <script type="text/javascript">
-    $(function () {
-        $('form').submit(function () {
-            $(this).find('input[type=submit]').prop('disabled', true);
-        });
+  $(function () {
+    $('form').submit(function () {
+      $(this).find('input[type=submit]').prop('disabled', true);
     });
+  });
 </script>
 
 {% block extrajsexternal %}

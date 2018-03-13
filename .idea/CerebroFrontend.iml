@@ -32,7 +32,7 @@
     <orderEntry type="library" name="jquery-3.3.1" level="application" />
   </component>
   <component name="PackageRequirementsSettings">
-    <option name="requirementsPath" value="E:\Github Repositories\CerebroFrontend\requirements.txt" />
+    <option name="requirementsPath" value="E:\Github Repositories\CerebroFrontend\cerebro\requirements.txt" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
