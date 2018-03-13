@@ -34,5 +34,8 @@ requests==2.3.0
 django-model-utils
 django-tables2
 
+# for heroku static files
+whitenoise
+
 # for production
 dj-database-url

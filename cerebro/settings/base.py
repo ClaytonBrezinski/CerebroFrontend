@@ -53,6 +53,8 @@ STATICFILES_DIRS = [
     os.path.join(PROJECT_ROOT, 'static'),
     ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = [
@@ -111,6 +113,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # for heroku static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     ]
 
 ROOT_URLCONF = 'cerebro.urls'
@@ -121,6 +125,8 @@ WSGI_APPLICATION = 'cerebro.wsgi.application'
 INSTALLED_APPS = [
     # Grappelli custom admin, needs to be defined before the admin app.
     'grappelli',
+    # whitenoise needs to be run before  'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
 
     'django.contrib.auth',
     'django.contrib.contenttypes',
