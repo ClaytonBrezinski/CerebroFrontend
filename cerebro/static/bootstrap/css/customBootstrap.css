@@ -68,3 +68,20 @@ code {
     border-bottom: 3px solid #007bff;
     text-color: gray;
 }
+
+.thumbnail {
+    display: inline-block;
+    display: block;
+    height: auto;
+    max-width: 100%;
+    padding: 4px;
+    margin-bottom: 20px;
+}
+
+.thumbnail > img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
