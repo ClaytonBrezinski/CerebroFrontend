@@ -59,7 +59,6 @@ urlpatterns = [
 if settings.DEBUG:
     # This serves static files and media files.
     urlpatterns += staticfiles_urlpatterns()
-    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     # In case media is not served correctly
     # urlpatterns += ['',
     #                url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
@@ -69,4 +68,4 @@ if settings.DEBUG:
     #
 
 if not settings.DEBUG:
-    urlpatterns += url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT})
+    urlpatterns.append(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT})
