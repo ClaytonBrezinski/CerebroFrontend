@@ -125,8 +125,6 @@ WSGI_APPLICATION = 'cerebro.wsgi.application'
 INSTALLED_APPS = [
     # Grappelli custom admin, needs to be defined before the admin app.
     'grappelli',
-    # whitenoise needs to be run before  'django.contrib.staticfiles',
-    'whitenoise.runserver_nostatic',
 
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -56,6 +56,9 @@ CONTACTS = {
 # Subscribers app settings
 SEND_SUBSCRIBERS_EMAIL_CONFIRMATION = True
 
+#whitenoise staticfile storage
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Django-storages settings
 #DEFAULT_FILE_STORAGE = 'core.s3utils.MediaRootS3BotoStorage'
 
