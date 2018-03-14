@@ -57,7 +57,7 @@ CONTACTS = {
 SEND_SUBSCRIBERS_EMAIL_CONFIRMATION = True
 
 # Django-storages settings
-DEFAULT_FILE_STORAGE = 'core.s3utils.MediaRootS3BotoStorage'
+#DEFAULT_FILE_STORAGE = 'core.s3utils.MediaRootS3BotoStorage'
 
 # AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 # AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']

@@ -11,9 +11,9 @@ Source: http://stackoverflow.com/questions/10390244/how-to-set-up-a-django-\
         project-with-django-storages-and-amazon-s3-but-with-diff
 """
 
-from django.conf import settings
-
-from storages.backends.s3boto import S3BotoStorage
+# from django.conf import settings
+#
+# from storages.backends.s3boto import S3BotoStorage
 
 
 # MediaRootS3BotoStorage = lambda: S3BotoStorage(
