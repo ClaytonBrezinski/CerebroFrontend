@@ -60,15 +60,11 @@
 {% endblock %}
 
 {% block extracss %}
-<link href="{% static 'datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
-<link href="{% static 'datatables/extensions/Responsive/css/dataTables.responsive.css' %}" rel="stylesheet">
-<link href="{% static 'datatables/extensions/TableTools/css/dataTables.tableTools.css' %}" rel="stylesheet">
+<link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block extrajs %}
-<script src="{% static 'datatables/media/js/jquery.dataTables.js' %}"></script>
-<script src="{% static 'datatables/extensions/Responsive/js/dataTables.responsive.js' %}"></script>
-<script src="{% static 'datatables/extensions/TableTools/js/dataTables.tableTools.js' %}"></script>
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="{% static 'scripts/scripts.js' %}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
