@@ -66,8 +66,3 @@ if settings.DEBUG:
     #                    }),
     #                ]
     #
-
-if not settings.DEBUG:
-    urlpatterns.append(
-        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT})
-            )
