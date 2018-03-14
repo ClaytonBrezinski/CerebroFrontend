@@ -8,7 +8,7 @@ class CustomUserAdmin(UserAdmin):
         'username',
         'email',
         'settings_time_zone',
-        'settings_glucose_unit',
+        # 'settings_glucose_unit',
         'last_login',
         'date_joined',
     ]
@@ -21,13 +21,13 @@ class CustomUserAdmin(UserAdmin):
         return instance.settings.time_zone
     settings_time_zone.short_description = 'Time zone'
 
-    def settings_glucose_unit(self, instance):
-        """
-        This method allows us to access the glucose_unit attribute of Settings
-        to display in the Django Admin.
-        """
-        return instance.settings.glucose_unit
-    settings_glucose_unit.short_description = 'Glucose unit'
+    # def settings_glucose_unit(self, instance):
+    #     """
+    #     This method allows us to access the glucose_unit attribute of Settings
+    #     to display in the Django Admin.
+    #     """
+    #     return instance.settings.glucose_unit
+    # settings_glucose_unit.short_description = 'Glucose unit'
 
 
 admin.site.unregister(User)

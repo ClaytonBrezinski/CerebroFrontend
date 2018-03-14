@@ -7,8 +7,6 @@ from crispy_forms.layout import Button, Submit, Fieldset, HTML, Field
 from crispy_forms.bootstrap import FormActions
 from timezone_field import TimeZoneFormField
 
-from glucoses.models import Category, Unit
-
 from .validators import validate_email_unique, validate_username_unique
 
 
@@ -28,7 +26,7 @@ class SignUpForm(forms.Form):
     username = forms.CharField(max_length=30, validators=[validate_username_unique])
     password = forms.CharField(max_length=128, widget=forms.PasswordInput())
     email = forms.EmailField(max_length=75, validators=[validate_email_unique])
-    glucose_unit = NameModelChoiceField(Unit.objects.all(), empty_label=None, label='Glucose Unit')
+    # glucose_unit = NameModelChoiceField(Unit.objects.all(), empty_label=None, label='Glucose Unit')
     time_zone = TimeZoneFormField(label='Time Zone')
 
     def __init__(self, *args, **kwargs):
@@ -44,7 +42,7 @@ class SignUpForm(forms.Form):
                                              Field('username', autofocus=True),
                                              Field('password'),
                                              Field('email'),
-                                             Field('glucose_unit'),
+                                             # Field('glucose_unit'),
                                              Field('time_zone'),
                                              ),
                                     FormActions(
@@ -62,18 +60,18 @@ class UserSettingsForm(forms.Form):
     email = forms.EmailField(label='Email')
     time_zone = TimeZoneFormField(label='Time Zone')
 
-    glucose_unit = NameModelChoiceField(Unit.objects.all(), label='Primary Currency', empty_label=None)
-    default_category = NameModelChoiceField(Category.objects.all(), label='Default Category', empty_label='Auto',
-                                            required=False)
-
-    glucose_low = forms.DecimalField(label='MarketCap % Drop', max_digits=6, max_value=3000, min_value=0,
-                                     help_text="-% change in market cap before alert email")
-    glucose_high = forms.DecimalField(label='MarketCap % Rise', max_digits=6, max_value=3000, min_value=0,
-                                      help_text="+% change in market cap before alert email")
-    glucose_target_min = forms.DecimalField(label='Sentiment change %', max_digits=6, max_value=3000, min_value=0,
-                                            help_text="change in currency's sentiment before alert email")
-    glucose_target_max = forms.DecimalField(label='Volume change %', max_digits=6, max_value=3000, min_value=0,
-                                            help_text="change in currency's volume change before alert email")
+    # glucose_unit = NameModelChoiceField(Unit.objects.all(), label='Primary Currency', empty_label=None)
+    # default_category = NameModelChoiceField(Category.objects.all(), label='Default Category', empty_label='Auto',
+    #                                         required=False)
+    #
+    # glucose_low = forms.DecimalField(label='MarketCap % Drop', max_digits=6, max_value=3000, min_value=0,
+    #                                  help_text="-% change in market cap before alert email")
+    # glucose_high = forms.DecimalField(label='MarketCap % Rise', max_digits=6, max_value=3000, min_value=0,
+    #                                   help_text="+% change in market cap before alert email")
+    # glucose_target_min = forms.DecimalField(label='Sentiment change %', max_digits=6, max_value=3000, min_value=0,
+    #                                         help_text="change in currency's sentiment before alert email")
+    # glucose_target_max = forms.DecimalField(label='Volume change %', max_digits=6, max_value=3000, min_value=0,
+    #                                         help_text="change in currency's volume change before alert email")
 
     def __init__(self, *args, **kwargs):
         super(UserSettingsForm, self).__init__(*args, **kwargs)
@@ -100,10 +98,10 @@ class UserSettingsForm(forms.Form):
                          Field('last_name'),
                          Field('time_zone'),
                          ),
-                Fieldset('Preferences',
-                         Field('glucose_unit'),
-                         Field('default_category'),
-                         ),
+                # Fieldset('Preferences',
+                #          Field('glucose_unit'),
+                #          Field('default_category'),
+                #          ),
                 Fieldset('Email Alert Parameters ',
                          Field('glucose_low'),
                          Field('glucose_high'),

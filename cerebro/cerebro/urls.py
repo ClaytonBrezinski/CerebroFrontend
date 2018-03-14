@@ -46,7 +46,6 @@ urlpatterns = [
 
     url(r'^accounts/', include('accounts.urls')),
     url(r'^core/', include('core.urls')),
-    url(r'^glucoses/', include('glucoses.urls')),
     url(r'^blog/', include('blogs.urls')),
     url(r'^coins/', include('coins.urls')),
     url(r'^socialMedia/', include('socialMedia.urls')),
