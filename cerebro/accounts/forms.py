@@ -44,8 +44,8 @@ class SignUpForm(forms.Form):
                                              Field('username', autofocus=True),
                                              Field('password'),
                                              Field('email'),
-                                             Field('glucose_unit'),
-                                             Field('time_zone'),
+                                             # Field('glucose_unit'),
+                                             # Field('time_zone'),
                                              ),
                                     FormActions(
                                             Submit('submit', 'Create My Account', css_class='btn-success pull-right')),
@@ -62,18 +62,18 @@ class UserSettingsForm(forms.Form):
     email = forms.EmailField(label='Email')
     time_zone = TimeZoneFormField(label='Time Zone')
 
-    glucose_unit = NameModelChoiceField(Unit.objects.all(), label='Primary Currency', empty_label=None)
-    default_category = NameModelChoiceField(Category.objects.all(), label='Default Category', empty_label='Auto',
-                                            required=False)
-
-    glucose_low = forms.DecimalField(label='MarketCap % Drop', max_digits=6, max_value=3000, min_value=0,
-                                     help_text="-% change in market cap before alert email")
-    glucose_high = forms.DecimalField(label='MarketCap % Rise', max_digits=6, max_value=3000, min_value=0,
-                                      help_text="+% change in market cap before alert email")
-    glucose_target_min = forms.DecimalField(label='Sentiment change %', max_digits=6, max_value=3000, min_value=0,
-                                            help_text="change in currency's sentiment before alert email")
-    glucose_target_max = forms.DecimalField(label='Volume change %', max_digits=6, max_value=3000, min_value=0,
-                                            help_text="change in currency's volume change before alert email")
+    # glucose_unit = NameModelChoiceField(Unit.objects.all(), label='Primary Currency', empty_label=None)
+    # default_category = NameModelChoiceField(Category.objects.all(), label='Default Category', empty_label='Auto',
+    #                                         required=False)
+    #
+    # glucose_low = forms.DecimalField(label='MarketCap % Drop', max_digits=6, max_value=3000, min_value=0,
+    #                                  help_text="-% change in market cap before alert email")
+    # glucose_high = forms.DecimalField(label='MarketCap % Rise', max_digits=6, max_value=3000, min_value=0,
+    #                                   help_text="+% change in market cap before alert email")
+    # glucose_target_min = forms.DecimalField(label='Sentiment change %', max_digits=6, max_value=3000, min_value=0,
+    #                                         help_text="change in currency's sentiment before alert email")
+    # glucose_target_max = forms.DecimalField(label='Volume change %', max_digits=6, max_value=3000, min_value=0,
+    #                                         help_text="change in currency's volume change before alert email")
 
     def __init__(self, *args, **kwargs):
         super(UserSettingsForm, self).__init__(*args, **kwargs)
@@ -100,10 +100,10 @@ class UserSettingsForm(forms.Form):
                          Field('last_name'),
                          Field('time_zone'),
                          ),
-                Fieldset('Preferences',
-                         Field('glucose_unit'),
-                         Field('default_category'),
-                         ),
+                # Fieldset('Preferences',
+                #          Field('glucose_unit'),
+                #          Field('default_category'),
+                #          ),
                 Fieldset('Email Alert Parameters ',
                          Field('glucose_low'),
                          Field('glucose_high'),

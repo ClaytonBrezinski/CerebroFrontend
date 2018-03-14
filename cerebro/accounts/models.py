@@ -20,17 +20,17 @@ class UserSettings(TimeStampedModel):
 
     time_zone = TimeZoneField(default=settings.TIME_ZONE)
 
-    glucose_unit = models.ForeignKey(Unit, null=False, blank=False, default=1, on_delete=models.CASCADE)
-    default_category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
-
-    glucose_low = models.PositiveIntegerField(
-            null=False, blank=False, default=60)
-    glucose_high = models.PositiveIntegerField(
-            null=False, blank=False, default=180)
-    glucose_target_min = models.PositiveIntegerField(
-            null=False, blank=False, default=70)
-    glucose_target_max = models.PositiveIntegerField(
-            null=False, blank=False, default=120)
+    # glucose_unit = models.ForeignKey(Unit, null=False, blank=False, default=1, on_delete=models.CASCADE)
+    # default_category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
+    #
+    # glucose_low = models.PositiveIntegerField(
+    #         null=False, blank=False, default=60)
+    # glucose_high = models.PositiveIntegerField(
+    #         null=False, blank=False, default=180)
+    # glucose_target_min = models.PositiveIntegerField(
+    #         null=False, blank=False, default=70)
+    # glucose_target_max = models.PositiveIntegerField(
+    #         null=False, blank=False, default=120)
 
     def username(self):
         return self.user.username
