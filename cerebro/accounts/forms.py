@@ -7,8 +7,6 @@ from crispy_forms.layout import Button, Submit, Fieldset, HTML, Field
 from crispy_forms.bootstrap import FormActions
 from timezone_field import TimeZoneFormField
 
-from glucoses.models import Category, Unit
-
 from .validators import validate_email_unique, validate_username_unique
 
 
@@ -28,7 +26,7 @@ class SignUpForm(forms.Form):
     username = forms.CharField(max_length=30, validators=[validate_username_unique])
     password = forms.CharField(max_length=128, widget=forms.PasswordInput())
     email = forms.EmailField(max_length=75, validators=[validate_email_unique])
-    glucose_unit = NameModelChoiceField(Unit.objects.all(), empty_label=None, label='Glucose Unit')
+    # glucose_unit = NameModelChoiceField(Unit.objects.all(), empty_label=None, label='Glucose Unit')
     time_zone = TimeZoneFormField(label='Time Zone')
 
     def __init__(self, *args, **kwargs):
@@ -45,7 +43,7 @@ class SignUpForm(forms.Form):
                                              Field('password'),
                                              Field('email'),
                                              # Field('glucose_unit'),
-                                             # Field('time_zone'),
+                                             Field('time_zone'),
                                              ),
                                     FormActions(
                                             Submit('submit', 'Create My Account', css_class='btn-success pull-right')),

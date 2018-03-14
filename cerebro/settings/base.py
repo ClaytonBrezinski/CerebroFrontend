@@ -153,7 +153,6 @@ INSTALLED_APPS = [
     'accounts',
     'blogs',
     'core',
-    'glucoses',
     'subscribers',
     'coins',
     'socialMedia',

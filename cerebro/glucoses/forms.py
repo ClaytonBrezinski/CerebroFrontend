@@ -8,7 +8,7 @@ from crispy_forms.helper import FormHelper, Layout
 from crispy_forms.layout import Button, Submit, MultiField, Div, HTML, Field, Fieldset, Reset
 from crispy_forms.bootstrap import FormActions
 
-from .models import Glucose, Category
+# from .models import Glucose, Category
 from .fields import RestrictedFileField
 
 DATE_FORMAT = '%Y/%m/%d'
@@ -43,7 +43,7 @@ class GlucoseFilterForm(forms.Form):
     start_value = forms.IntegerField(label='Value Range', required=False, min_value=0)
     end_value = forms.IntegerField(label='', required=False, min_value=0)
 
-    category = NameModelChoiceField(queryset=Category.objects.all(), required=False)
+    # category = NameModelChoiceField(queryset=Category.objects.all(), required=False)
 
     notes = forms.CharField(label='Notes Contains', required=False, widget=forms.Textarea(attrs={'rows': 2}))
 
@@ -55,9 +55,9 @@ class GlucoseFilterForm(forms.Form):
         self.helper.form_method = 'post'
         self.helper.form_action = '.'
 
-        self.fields['tags'] = forms.ChoiceField(choices=self.get_tags(Glucose.objects.filter(user=user).exclude(
-                tags__name__isnull=True)),
-                required=False)
+        # self.fields['tags'] = forms.ChoiceField(choices=self.get_tags(Glucose.objects.filter(user=user).exclude(
+        #         tags__name__isnull=True)),
+        #         required=False)
 
         self.helper.layout = Layout('quick_date_select',
                                     Field('start_date', placeholder='From (mm/dd/yyyy)'),
@@ -89,42 +89,42 @@ class GlucoseFilterForm(forms.Form):
         return choices
 
 
-class GlucoseQuickAddForm(forms.ModelForm):
-    """
-    A simple form for adding glucose values. Date and time are automatically
-    set to the user's current local date and time using Javascript (see
-    dashboard.html template).
-    """
-
-    def __init__(self, *args, **kwargs):
-        super(GlucoseQuickAddForm, self).__init__(*args, **kwargs)
-
-        self.helper = FormHelper()
-        self.helper.form_id = 'quick_add_form'
-        self.helper.form_method = 'post'
-        self.helper.form_class = 'form-inline'
-        self.helper.form_show_labels = False
-
-        # Remove the blank option from the select widget.
-        self.fields['category'].empty_label = None
-
-        self.helper.layout = Layout(
-                HTML('''
-            <div id="div_id_value" class="form-group"> <div class="controls">
-            <input autofocus="True" class="numberinput form-control"
-            id="id_value" name="value"
-            placeholder="Value ({{ user.settings.glucose_unit.name }})"
-            required="True" type="number" step="any" min="0"/></div></div>
-            '''),
-                Field('category'),
-                Field('record_date', type='hidden'),
-                Field('record_time', type='hidden'),
-                Submit('submit', 'Quick Add'),
-                )
-
-    class Meta:
-        model = Glucose
-        exclude = ('user', 'notes')
+# class GlucoseQuickAddForm(forms.ModelForm):
+#     """
+#     A simple form for adding glucose values. Date and time are automatically
+#     set to the user's current local date and time using Javascript (see
+#     dashboard.html template).
+#     """
+#
+#     def __init__(self, *args, **kwargs):
+#         super(GlucoseQuickAddForm, self).__init__(*args, **kwargs)
+#
+#         self.helper = FormHelper()
+#         self.helper.form_id = 'quick_add_form'
+#         self.helper.form_method = 'post'
+#         self.helper.form_class = 'form-inline'
+#         self.helper.form_show_labels = False
+#
+#         # Remove the blank option from the select widget.
+#         self.fields['category'].empty_label = None
+#
+#         self.helper.layout = Layout(
+#                 HTML('''
+#             <div id="div_id_value" class="form-group"> <div class="controls">
+#             <input autofocus="True" class="numberinput form-control"
+#             id="id_value" name="value"
+#             placeholder="Value ({{ user.settings.glucose_unit.name }})"
+#             required="True" type="number" step="any" min="0"/></div></div>
+#             '''),
+#                 Field('category'),
+#                 Field('record_date', type='hidden'),
+#                 Field('record_time', type='hidden'),
+#                 Submit('submit', 'Quick Add'),
+#                 )
+#
+#     class Meta:
+#         # model = Glucose
+#         exclude = ('user', 'notes')
 
 
 class GlucoseEmailReportForm(forms.Form):
@@ -244,8 +244,9 @@ class GlucoseInputForm(forms.ModelForm):
                         {% endif %}>{{ message }}</p>{% endfor %}{% endif %}
                         '''
                         ),
-                Field('value', placeholder='Value', required=True, autofocus=True,
-                      min=0, step='any'),
+                Field(
+                        'value', placeholder='Value', required=True, autofocus=True,
+                        min=0, step='any'),
                 'category',
                 'record_date',
                 'record_time',
@@ -255,7 +256,7 @@ class GlucoseInputForm(forms.ModelForm):
                 )
 
     class Meta:
-        model = Glucose
+        # model = Glucose
         exclude = ('user',)
         widgets = {
             'notes': forms.Textarea(attrs={'rows': 4}),

@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from timezone_field import TimeZoneField
 
 from model_utils.models import TimeStampedModel
-from glucoses.models import Category, Unit
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver

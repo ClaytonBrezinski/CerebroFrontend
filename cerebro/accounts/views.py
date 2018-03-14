@@ -11,7 +11,6 @@ from django.contrib.auth import authenticate, login, logout
 from axes.decorators import axes_dispatch
 from braces.views import LoginRequiredMixin
 
-from core.utils import glucose_by_unit_setting, to_mg
 
 from .forms import UserSettingsForm, SignUpForm
 
