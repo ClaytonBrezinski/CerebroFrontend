@@ -16,11 +16,11 @@ from django.conf import settings
 from storages.backends.s3boto import S3BotoStorage
 
 
-MediaRootS3BotoStorage = lambda: S3BotoStorage(
-    location=settings.MEDIA_ROOT,
-    file_overwrite=False
-)
-
-StaticRootS3BotoStorage = lambda: S3BotoStorage(
-    location=settings.STATIC_ROOT
-)
+# MediaRootS3BotoStorage = lambda: S3BotoStorage(
+#     location=settings.MEDIA_ROOT,
+#     file_overwrite=False
+# )
+#
+# StaticRootS3BotoStorage = lambda: S3BotoStorage(
+#     location=settings.STATIC_ROOT
+# )
