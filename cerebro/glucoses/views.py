@@ -16,7 +16,7 @@ from django.views.generic import (CreateView, DeleteView, FormView, TemplateView
 from braces.views import LoginRequiredMixin
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
-from core.utils import glucose_by_unit_setting, to_mg
+# from core.utils import glucose_by_unit_setting, to_mg
 # from .reports import GlucoseCsvReport, GlucosePdfReport, ChartData, UserStats
 # from .utils import get_initial_category, import_glucose_from_csv
 # from .models import Glucose
