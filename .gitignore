@@ -113,3 +113,5 @@ requirements2\.txt
 glucosetracker/CerebroReport\.csv
 
 *.sqlite-journal
+
+cerebro/staticfiles/
