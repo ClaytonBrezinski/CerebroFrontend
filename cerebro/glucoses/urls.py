@@ -15,10 +15,7 @@ from .views import (
     )
 
 urlpatterns = [
-    url(regex=r'^import/',
-        view=import_data,
-        name='glucose_import',
-        ),
+
     # url(regex=r'^filter/',
     #     view=filter_view,
     #     name='glucose_filter',
@@ -35,14 +32,7 @@ urlpatterns = [
     #     view=GlucoseListJson.as_view(),
     #     name='glucose_list_json',
     #     ),
-    url(regex=r'^chart_data_json/$',
-        view=chart_data_json,
-        name='chart_data_json',
-        ),
-    url(regex=r'^stats_json/$',
-        view=stats_json,
-        name='stats_json',
-        ),
+
     # url(regex=r'^charts/$',
     #     view=GlucoseChartsView.as_view(),
     #     name='glucose_charts',
