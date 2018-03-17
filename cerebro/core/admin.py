@@ -8,7 +8,6 @@ class CustomUserAdmin(UserAdmin):
         'username',
         'email',
         'settings_time_zone',
-        # 'settings_glucose_unit',
         'last_login',
         'date_joined',
     ]

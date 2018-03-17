@@ -60,18 +60,21 @@ class UserSettingsForm(forms.Form):
     email = forms.EmailField(label='Email')
     time_zone = TimeZoneFormField(label='Time Zone')
 
-    # glucose_unit = NameModelChoiceField(Unit.objects.all(), label='Primary Currency', empty_label=None)
-    # default_category = NameModelChoiceField(Category.objects.all(), label='Default Category', empty_label='Auto',
-    #                                         required=False)
-    #
-    # glucose_low = forms.DecimalField(label='MarketCap % Drop', max_digits=6, max_value=3000, min_value=0,
+    # currencyUnit = NameModelChoiceField(Unit.objects.all(), label='Primary Currency', empty_label=None)
+    # priceChangeHigh = forms.DecimalField(label='Price % Drop', max_digits=6, max_value=3000, min_value=0,
     #                                  help_text="-% change in market cap before alert email")
-    # glucose_high = forms.DecimalField(label='MarketCap % Rise', max_digits=6, max_value=3000, min_value=0,
+    # priceChangeLow= forms.DecimalField(label='Price % Rise', max_digits=6, max_value=3000, min_value=0,
     #                                   help_text="+% change in market cap before alert email")
-    # glucose_target_min = forms.DecimalField(label='Sentiment change %', max_digits=6, max_value=3000, min_value=0,
+    # socialMediaVolumeChangeHigh = forms.DecimalField(label='Social Media Volume Drop %', max_digits=6, max_value=3000, min_value=0,
     #                                         help_text="change in currency's sentiment before alert email")
-    # glucose_target_max = forms.DecimalField(label='Volume change %', max_digits=6, max_value=3000, min_value=0,
-    #                                         help_text="change in currency's volume change before alert email")
+    # socialMediaVolumeChangeLow = forms.DecimalField(label='Social Media Volume Drop %', max_digits=6, max_value=3000, min_value=0,
+    #                                         help_text="change in currency's sentiment before alert email")
+    # sentimentChangeHigh = forms.DecimalField(label='Sentiment Rise %', max_digits=6, max_value=3000, min_value=0,
+    #                                         help_text="change in currency's sentiment before alert email")
+    # sentimentChangeLow = forms.DecimalField(label='Sentiment Drop %', max_digits=6, max_value=3000, min_value=0,
+    #                                         help_text="change in currency's sentiment before alert email")
+
+
 
     def __init__(self, *args, **kwargs):
         super(UserSettingsForm, self).__init__(*args, **kwargs)
@@ -98,15 +101,16 @@ class UserSettingsForm(forms.Form):
                          Field('last_name'),
                          Field('time_zone'),
                          ),
-                # Fieldset('Preferences',
-                #          Field('glucose_unit'),
-                #          Field('default_category'),
+                # Fieldset('Currency Preferences',
+                #          Field('currencyUnit'),
                 #          ),
-                # Fieldset('Email Alert Parameters ',
-                #          Field('glucose_low'),
-                #          Field('glucose_high'),
-                #          Field('glucose_target_min'),
-                #          Field('glucose_target_max'),
+                # Fieldset('Alert Parameters ',
+                #          Field('priceChangeHigh'),
+                #          Field('priceChangeLow'),
+                #          Field('sentimentChangeHigh'),
+                #          Field('sentimentChangeLow'),
+                #          Field('socialMediaVolumeChangeHigh'),
+                #          Field('socialMediaVolumeChangeLow'),
                 #          ),
                 FormActions(Submit('submit', 'Save'),
                             Button('cancel', 'Cancel', onclick='location.href="%s";' % reverse('dashboard')), ),
