@@ -1,20 +1,4 @@
-import json
-import logging
-import operator
-from datetime import datetime, timedelta
 
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
-from django.urls import reverse
-from django.db.models import Q
-from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render, HttpResponse
-from django.template import RequestContext
-from django.views.generic import (CreateView, DeleteView, FormView, TemplateView, UpdateView, )
-
-from braces.views import LoginRequiredMixin
-from django_datatables_view.base_datatable_view import BaseDatatableView
 
 # from core.utils import glucose_by_unit_setting, to_mg
 # from .reports import GlucoseCsvReport, GlucosePdfReport, ChartData, UserStats
@@ -22,14 +6,9 @@ from django_datatables_view.base_datatable_view import BaseDatatableView
 # from .models import Glucose
 # from .forms import (GlucoseCreateForm, GlucoseImportForm, GlucoseEmailReportForm, GlucoseFilterForm,
 #                     GlucoseQuickAddForm, GlucoseUpdateForm, )
-from functools import reduce
-from django.contrib.auth.models import User
 
-from socialMedia.models import Tweet, RedditPost, NewsItem
-from socialMedia.utils import datetimeToTimeAgo, timeAgoToString
 
-DATE_FORMAT = '%Y/%m/%d'
-TIME_FORMAT = '%I:%M %p'
+
 
 logger = logging.getLogger(__name__)
 
@@ -99,65 +78,6 @@ logger = logging.getLogger(__name__)
 #         return HttpResponse(json.dumps(data), content_type='application/json')
 #
 #     return render(template_name='glucoses/glucose_filter.html', context={'form': form, 'data': data}, request=request, )
-
-
-# @login_required
-def dashboard(request):
-    """
-    Displays the glucose data table for the currently logged in user. A form
-    for quickly adding glucose values is also included.
-
-    The data is loaded by the GlucoseListJson view and rendered by the
-    Datatables plugin via Javascript.
-    """
-    # form = GlucoseQuickAddForm()
-    # form.fields['category'].initial = get_initial_category(request.user)
-    user = User.objects.get(username=request.user.username)
-    user_settings = user.settings
-
-    # TODO update from .latest to a more complex algorithm
-    newsItems = NewsItem.objects.order_by('-createdAt')[:4]
-    redditPosts = RedditPost.objects.order_by('-createdAt')[:4]
-    tweets = Tweet.objects.order_by('-createdAt')[:4]
-
-    for item in newsItems:
-        item.daysAgo = timeAgoToString(datetimeToTimeAgo(item.createdAt))
-    for item in redditPosts:
-        item.daysAgo = timeAgoToString(datetimeToTimeAgo(item.createdAt))
-    for item in tweets:
-        item.daysAgo = timeAgoToString(datetimeToTimeAgo(item.createdAt))
-
-    return render(template_name='core/dashboard.html',
-                  context={
-                      # 'form': form,
-                           # 'glucose_unit_name': user_settings.glucose_unit.name,
-                           'newsItems': newsItems,
-                           'redditPosts': redditPosts,
-                           'tweets': tweets,
-                           },
-                  request=request, )
-
-
-@login_required
-def chart_data_json(request):
-    data = {}
-    params = request.GET
-
-    days = params.get('days', 0)
-    name = params.get('name', '')
-    # if name == 'avg_by_category':
-    #     # data['chart_data'] = ChartData.get_avg_by_category(user=request.user, days=int(days))
-    if name == 'avg_by_day':
-        # data['chart_data'] = ChartData.get_avg_by_day(user=request.user, days=int(days))
-        data['chart_data'] = {'dates': ['2017/05/05', '2017/05/06', '2017/05/07'],
-                              'values': [90.0, 95.0, 100.0]}
-    # elif name == 'level_breakdown':
-    #     data['chart_data'] = ChartData.get_level_breakdown(user=request.user, days=int(days))
-    # elif name == 'count_by_category':
-    #     data['chart_data'] = ChartData.get_count_by_category(user=request.user, days=int(days))
-
-    return HttpResponse(json.dumps(data), content_type='application/json')
-
 
 # @login_required
 # def stats_json(request):
