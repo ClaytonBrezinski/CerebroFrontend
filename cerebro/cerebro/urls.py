@@ -7,9 +7,8 @@ from django.contrib.sitemaps.views import sitemap
 
 from blogs.models import Blog
 from blogs.feeds import LatestBlogsFeed
-from core.views import HomePageView
+from core.views import HomePageView, dashboard
 from core.sitemaps import StaticViewSitemap
-from glucoses.views import dashboard
 from subscribers.views import subscribe_view
 
 admin.autodiscover()
