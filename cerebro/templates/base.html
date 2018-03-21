@@ -16,11 +16,8 @@
         determining the market's general sentiment towards a cryptocurrency.">
 
     <!-- CSS -->
-        <!-- custom css -->
-        <link href="{% static 'bootstrap/css/customBootstrap.css' %}" rel="stylesheet">
-        <link href="{% static 'bootstrap/css/signin.css' %}" rel="stylesheet">
-        {% block extracss %}{% endblock %}
-    
+
+
 
     <!-- bootstrap cdn -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
@@ -31,6 +28,12 @@
           rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
+    <!-- custom css -->
+
+    {% block extracss %}{% endblock %}
+
+    <link href="{% static 'bootstrap/css/customBootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/signin.css' %}" rel="stylesheet">
 
     <!-- Add custom CSS here -->
     {% block customcss %}
@@ -44,10 +47,11 @@
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for {{ site_name }}" href="{% url 'rss_feed' %}"/>
 
+
     <!-- Enables 'Add to Homescreen' for Android -->
     <meta name="viewport" content="width=device-width">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="{% static 'images/icons/icon_blood_red_192x192.png' %}">
+    <link rel="icon" sizes="192x192" href="{% static 'images/icons/icon_blood_red_192x192.svg' %}">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
@@ -57,16 +61,10 @@
 <body>
 {# TODO make menu button appear on right when shrunk - make menu button appear#}
 <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-md" role="navigation">
-    {% if user.is_authenticated %}
-        <a class="navbar-brand" href="{% url 'dashboard' %}">
-            <h4><img class="logo-img" src="{% static 'images/icons/icon_blood_red_192x192.png' %}"> Cerebro Reporting
-            </h4>
-        </a>
-    {% else %}
-        <a class="navbar-brand" href="/">
-            <h4 class="ion-arrow-graph-up-right">Cerebro Reporting </h4>
-        </a>
-    {% endif %}
+    <a class="navbar-brand" href="{% url 'dashboard' %}">
+        <img class="logo-img" src="{% static 'images/icons/icon_blood_red_192x192.svg' %}">
+        Cerebro Reporting
+    </a>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -90,10 +88,10 @@
                         <a href="#" class="nav-link dropdown-toggle ion-stats-bars" data-toggle="dropdown"> Reports </a>
                         <div class="dropdown-menu" aria-labelledby="">
                             {# TODO update urls when changed #}
-{#                            <a class="dropdown-item" href="{% url 'glucose_filter' %}">Filter Data</a>#}
-{#                            <a class="dropdown-item" href="{% url 'glucose_charts' %}">Charts & Graphs</a>#}
-{##}
-{#                            <a class="dropdown-item" href="{% url 'glucose_email_report' %}">Email Report</a>#}
+                            {#                            <a class="dropdown-item" href="{% url 'glucose_filter' %}">Filter Data</a>#}
+                            {#                            <a class="dropdown-item" href="{% url 'glucose_charts' %}">Charts & Graphs</a>#}
+                            {##}
+                            {#                            <a class="dropdown-item" href="{% url 'glucose_email_report' %}">Email Report</a>#}
                         </div>
                         {#                TODO make auto popup for when alerts occur - allow the user to click the button and receive the same popup on the popup have a button to adjust alert settings#}
 
