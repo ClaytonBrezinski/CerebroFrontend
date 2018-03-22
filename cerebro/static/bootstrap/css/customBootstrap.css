@@ -9,7 +9,8 @@ body {
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 60px;
+    min-height: 40px;
+    max-height: 80px;
     background-color: White;
 }
 

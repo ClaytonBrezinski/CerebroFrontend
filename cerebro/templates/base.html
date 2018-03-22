@@ -18,7 +18,6 @@
     <!-- CSS -->
 
 
-
     <!-- bootstrap cdn -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -37,11 +36,6 @@
 
     <!-- Add custom CSS here -->
     {% block customcss %}
-        <style>
-            body {
-                padding-bottom: 40px;
-            }
-        </style>
     {% endblock %}
 
     <!-- RSS Feed -->
@@ -94,8 +88,13 @@
                             {#                            <a class="dropdown-item" href="{% url 'glucose_email_report' %}">Email Report</a>#}
                         </div>
                         {#                TODO make auto popup for when alerts occur - allow the user to click the button and receive the same popup on the popup have a button to adjust alert settings#}
-
-                    <li class="nav-item"><a class="nav-link ion-ios-bell" href="{% url 'dashboard' %}"> Alerts</a></li>
+                        {# Alerts Button#}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link ion-ios-bell" href="{% url 'dashboard' %}"></a>
+                        <div class="dropdown-menu" aria-labelledby="">
+                            {# TODO populate with alert messages when they appear #}
+                        </div>
+                    </li>
                     <li class="nav-item dropdown {{ isActiveSettings }}">
                         <a href="#" class="nav-link dropdown-toggle ion-android-person"
                            data-toggle="dropdown"> {{ user }} </a>
@@ -141,19 +140,28 @@
     </div>
 {% endblock %}
 
+<!-- FOOTER -->
+
 <footer class="footer">
-    <!-- FOOTER -->
     <div class="container">
-        <p class="pull-right "><a href="#" class="font-weight-light">Back to top</a></p>
-        <p class="text-muted font-weight-light">
-            &copy; 2017 AlltraSolutions.tech by <a href="https://github.com/OriginalMidas">Clayton Brezinski </a>
-            | <a href="{% url 'blog_list_view' %}">Blog</a>
-            {# TODO update for facebook page #}
-            | <a href="https://www.facebook.com/Alttra-Solutions-267847987034563/">About</a>
-            | <a href="mailto:contact@alttrasolutions.tech">Contact Us</a>
-        </p>
+        <div class="row">
+            <div class="col-sm-8">
+                    <p class="font-weight-light">
+                        Created by <a href="https://github.com/OriginalMidas">Clayton Brezinski </a>
+                        {# TODO update for facebook page #}
+                        | <a href="https://www.facebook.com/Alttra-Solutions-267847987034563/">About</a>
+                        | <a href="mailto:contact@alttrasolutions.tech">Contact Us</a>
+                    </p>
+            </div>
+            <div class="col-sm-4">
+                <div class="mx-auto" style="width: 200px;">
+                    <p class="font-weight-light">&copy; 2017 AlltraSolutions.tech</p>
+                </div>
+            </div>
+        </div>
     </div>
 </footer>
+
 <!-- JavaScript -->
 <!-- Placed at the end of the document so the pages load faster -->
 {% compress js %}
