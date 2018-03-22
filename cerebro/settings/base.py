@@ -1,6 +1,6 @@
 import os
-PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
+PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -148,6 +148,8 @@ INSTALLED_APPS = [
     'taggit',
     'storages',
     'django_tables2',
+    'rest_framework',
+    'rest_framework.authtoken',
 
     # Local apps
     'accounts',
@@ -157,6 +159,13 @@ INSTALLED_APPS = [
     'coins',
     'socialMedia',
     ]
+
+# Django REST framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        )
+    }
 
 # Django-crispy-forms settings
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
