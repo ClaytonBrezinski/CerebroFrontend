@@ -11,9 +11,11 @@ urlpatterns = [
         name='coinsChartDataJson',
         ),
     url(regex=r'^coinAPI/$',
-        view=CoinList.as_view()
+        view=CoinList.as_view(),
+        name='coinAPI'
         ),
     url(regex=r'^currencyAPI/$',
-        view=CryptocurrencyList.as_view()
+        view=CryptocurrencyList.as_view(),
+        name='currencyAPI'
         ),
     ]

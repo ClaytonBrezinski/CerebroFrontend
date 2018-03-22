@@ -1,8 +1,15 @@
 from django.test import TestCase
 from .models import Cryptocurrency, Coin
+from django.contrib.auth.models import User
 
 # Datetime stuff
 from django.utils.timezone import now
+
+# REST API stuff
+from rest_framework.test import APIClient
+from rest_framework import status
+from django.core.urlresolvers import reverse
+from rest_framework.authtoken.models import Token
 
 
 class CryptocurrencyModelTestCase(TestCase):
@@ -28,6 +35,7 @@ class CryptocurrencyModelTestCase(TestCase):
         self.cryptocurrency.save()
         newCount = Cryptocurrency.objects.count()
         self.assertNotEqual(oldCount, newCount)
+
     def testErrornousCreation(self):
         """
         Create cryptocurrencies with errornous data inputs
@@ -74,3 +82,49 @@ class CoinModelTestCase(TestCase):
         :return:
         """
         pass
+
+
+class CryptoCurrencyViewTestCase(TestCase):
+    """
+    Test suite for the API views
+    """
+
+    def setUp(self):
+        # create a test user and give them a token
+        testUser = User.objects.create(username='tester', password='pass')
+        Token.objects.create(user=testUser)
+        self.token = Token.objects.get(user__username=testUser.username)
+        # initialize the client and force it to use authentication
+        self.client = APIClient()
+        self.client.force_authenticate(user=testUser)
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
+
+        # self.cryptocurrencyData = {'name': "test", 'tickerSymbol': "tst"}
+        #
+        # self.response = self.client.post(
+        #         reverse('coinAPI'),
+        #         self.cryptocurrencyData,
+        #         format="json")
+
+    def testAPIput(self):
+        """
+        test that the api can create a new model
+        :return:
+        """
+        # self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
+        pass
+
+
+class CoinViewTestCase(TestCase):
+    """
+    Test suite for the API views
+    """
+
+    def setUp(self):
+        pass
+
+    def testAPIput(self):
+        """
+        test that the api can create a new model
+        :return:
+        """
