@@ -6,6 +6,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .reports import ChartData
 from django.db.models import Max
+# REST framework specific
+from django.http import HttpResponse
+from rest_framework import generics, status
+from rest_framework.response import Response
+from .serializers import CoinSerializer, CryptocurrencySerializer
+
 
 # Create your views here.
 
@@ -40,3 +46,23 @@ def coinsChartDataJson(request):
     data['chart_data'] = ChartData.getCurrencyData(currency='Bitcoin')
 
     return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+class CoinList(generics.ListCreateAPIView):
+    """
+    Serializers are those components used to convert the received data from JSON format to the relative Django model
+    and viceversa.
+    ListCreateAPIView allows for get and POST requests to occur
+    """
+    queryset = Coin.objects.all()
+    serializer_class = CoinSerializer
+
+
+class CryptocurrencyList(generics.ListCreateAPIView):
+    """
+    Serializers are those components used to convert the received data from JSON format to the relative Django model
+    and viceversa.
+    ListCreateAPIView allows for get and POST requests to occur
+    """
+    queryset = Cryptocurrency.objects.all()
+    serializer_class = CryptocurrencySerializer

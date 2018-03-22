@@ -3,6 +3,11 @@ from .models import NewsItem, RedditPost, Tweet
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .utils import datetimeToTimeAgo, timeAgoToString
+# REST framework specific
+from django.http import HttpResponse
+from rest_framework import generics, status
+from rest_framework.response import Response
+from .serializers import RedditPostSerializer, TweetSerializer, NewsItemSerializer
 
 
 @login_required()
@@ -23,3 +28,33 @@ def socialMediaView(request):
 
     return render(request, template_name,
                   {'newsItems': newsItems, 'redditPosts': redditPosts, 'tweets': tweets})
+
+
+class NewsItemList(generics.ListCreateAPIView):
+    """
+    Serializers are those components used to convert the received data from JSON format to the relative Django model
+    and viceversa.
+    ListCreateAPIView allows for get and POST requests to occur
+    """
+    queryset = NewsItem.objects.all()
+    serializer_class = NewsItemSerializer
+
+
+class RedditPostList(generics.ListCreateAPIView):
+    """
+    Serializers are those components used to convert the received data from JSON format to the relative Django model
+    and viceversa.
+    ListCreateAPIView allows for get and POST requests to occur
+    """
+    queryset = RedditPost.objects.all()
+    serializer_class = RedditPostSerializer
+
+
+class TweetList(generics.ListCreateAPIView):
+    """
+    Serializers are those components used to convert the received data from JSON format to the relative Django model
+    and viceversa.
+    ListCreateAPIView allows for get and POST requests to occur
+    """
+    queryset = Tweet.objects.all()
+    serializer_class = TweetSerializer
