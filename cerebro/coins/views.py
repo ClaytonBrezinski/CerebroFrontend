@@ -6,10 +6,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .reports import ChartData
 from django.db.models import Max
+
 # REST framework specific
 from django.http import HttpResponse
 from rest_framework import generics, status
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .permissions import IsAdminOrReadOnly
 from .serializers import CoinSerializer, CryptocurrencySerializer
 
 
@@ -29,9 +32,6 @@ def cryptocurrenciesView(request):
 
     return render(request=request, template_name=template_name, context={'cryptocurrency': table}, )
 
-
-# def coinsChart(request):
-#   return render()
 
 @login_required
 def coinsChartDataJson(request):
@@ -56,6 +56,7 @@ class CoinList(generics.ListCreateAPIView):
     """
     queryset = Coin.objects.all()
     serializer_class = CoinSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, IsAdminOrReadOnly,)
 
 
 class CryptocurrencyList(generics.ListCreateAPIView):
@@ -66,3 +67,4 @@ class CryptocurrencyList(generics.ListCreateAPIView):
     """
     queryset = Cryptocurrency.objects.all()
     serializer_class = CryptocurrencySerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, IsAdminOrReadOnly,)

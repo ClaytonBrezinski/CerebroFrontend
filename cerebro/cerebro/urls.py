@@ -11,6 +11,9 @@ from core.views import HomePageView, dashboard
 from core.sitemaps import StaticViewSitemap
 from subscribers.views import subscribe_view
 
+from rest_framework.authtoken.views import obtain_auth_token
+
+
 admin.autodiscover()
 
 blog_info_dict = {'queryset': Blog.objects.publicly_viewable(),
@@ -51,6 +54,10 @@ urlpatterns = [
 
     url(r'^dashboard/$', view=dashboard, name='dashboard'),
     url(r'^subscribe/$', view=subscribe_view, name='subscribe'),
+
+    # DjangoRESTFramework
+    url(r'^api-token-auth/', include('rest_framework.urls')),
+    url(r'^api-token-auth/', obtain_auth_token),
     ]
 
 # Route for media files in local development.

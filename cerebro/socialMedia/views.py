@@ -3,11 +3,15 @@ from .models import NewsItem, RedditPost, Tweet
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .utils import datetimeToTimeAgo, timeAgoToString
-# REST framework specific
+
+# DjangoRESTFramework specific
 from django.http import HttpResponse
 from rest_framework import generics, status
 from rest_framework.response import Response
+from .permissions import IsAdminOrReadOnly
 from .serializers import RedditPostSerializer, TweetSerializer, NewsItemSerializer
+
+
 
 
 @login_required()
@@ -38,6 +42,7 @@ class NewsItemList(generics.ListCreateAPIView):
     """
     queryset = NewsItem.objects.all()
     serializer_class = NewsItemSerializer
+    permission_classes = (IsAdminOrReadOnly,)
 
 
 class RedditPostList(generics.ListCreateAPIView):
@@ -48,6 +53,7 @@ class RedditPostList(generics.ListCreateAPIView):
     """
     queryset = RedditPost.objects.all()
     serializer_class = RedditPostSerializer
+    permission_classes = (IsAdminOrReadOnly,)
 
 
 class TweetList(generics.ListCreateAPIView):
@@ -58,3 +64,4 @@ class TweetList(generics.ListCreateAPIView):
     """
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
+    permission_classes = (IsAdminOrReadOnly,)
