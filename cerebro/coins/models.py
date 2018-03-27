@@ -24,7 +24,7 @@ class Cryptocurrency(models.Model):
 
 class Coin(models.Model):
     cryptocurrency = models.ForeignKey(Cryptocurrency, null=False, blank=False, on_delete=models.CASCADE)
-    price = models.PositiveIntegerField(null=False, blank=False)
+    price = models.DecimalField(null=False, blank=False, max_digits=17, decimal_places= 8)
     volume = models.PositiveIntegerField(null=False, blank=False)
     time = models.DateTimeField(auto_now=False)
 

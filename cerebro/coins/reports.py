@@ -32,9 +32,11 @@ class ChartData(object):
         # TODO add volume
         data = Coin.objects.all().filter(cryptocurrency__name=currency).values('price', 'time')
         # update time field to unix time, multiply by 10,000 to get time 'accuracy' to mS
+        # update price field to always be a float variable
         for object in data:
             unixTime = int(object['time'].timestamp()) * 10000
             object['time'] = unixTime
+            object['price'] = float(object['price'])
         # convert the queryset to a list of dictionaries
         data = [item for item in data]
         # time, price inverted

@@ -45,6 +45,7 @@ def coinsChartDataJson(request):
     # data will contain crypto name, price, and the unix time
     data['chart_data'] = ChartData.getCurrencyData(currency='Bitcoin')
 
+
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 
