@@ -43,10 +43,9 @@ def coinsChartDataJson(request):
 
     # TODO let currency choice get pulled from the webpage
     # data will contain crypto name, price, and the unix time
-    data['chart_data'] = ChartData.getCurrencyData(currency='Bitcoin')
+    data['chart_price_data'], data['chart_volume_data'] = ChartData.getCurrencyData(currency='Bitcoin')
 
-
-    return HttpResponse(json.dumps(data), content_type='application/json')
+    return HttpResponse(json.dumps(data, ), content_type='application/json')
 
 
 class CoinList(generics.ListCreateAPIView):

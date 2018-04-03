@@ -30,17 +30,21 @@ class ChartData(object):
         # Alter currency value based on User's currency default
         # pull all data from the database
         # TODO add volume
-        data = Coin.objects.all().filter(cryptocurrency__name=currency).values('price', 'time')
+        data = Coin.objects.all().filter(cryptocurrency__name=currency).values('price', 'time', 'volume')
         # update time field to unix time, multiply by 10,000 to get time 'accuracy' to mS
         # update price field to always be a float variable
         for object in data:
             unixTime = int(object['time'].timestamp()) * 10000
             object['time'] = unixTime
             object['price'] = float(object['price'])
+            object['volume'] = int(object['volume'])
         # convert the queryset to a list of dictionaries
         data = [item for item in data]
         # time, price inverted
-        return [[row[key] for key in ['time', 'price']] for row in data]
+        # time, volume
+        timePrice = [[row[key] for key in ['time', 'price']] for row in data]
+        timeVolume = [[row[key] for key in ['time', 'volume']] for row in data]
+        return timePrice, timeVolume
 
     # TODO create a getCurrencySentimentData class
     @classmethod

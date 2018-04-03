@@ -115,3 +115,5 @@ glucosetracker/CerebroReport\.csv
 *.sqlite-journal
 
 cerebro/staticfiles/
+
+*.csv
