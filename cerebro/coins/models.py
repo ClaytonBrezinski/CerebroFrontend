@@ -1,7 +1,5 @@
 from django.db import models
 import django_tables2 as tables
-import time
-
 
 class Cryptocurrency(models.Model):
     name = models.CharField(unique=True, max_length=25)
@@ -38,15 +36,15 @@ class Coin(models.Model):
         return self.cryptocurrency.name
 
 
+
 class Cryptocurrencytable(tables.Table):
     rank = tables.Column(verbose_name='#')
     name = tables.Column(verbose_name='Name', accessor='cryptocurrency.name')
-    # TODO remove ticker symbol
     tickerSymbol = tables.Column(verbose_name='Ticker Symbol', accessor='cryptocurrency.tickerSymbol')
-    price = tables.Column(verbose_name='Price', )
+    price = tables.Column(verbose_name='Price ($)', )
     marketCap = tables.Column(verbose_name='Market Cap')
     volume = tables.Column(verbose_name='Volume')
-    # TODO add ticker symbol to the circulating supply
+
     circulatingSupply = tables.Column(verbose_name='Circulating Supply')
     dayChange = tables.Column(verbose_name='Change(24h)')
     weekChange = tables.Column(verbose_name='Change(7d)')
@@ -57,3 +55,28 @@ class Cryptocurrencytable(tables.Table):
         sequence = ('rank', 'name', 'tickerSymbol')
         fields = ('name', 'tickerSymbol')  # 'price', 'Market Cap'
         attrs = {'class': 'table table-striped table-hover'}
+
+    def render_price(self, record, value):
+        """
+        Since all coins except for BTC are priced in relation to BTC, convert them back to $ USD when printing on the table
+        :param record: the whole row that is being pulled. such as BTC, LTC, etc.
+        :param value: the value from the row that is being pulled, BTC's price, LTC's price.
+        :return: either BTC's USD value or the coin's value converted to USD value based on BTC's latest price.
+        """
+        if record.cryptocurrency.tickerSymbol == 'BTC':
+            return round(value, 3)
+        else:
+            latestBTC = Coin.objects.filter(cryptocurrency__tickerSymbol='BTC').latest('id')
+            return round(float(value) * float(latestBTC.price), 3)
+
+    def render_volume(self, record):
+        """
+        Override the traditional social volume reading, instead output the whole day's volume.
+        :param record:
+        :return:
+        """
+    #def render_marketCap hard code these two for presentation day
+    # TODO add ticker symbol to the circulating supply
+    #def render_circulatingSupply
+    #def render_dayChange()
+    #def render_weekChange()
