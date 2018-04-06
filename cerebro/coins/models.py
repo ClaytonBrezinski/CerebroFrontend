@@ -1,5 +1,7 @@
 from django.db import models
 import django_tables2 as tables
+from datetime import datetime, timedelta
+
 
 class Cryptocurrency(models.Model):
     name = models.CharField(unique=True, max_length=25)
@@ -22,7 +24,7 @@ class Cryptocurrency(models.Model):
 
 class Coin(models.Model):
     cryptocurrency = models.ForeignKey(Cryptocurrency, null=False, blank=False, on_delete=models.CASCADE)
-    price = models.DecimalField(null=False, blank=False, max_digits=17, decimal_places= 8)
+    price = models.DecimalField(null=False, blank=False, max_digits=17, decimal_places=8)
     volume = models.PositiveIntegerField(null=False, blank=False)
     time = models.DateTimeField(auto_now=False)
 
@@ -36,14 +38,13 @@ class Coin(models.Model):
         return self.cryptocurrency.name
 
 
-
 class Cryptocurrencytable(tables.Table):
     rank = tables.Column(verbose_name='#')
     name = tables.Column(verbose_name='Name', accessor='cryptocurrency.name')
     tickerSymbol = tables.Column(verbose_name='Ticker Symbol', accessor='cryptocurrency.tickerSymbol')
     price = tables.Column(verbose_name='Price ($)', )
     marketCap = tables.Column(verbose_name='Market Cap')
-    volume = tables.Column(verbose_name='Volume')
+    volume = tables.Column(verbose_name='Social Media Volume')
 
     circulatingSupply = tables.Column(verbose_name='Circulating Supply')
     dayChange = tables.Column(verbose_name='Change(24h)')
@@ -66,17 +67,26 @@ class Cryptocurrencytable(tables.Table):
         if record.cryptocurrency.tickerSymbol == 'BTC':
             return round(value, 3)
         else:
-            latestBTC = Coin.objects.filter(cryptocurrency__tickerSymbol='BTC').latest('id')
-            return round(float(value) * float(latestBTC.price), 3)
+            latestBTCprice = Coin.objects.filter(cryptocurrency__tickerSymbol='BTC').latest('id')
+            return round(float(value) * float(latestBTCprice.price), 3)
 
     def render_volume(self, record):
         """
         Override the traditional social volume reading, instead output the whole day's volume.
-        :param record:
-        :return:
+        :param record: the whole row that is being pulled. such as BTC, LTC, etc.
+        :return: the whole day's social media volume
         """
-    #def render_marketCap hard code these two for presentation day
+        ## change this for project day accuracy
+        daysCoins = Coin.objects.filter(time__gte=datetime.now() - timedelta(days=14),
+                                        cryptocurrency__tickerSymbol=record.cryptocurrency.tickerSymbol)
+        socialVolume = 0
+        for coin in daysCoins:
+            socialVolume += coin.volume
+        return "%i posts" % socialVolume
+
+    # hard code these two for presentation day
+    # def render_marketCap
     # TODO add ticker symbol to the circulating supply
-    #def render_circulatingSupply
-    #def render_dayChange()
-    #def render_weekChange()
+    # def render_circulatingSupply
+    # def render_dayChange()
+    # def render_weekChange()
