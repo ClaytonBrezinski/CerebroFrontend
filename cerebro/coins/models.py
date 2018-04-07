@@ -43,12 +43,12 @@ class Cryptocurrencytable(tables.Table):
     name = tables.Column(verbose_name='Name', accessor='cryptocurrency.name')
     tickerSymbol = tables.Column(verbose_name='Ticker Symbol', accessor='cryptocurrency.tickerSymbol')
     price = tables.Column(verbose_name='Price ($)', )
-    marketCap = tables.Column(verbose_name='Market Cap')
+    marketCap = tables.Column(verbose_name='Market Cap', accessor='cryptocurrency.tickerSymbol')
     volume = tables.Column(verbose_name='Social Media Volume')
 
-    circulatingSupply = tables.Column(verbose_name='Circulating Supply')
-    dayChange = tables.Column(verbose_name='Change(24h)')
-    weekChange = tables.Column(verbose_name='Change(7d)')
+    circulatingSupply = tables.Column(verbose_name='Circulating Supply', accessor='cryptocurrency.tickerSymbol')
+    dayChange = tables.Column(verbose_name='% Change(24h)')
+    weekChange = tables.Column(verbose_name='% Change(7d)')
 
     class Meta:
         model = Coin
@@ -84,9 +84,39 @@ class Cryptocurrencytable(tables.Table):
             socialVolume += coin.volume
         return "%i posts" % socialVolume
 
+    # TODO: remove the hardcoded marketcap and circulating supply values
     # hard code these two for presentation day
-    # def render_marketCap
-    # TODO add ticker symbol to the circulating supply
-    # def render_circulatingSupply
+    def render_marketCap(self, record):
+        """
+        hardcode the marketcap value being outputted on the table
+        :param record:
+        :return:
+        """
+        def getMarketCap(tickerSymbol):
+            return {
+                'BTC': 115461148996,
+                'LTC': 6602863513,
+                'ETH': 37361268692,
+                'DASH': 2396292038,
+                'BCH': 10976152334,
+                'XRP': 19239977379,
+                }[tickerSymbol]
+
+        ticker = record.cryptocurrency.tickerSymbol
+        return "$ %s" %format(getMarketCap(ticker), ',d')
+
+    def render_circulatingSupply(self, record):
+        def getCirculatingSupply(tickerSymbol):
+            return {
+                'BTC': 16960550,
+                'LTC': 55957419,
+                'ETH': 98643874,
+                'DASH': 7994142,
+                'BCH': 17057700,
+                'XRP': 39094520623,
+                }[tickerSymbol]
+
+        ticker = record.cryptocurrency.tickerSymbol
+        return "%s %s" %(format(getCirculatingSupply(ticker), ',d'), ticker)
     # def render_dayChange()
     # def render_weekChange()
