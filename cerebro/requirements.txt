@@ -33,6 +33,7 @@ requests==2.3.0
 # additional
 django-model-utils
 django-tables2
+djangorestframework
 
 # for heroku static files
 whitenoise

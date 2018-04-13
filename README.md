@@ -25,3 +25,8 @@
 
 6. Run the local web server with `python manage.py runserver --settings=settings.localdemo`
 altering the --settings setting to your choice from #5
+
+
+## Additional Notes
+use the following format with httpie to use the REST API via the command line
+`http --json POST 127.0.0.1:8000/coins/currencyAPI/ name='' tickerSymbol='' active=False "Authorization: Token <INSERT TOKEN HERE>" `

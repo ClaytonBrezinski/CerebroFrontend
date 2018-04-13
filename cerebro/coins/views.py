@@ -7,6 +7,15 @@ from django.contrib.auth.decorators import login_required
 from .reports import ChartData
 from django.db.models import Max
 
+# REST framework specific
+from django.http import HttpResponse
+from rest_framework import generics, status
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .permissions import IsAdminOrReadOnly
+from .serializers import CoinSerializer, CryptocurrencySerializer
+
+
 # Create your views here.
 
 def cryptocurrenciesView(request):
@@ -18,14 +27,11 @@ def cryptocurrenciesView(request):
     user = User.objects.get(username=request.user.username)
 
     cryptocurencies = Cryptocurrency.objects.annotate(latest_created_at=Max('coin__time'))
-    table = Cryptocurrencytable(Coin.objects.filter(time__in=[b.latest_created_at for b in cryptocurencies]))
+    table = Cryptocurrencytable(Coin.objects.filter(time__in=[currency.latest_created_at for currency in cryptocurencies]))
     RequestConfig(request).configure(table)
 
     return render(request=request, template_name=template_name, context={'cryptocurrency': table}, )
 
-
-# def coinsChart(request):
-#   return render()
 
 @login_required
 def coinsChartDataJson(request):
@@ -37,6 +43,28 @@ def coinsChartDataJson(request):
 
     # TODO let currency choice get pulled from the webpage
     # data will contain crypto name, price, and the unix time
-    data['chart_data'] = ChartData.getCurrencyData(currency='Bitcoin')
+    data['chart_price_data'], data['chart_volume_data'] = ChartData.getCurrencyData(currency='Bitcoin')
 
-    return HttpResponse(json.dumps(data), content_type='application/json')
+    return HttpResponse(json.dumps(data, ), content_type='application/json')
+
+
+class CoinList(generics.ListCreateAPIView):
+    """
+    Serializers are those components used to convert the received data from JSON format to the relative Django model
+    and viceversa.
+    ListCreateAPIView allows for get and POST requests to occur
+    """
+    queryset = Coin.objects.all()
+    serializer_class = CoinSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, IsAdminOrReadOnly,)
+
+
+class CryptocurrencyList(generics.ListCreateAPIView):
+    """
+    Serializers are those components used to convert the received data from JSON format to the relative Django model
+    and viceversa.
+    ListCreateAPIView allows for get and POST requests to occur
+    """
+    queryset = Cryptocurrency.objects.all()
+    serializer_class = CryptocurrencySerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, IsAdminOrReadOnly,)
