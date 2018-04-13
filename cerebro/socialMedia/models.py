@@ -91,3 +91,10 @@ class RedditPost(models.Model):
 
     class Meta:
         get_latest_by = "createdAt"
+
+
+
+
+    # Create sentiment class object with the average at the given time interval, and save it to the database
+
+

@@ -27,7 +27,7 @@ def cryptocurrenciesView(request):
     user = User.objects.get(username=request.user.username)
 
     cryptocurencies = Cryptocurrency.objects.annotate(latest_created_at=Max('coin__time'))
-    table = Cryptocurrencytable(Coin.objects.filter(time__in=[b.latest_created_at for b in cryptocurencies]))
+    table = Cryptocurrencytable(Coin.objects.filter(time__in=[currency.latest_created_at for currency in cryptocurencies]))
     RequestConfig(request).configure(table)
 
     return render(request=request, template_name=template_name, context={'cryptocurrency': table}, )
