@@ -31,14 +31,11 @@ logger = logging.getLogger(__name__)
 @login_required
 def dashboard(request):
     """
-    Displays the glucose data table for the currently logged in user. A form
-    for quickly adding glucose values is also included.
-
-    The data is loaded by the GlucoseListJson view and rendered by the
-    Datatables plugin via Javascript.
+    Responsible for displaying the data such as social media posts
+    on the /dashboard page. chart_data_json will be called immediately after
+    to load the chart data. The separation of these functions was done in case
+    the chart data becomes extremely large and takes time to load
     """
-    # form = GlucoseQuickAddForm()
-    # form.fields['category'].initial = get_initial_category(request.user)
     user = User.objects.get(username=request.user.username)
     user_settings = user.settings
 
@@ -67,6 +64,12 @@ def dashboard(request):
 
 @login_required
 def chart_data_json(request):
+    """
+    function responsible for pulling coin data from the database and displaying it within the
+    page's highcharts javascript table.
+    :param request:
+    :return:
+    """
     data = {}
     params = request.GET
 
@@ -86,6 +89,9 @@ def chart_data_json(request):
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 class HomePageView(TemplateView):
+    """
+    view that will reroute and display the hopepage for users that are not logged in
+    """
     template_name = 'home.html'
 
     def get_context_data(self, **kwargs):
@@ -96,6 +102,9 @@ class HomePageView(TemplateView):
 
 
 class HelpPageView(LoginRequiredMixin, FormView):
+    """
+    view that will showcase the help form
+    """
     success_url = '.'
     form_class = ContactForm
     template_name = 'core/help.html'

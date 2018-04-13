@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 
 
 def validate_email_unique(value):
+    """
+    helper function to ensure that user's email addresses are unique to those in the database
+    :param value:
+    :return:
+    """
     exists = User.objects.filter(email__iexact=value)
 
     if exists:
@@ -11,11 +16,14 @@ def validate_email_unique(value):
 
 
 def validate_username_unique(value):
+    """
+    disallow any of the following usernames to exist
+    :param value:
+    :return:
+    """
     exists = User.objects.filter(username__iexact=value)
     invalid_usernames = [
         'cerebro',
-        'glucose',
-        'diabetes',
         'admin',
         'help',
         'helpdesk',

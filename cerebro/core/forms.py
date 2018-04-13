@@ -4,8 +4,10 @@ from crispy_forms.helper import FormHelper, Layout
 from crispy_forms.layout import Submit, Fieldset, HTML, Field
 from crispy_forms.bootstrap import FormActions
 
-
 class ContactForm(forms.Form):
+    """
+    form for the 'help' field under the accounts tab
+    """
     email = forms.EmailField(label='Your Email Address')
     subject = forms.CharField(required=False)
     message = forms.CharField(widget=forms.Textarea(

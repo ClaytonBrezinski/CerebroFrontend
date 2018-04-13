@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 
+# customization of the admin panel is done within this file
 
 class CustomUserAdmin(UserAdmin):
     list_display = [

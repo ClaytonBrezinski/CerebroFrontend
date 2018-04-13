@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import UserSettings
 
 
+# custom settings for the admin panel.
 class UserSettingsAdmin(admin.ModelAdmin):
     list_display = [
         'username',

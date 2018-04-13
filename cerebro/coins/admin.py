@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import Cryptocurrency, Coin
 
 
-# Register your models here.
+# customize the admin view panel with this class
 
 
 class CoinAdmin(admin.ModelAdmin):

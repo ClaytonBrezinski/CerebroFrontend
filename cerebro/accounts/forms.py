@@ -23,6 +23,9 @@ class NameModelChoiceField(forms.ModelChoiceField):
 
 
 class SignUpForm(forms.Form):
+    """
+    form handler for the signup page using django crispy forms
+    """
     username = forms.CharField(max_length=30, validators=[validate_username_unique])
     password = forms.CharField(max_length=128, widget=forms.PasswordInput())
     email = forms.EmailField(max_length=75, validators=[validate_email_unique])
@@ -52,7 +55,7 @@ class SignUpForm(forms.Form):
 
 class UserSettingsForm(forms.Form):
     """
-    Form to allow users to change profile settings and preferences.
+    Form to allow users to change profile settings and preferences using django-crispy-forms
     """
     username = forms.CharField(required=False)
     first_name = forms.CharField(label='First Name', required=False)

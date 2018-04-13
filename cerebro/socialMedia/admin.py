@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Tweet, NewsItem, RedditPost
 
 
-# Register your models here.
+# These are settings for customizing the admin view
 class TweetAdmin(admin.ModelAdmin):
     date_hierarchy = 'createdAt'
     search_fields = ['text', 'username', 'url']

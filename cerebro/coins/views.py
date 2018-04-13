@@ -35,6 +35,11 @@ def cryptocurrenciesView(request):
 
 @login_required
 def coinsChartDataJson(request):
+    """
+    function responsible for pushing coin data from the database to the highcharts js on the coins page.
+    :param request:
+    :return:
+    """
     data = {}
     params = request.GET
     # to pull from the js code from cryptocurrencies.html, use this method. If nothing is added, days = 0, name = ""

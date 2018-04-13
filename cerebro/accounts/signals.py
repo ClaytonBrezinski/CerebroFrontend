@@ -8,6 +8,7 @@ from .models import UserSettings
 
 logger = logging.getLogger(__name__)
 
+# Signals are a built-in django functionality that allow for system wide listening for specific actions
 
 @receiver(signal=post_save, sender=User)
 def create_usersettings_on_user_create(sender, instance, created, **kwargs):

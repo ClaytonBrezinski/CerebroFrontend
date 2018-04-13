@@ -16,6 +16,11 @@ from .serializers import RedditPostSerializer, TweetSerializer, NewsItemSerializ
 
 @login_required()
 def socialMediaView(request):
+    """
+    Function that hands off data from the database to the /socialMedia page
+    :param request:
+    :return:
+    """
     template_name = 'socialMedia/socialMedia.html'
     user = User.objects.get(username=request.user.username)
     # pull news, reddit posts, and tweets from the database
