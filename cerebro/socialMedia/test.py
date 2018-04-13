@@ -10,7 +10,6 @@ from rest_framework import status
 from django.core.urlresolvers import reverse
 
 
-
 class TweetModelTestCase(TestCase):
     """
     This is a test suite for the Cryptocurrency model
@@ -34,6 +33,8 @@ class TweetModelTestCase(TestCase):
         """
         oldCount = Tweet.objects.count()
         self.tweet.save()
+        theTweet = Tweet.objects.create(Text='hi', retweetcount=1, likesCount=1, username='test', url='www.reddit.com')
+        theTweet.save()
         newCount = Tweet.objects.count()
         self.assertNotEqual(oldCount, newCount)
 
@@ -42,7 +43,8 @@ class TweetModelTestCase(TestCase):
         Create tweet with errornous data inputs
         :return:
         """
-        pass
+        theTweet = Tweet.objects.create(Text='', retweetcount='', likesCount='A', username='', url='test')
+        self.assertFormError(theTweet.save())
 
     def testGetName(self):
         pass
@@ -76,6 +78,8 @@ class NewsItemTestCase(TestCase):
         """
         oldCount = NewsItem.objects.count()
         self.newsItem.save()
+        item = NewsItem.objects.create(headlineText='tester', Text='tester', createdAt='', Url='', newsAgency='')
+        item.save()
         newCount = NewsItem.objects.count()
         self.assertNotEqual(oldCount, newCount)
 
@@ -84,7 +88,8 @@ class NewsItemTestCase(TestCase):
         Create news item with errornous data inputs
         :return:
         """
-        pass
+        item = NewsItem.objects.create(headlineText='', Text='', createdAt='qq', Url='test', newsAgency='')
+        self.assertFormError(item.save())
 
 
 class RedditPostTestCase(TestCase):
@@ -113,6 +118,9 @@ class RedditPostTestCase(TestCase):
         """
         oldCount = RedditPost.objects.count()
         self.redditPost.save()
+        reddit = RedditPost.objects.create(text='tester', createdAt='', url='www.reddit.com/r/battlestations/',
+                                           subreddit='battlestations', comments=1, upvotes=1)
+        reddit.save()
         newCount = RedditPost.objects.count()
         self.assertNotEqual(oldCount, newCount)
 
@@ -121,4 +129,6 @@ class RedditPostTestCase(TestCase):
         Create RedditPost with errornous data inputs
         :return:
         """
-        pass
+        reddit = RedditPost.objects.create(text='', createdAt='12', url='reddit/r/battlestations/',
+                                           subreddit='qq', comments='a', upvotes=4525135486789)
+        self.assertFormError(reddit.save())
